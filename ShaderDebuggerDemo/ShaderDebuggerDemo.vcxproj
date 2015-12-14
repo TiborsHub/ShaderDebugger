@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{75996A98-10D9-43FC-87D7-8EAF2FC25E75}</ProjectGuid>
+    <RootNamespace>ShaderDebuggerDemo</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>AngleUtil;TestCases;..\LibShaderDebugger\Interface;..\LibUtil\Interface;D:\Dev\ThirdParty\wxWidgets-3.0.2\include;D:\Dev\ThirdParty\wxWidgets-3.0.2\include\msvc;D:\Dev\angle\include;D:\Dev\angle\util;D:\Dev\angle\src;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Dev\ThirdParty\wxWidgets-3.0.2\lib\vc_lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)$(Configuration)_$(Platform)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>AngleUtil;TestCases;..\LibShaderDebugger\Interface;..\LibUtil\Interface;D:\Dev\ThirdParty\wxWidgets-3.0.2\include;D:\Dev\ThirdParty\wxWidgets-3.0.2\include\msvc;D:\Dev\angle\include;D:\Dev\angle\util;D:\Dev\angle\src;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)$(Configuration)_$(Platform)\</OutDir>
+    <LibraryPath>D:\Dev\ThirdParty\wxWidgets-3.0.2\lib\vc_lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;NOMINMAX;ANGLE_STANDALONE_BUILD;GL_GLEXT_PROTOTYPES;EGL_EGLEXT_PROTOTYPES;_DEBUG;ANGLE_ENABLE_DEBUG_ANNOTATIONS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BrowseInformation>true</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d9.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration />
+    </Link>
+    <PreBuildEvent>
+      <Command>../RightTrimSources.cmd</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Right trim all source files</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;NOMINMAX;ANGLE_STANDALONE_BUILD;GL_GLEXT_PROTOTYPES;EGL_EGLEXT_PROTOTYPES;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>d3d9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\AngleUtil\Win32EmbeddedWindow.cpp" />
+    <ClCompile Include="Source\AppShaderDebuggerDemo.cpp" />
+    <ClCompile Include="Source\Gui\EglRenderWindow.cpp" />
+    <ClCompile Include="Source\Gui\MainFrame.cpp" />
+    <ClCompile Include="Source\Gui\MousePosEvent.cpp" />
+    <ClCompile Include="Source\ShaderDebuggerDemo.cpp" />
+    <ClCompile Include="Source\TestCases\InspectContextFbReadTest.cpp" />
+    <ClCompile Include="Source\TestCases\InspectContextSingleTriangle.cpp" />
+    <ClCompile Include="Source\TestCases\InspectContextTestCode.cpp" />
+    <ClCompile Include="Source\TestCases\InspectContextValueTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\AngleUtil\Win32EmbeddedWindow.h" />
+    <ClInclude Include="Source\Gui\EglRenderWindow.h" />
+    <ClInclude Include="Source\Gui\EventId.h" />
+    <ClInclude Include="Source\Gui\MainFrame.h" />
+    <ClInclude Include="Source\Gui\MousePosEvent.h" />
+    <ClInclude Include="Source\ShaderDebuggerDemo.h" />
+    <ClInclude Include="Source\TestCases\InspectContextFbReadTest.h" />
+    <ClInclude Include="Source\TestCases\InspectContextSingleTriangle.h" />
+    <ClInclude Include="Source\TestCases\InspectContextTestCode.h" />
+    <ClInclude Include="Source\TestCases\InspectContextValueTest.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\angle\src\angle_common.vcxproj">
+      <Project>{7ab4b0c9-d974-3a65-ed87-61816b6917cb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\angle\src\libANGLE.vcxproj">
+      <Project>{d51f95b2-d343-6b88-7902-c392acc99260}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\angle\src\libEGL.vcxproj">
+      <Project>{777ac703-c49d-e67c-f2ea-2bede272a25f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\angle\src\libGLESv2.vcxproj">
+      <Project>{d5d676ed-c189-2a6b-8de3-f4ca6175550f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\angle\src\preprocessor.vcxproj">
+      <Project>{7642cfd5-f187-3e3f-f8ff-859949b9f13e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\angle\src\translator.vcxproj">
+      <Project>{6ac42cf5-8088-f4be-7c3d-1bd1bd440fcc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\angle\src\translator_lib.vcxproj">
+      <Project>{3fff5710-d21b-35ae-d702-74bb256ef228}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\angle\src\translator_static.vcxproj">
+      <Project>{65be9c8a-0ff1-a4b7-c81e-43801f64e13d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\angle\util\angle_util.vcxproj">
+      <Project>{9767c383-b58a-ab1e-4713-cf8fc5ba2b7e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\LibShaderDebugger\LibShaderDebugger.vcxproj">
+      <Project>{65ffb1e6-fbbf-4dc7-a982-fdf70100d0f3}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{65FFB1E6-FBBF-4DC7-A982-FDF70100D0F3}</ProjectGuid>
+    <RootNamespace>LibShaderDebugger</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>Interface;..\LibUtil\Interface;D:\Dev\angle\include;D:\Dev\angle\src;D:\Dev\angle\util;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>Interface;..\LibUtil\Interface;D:\Dev\angle\include;D:\Dev\angle\src;D:\Dev\angle\util;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;NOMINMAX;ANGLE_STANDALONE_BUILD;GL_GLEXT_PROTOTYPES;EGL_EGLEXT_PROTOTYPES;_DEBUG;ANGLE_ENABLE_DEBUG_ANNOTATIONS;ANGLE_ENABLE_HLSL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;NOMINMAX;ANGLE_STANDALONE_BUILD;GL_GLEXT_PROTOTYPES;EGL_EGLEXT_PROTOTYPES;NDEBUG;ANGLE_ENABLE_HLSL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Implementation\ASTManipulations.h" />
+    <ClInclude Include="Implementation\ASTPrinter.h" />
+    <ClInclude Include="Implementation\ASTQueries.h" />
+    <ClInclude Include="Implementation\ASTSymbolFinder.h" />
+    <ClInclude Include="Implementation\CreateShaderInspectorInstance.h" />
+    <ClInclude Include="Implementation\DataFramebuffer.h" />
+    <ClInclude Include="Implementation\GlObject.h" />
+    <ClInclude Include="Implementation\GlUtil.h" />
+    <ClInclude Include="Implementation\ProgramInspectorWebGL.h" />
+    <ClInclude Include="Implementation\ShaderCompilerESSL.h" />
+    <ClInclude Include="Implementation\ShaderInspectorI.h" />
+    <ClInclude Include="Implementation\ShaderInspectorWebGL.h" />
+    <ClInclude Include="Implementation\Texture2D.h" />
+    <ClInclude Include="Implementation\UtilGLSL.h" />
+    <ClInclude Include="Implementation\UtilText.h" />
+    <ClInclude Include="Interface\CreateProgramInspectorInstance.h" />
+    <ClInclude Include="Interface\InspectContextI.h" />
+    <ClInclude Include="Interface\InspectContextWebGL1.h" />
+    <ClInclude Include="Interface\InspectContextWebGL1Basic.h" />
+    <ClInclude Include="Interface\InspectedProgram.h" />
+    <ClInclude Include="Interface\InspectedProgramCollection.h" />
+    <ClInclude Include="Interface\InspectResult.h" />
+    <ClInclude Include="Interface\LibShaderDebuggerInitFin.h" />
+    <ClInclude Include="Interface\PixelData.h" />
+    <ClInclude Include="Interface\ProgramInspectorI.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Implementation\ASTManipulations.cpp" />
+    <ClCompile Include="Implementation\ASTPrinter.cpp" />
+    <ClCompile Include="Implementation\ASTQueries.cpp" />
+    <ClCompile Include="Implementation\ASTSymbolFinder.cpp" />
+    <ClCompile Include="Implementation\CreateProgramInspectorInstance.cpp" />
+    <ClCompile Include="Implementation\CreateShaderInspectorInstance.cpp" />
+    <ClCompile Include="Implementation\DataFramebuffer.cpp" />
+    <ClCompile Include="Implementation\GlObject.cpp" />
+    <ClCompile Include="Implementation\GlUtil.cpp" />
+    <ClCompile Include="Implementation\InspectContextWebGL1.cpp" />
+    <ClCompile Include="Implementation\InspectContextWebGL1Basic.cpp" />
+    <ClCompile Include="Implementation\InspectedProgramCollection.cpp" />
+    <ClCompile Include="Implementation\InspectedProgramCollectionSingleton.cpp" />
+    <ClCompile Include="Implementation\InspectResult.cpp" />
+    <ClCompile Include="Implementation\LibShaderDebuggerInitFin.cpp" />
+    <ClCompile Include="Implementation\PixelData.cpp" />
+    <ClCompile Include="Implementation\ProgramInspectorI.cpp" />
+    <ClCompile Include="Implementation\ProgramInspectorWebGL.cpp" />
+    <ClCompile Include="Implementation\ShaderCompilerESSL.cpp" />
+    <ClCompile Include="Implementation\ShaderInspectorI.cpp" />
+    <ClCompile Include="Implementation\ShaderInspectorWebGL.cpp" />
+    <ClCompile Include="Implementation\Texture2D.cpp" />
+    <ClCompile Include="Implementation\UtilGLSL.cpp" />
+    <ClCompile Include="Implementation\UtilText.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\angle\src\angle_common.vcxproj">
+      <Project>{7ab4b0c9-d974-3a65-ed87-61816b6917cb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\angle\src\libANGLE.vcxproj">
+      <Project>{d51f95b2-d343-6b88-7902-c392acc99260}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\angle\src\libEGL.vcxproj">
+      <Project>{777ac703-c49d-e67c-f2ea-2bede272a25f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\angle\src\libGLESv2.vcxproj">
+      <Project>{d5d676ed-c189-2a6b-8de3-f4ca6175550f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\angle\src\preprocessor.vcxproj">
+      <Project>{7642cfd5-f187-3e3f-f8ff-859949b9f13e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\angle\src\translator.vcxproj">
+      <Project>{6ac42cf5-8088-f4be-7c3d-1bd1bd440fcc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\angle\src\translator_lib.vcxproj">
+      <Project>{3fff5710-d21b-35ae-d702-74bb256ef228}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\angle\src\translator_static.vcxproj">
+      <Project>{65be9c8a-0ff1-a4b7-c81e-43801f64e13d}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

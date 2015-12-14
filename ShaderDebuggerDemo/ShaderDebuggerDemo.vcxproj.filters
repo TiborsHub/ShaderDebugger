@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{d02ff807-bab4-47f6-b046-94e954880484}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestCases">
+      <UniqueIdentifier>{ac8f8782-88b8-415e-a012-8ee8d0e0b86f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AngleUtil">
+      <UniqueIdentifier>{8c86f20d-b3d4-4c64-a4d8-5a4b942c6b67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gui">
+      <UniqueIdentifier>{221a9af7-4cf8-4b61-8092-d697dde7d413}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\ShaderDebuggerDemo.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AppShaderDebuggerDemo.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Gui\MainFrame.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TestCases\InspectContextSingleTriangle.cpp">
+      <Filter>TestCases</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AngleUtil\Win32EmbeddedWindow.cpp">
+      <Filter>AngleUtil</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Gui\EglRenderWindow.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Gui\MousePosEvent.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TestCases\InspectContextTestCode.cpp">
+      <Filter>TestCases</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TestCases\InspectContextFbReadTest.cpp">
+      <Filter>TestCases</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TestCases\InspectContextValueTest.cpp">
+      <Filter>TestCases</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\ShaderDebuggerDemo.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Gui\MainFrame.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TestCases\InspectContextSingleTriangle.h">
+      <Filter>TestCases</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AngleUtil\Win32EmbeddedWindow.h">
+      <Filter>AngleUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Gui\EglRenderWindow.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Gui\EventId.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Gui\MousePosEvent.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TestCases\InspectContextTestCode.h">
+      <Filter>TestCases</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TestCases\InspectContextFbReadTest.h">
+      <Filter>TestCases</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TestCases\InspectContextValueTest.h">
+      <Filter>TestCases</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
