@@ -50,11 +50,8 @@ ShaderDebuggerDemo::~ShaderDebuggerDemo()
 bool
 ShaderDebuggerDemo::OnInit()
 {
-    _CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
-
     if (LibShaderDebuggerInitialize() && CreateInspectedProgramCollectionSingleton())
     {
-
         MainFrame *frame = new MainFrame(
             "Shader debugger",
             wxPoint(200, 100),
@@ -89,10 +86,6 @@ ShaderDebuggerDemo::OnExit()
     }
 
     DestroyInspectedProgramCollectionSingleton();
-
-#ifdef _DEBUG
-    _CrtDumpMemoryLeaks();
-#endif
 
     return exit_status;
 }
