@@ -71,6 +71,7 @@ EglRenderWindow::OnMouseMove(wxMouseEvent& inEvent)
 void
 EglRenderWindow::OnMouseDown(wxMouseEvent& inEvent)
 {
+    (void)inEvent;
 }
 
 
