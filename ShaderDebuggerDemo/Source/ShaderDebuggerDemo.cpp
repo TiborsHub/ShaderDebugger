@@ -39,6 +39,7 @@ ShaderDebuggerDemo::ShaderDebuggerDemo()
 
 
 // Destructor
+// virtual
 ShaderDebuggerDemo::~ShaderDebuggerDemo()
 {
 
@@ -52,18 +53,18 @@ ShaderDebuggerDemo::OnInit()
 {
     if (LibShaderDebuggerInitialize() && CreateInspectedProgramCollectionSingleton())
     {
-        MainFrame *frame = new MainFrame(
+        MainFrame* main_frame(new MainFrame(
             "Shader debugger",
             wxPoint(200, 100),
-            wxSize(1000, 800));
+            wxSize(1000, 800)));
 
-        frame->SetName("MainFrame");
-        if (!wxPersistenceManager::Get().RegisterAndRestore(frame))
+        main_frame->SetName("MainFrame");
+        if (!wxPersistenceManager::Get().RegisterAndRestore(main_frame))
         {
 
         }
 
-        frame->Show(true);
+        main_frame->Show(true);
         return true;
     }
 
@@ -76,9 +77,8 @@ ShaderDebuggerDemo::OnInit()
 int
 ShaderDebuggerDemo::OnExit()
 {
-    wxPersistenceManager::sDestroy();
-
     int exit_status(0);
+
     if (!LibShaderDebuggerFinalize())
     {
         // "Failed to finalize the compiler.";

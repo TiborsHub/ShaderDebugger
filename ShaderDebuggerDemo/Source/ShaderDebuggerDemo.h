@@ -29,7 +29,7 @@ public:
                                 ShaderDebuggerDemo();
 
                                 // Destructor
-                                ~ShaderDebuggerDemo();
+    virtual                     ~ShaderDebuggerDemo() override;
 
                                 // Initialization of application
     virtual bool                OnInit() override;
