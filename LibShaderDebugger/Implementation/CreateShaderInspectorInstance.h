@@ -26,9 +26,9 @@ CLASS_FORWARD_DECLARATIONS(ProgramInspectorI);
 // Return Shader inspector instance
 SpShaderInspectorI
 CreateShaderInspectorInstance(
-    int                 inShaderIx,
-    SpProgramInspectorI inProgramInspector,
-    uint64_t            inShaderType);
+    int                inShaderIx,
+    ProgramInspectorI* inProgramInspector,
+    uint64_t           inShaderType);
 
 
 #endif // __CREATE_SHADER_INSPECTOR_INSTANCE_H__

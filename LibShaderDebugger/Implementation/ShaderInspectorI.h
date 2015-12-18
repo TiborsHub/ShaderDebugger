@@ -32,7 +32,7 @@ class ShaderInspectorI
 {
 public:
                                 // Constructor
-                                ShaderInspectorI(int inShaderIx, SpProgramInspectorI inProgramInspector);
+                                ShaderInspectorI(int inShaderIx, ProgramInspectorI* inProgramInspector);
 
                                 // Destructor
     virtual                     ~ShaderInspectorI() {};
@@ -54,8 +54,8 @@ protected:
                                 // Index of shader in program
     size_t                      mShaderIx;
 
-                                // Inspector of program
-    SpProgramInspectorI         mProgramInspector;
+                                // Inspector of program, program inspector is owner of shader inspector
+    ProgramInspectorI*          mProgramInspector;
 };
 
 
@@ -63,7 +63,7 @@ protected:
 
 // Constructor
 inline
-ShaderInspectorI::ShaderInspectorI(int inShaderIx, SpProgramInspectorI inProgramInspector) :
+ShaderInspectorI::ShaderInspectorI(int inShaderIx, ProgramInspectorI* inProgramInspector) :
     mShaderIx         (inShaderIx),
     mProgramInspector (inProgramInspector)
 {

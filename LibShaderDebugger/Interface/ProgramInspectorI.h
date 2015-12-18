@@ -27,7 +27,7 @@ class InspectResult;
 #include <string>
 
 
-class ProgramInspectorI : public std::enable_shared_from_this<ProgramInspectorI>
+class ProgramInspectorI
 {
 public:
                                 // Constructor

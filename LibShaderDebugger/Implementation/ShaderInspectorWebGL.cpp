@@ -39,12 +39,12 @@
 
 // Constructor
 ShaderInspectorWebGL::ShaderInspectorWebGL(
-    int                 inShaderIx,
-    SpProgramInspectorI inProgramInspector,
-    sh::GLenum          inShaderType,
-    ShShaderSpec        inShaderSpec,
-    ShShaderOutput      inOutputLanguage,
-    ShCompileOptions    inCompileOptions)
+    int                inShaderIx,
+    ProgramInspectorI* inProgramInspector,
+    sh::GLenum         inShaderType,
+    ShShaderSpec       inShaderSpec,
+    ShShaderOutput     inOutputLanguage,
+    ShCompileOptions   inCompileOptions)
 :
     ShaderInspectorI (inShaderIx, inProgramInspector),
     mShaderType      (inShaderType),

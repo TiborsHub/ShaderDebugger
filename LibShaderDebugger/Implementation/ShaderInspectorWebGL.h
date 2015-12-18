@@ -48,12 +48,12 @@ class ShaderInspectorWebGL : public ShaderInspectorI
 public:
                                 // Constructor
                                 ShaderInspectorWebGL(
-                                    int                 inShaderIx,
-                                    SpProgramInspectorI inProgramInspector,
-                                    sh::GLenum          inShaderType,
-                                    ShShaderSpec        inShaderSpec,
-                                    ShShaderOutput      inOutputLanguage,
-                                    ShCompileOptions    inCompileOptions);
+                                    int                inShaderIx,
+                                    ProgramInspectorI* inProgramInspector,
+                                    sh::GLenum         inShaderType,
+                                    ShShaderSpec       inShaderSpec,
+                                    ShShaderOutput     inOutputLanguage,
+                                    ShCompileOptions   inCompileOptions);
 
                                 // Initialize the inspector
     virtual bool                Initialize();

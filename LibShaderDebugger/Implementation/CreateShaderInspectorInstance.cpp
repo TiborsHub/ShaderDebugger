@@ -19,9 +19,9 @@
 // Return Shader inspector instance
 SpShaderInspectorI
 CreateShaderInspectorInstance(
-    int                 inShaderIx,
-    SpProgramInspectorI inProgramInspector,
-    uint64_t            inShaderType)
+    int                inShaderIx,
+    ProgramInspectorI* inProgramInspector,
+    uint64_t           inShaderType)
 {
     return std::make_shared<ShaderInspectorWebGL>(
         inShaderIx,

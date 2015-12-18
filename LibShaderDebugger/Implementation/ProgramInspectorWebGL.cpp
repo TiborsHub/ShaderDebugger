@@ -29,7 +29,7 @@
 ProgramInspectorWebGL::ProgramInspectorWebGL(SpInspectContextI& inInspectContext) :
     ProgramInspectorI(inInspectContext)
 {
-
+    
 }
 
 
@@ -59,7 +59,7 @@ ProgramInspectorWebGL::Inspect(size_t inShaderIx, size_t inSourceIx, InspectResu
                 uint64_t shader_type(mContext->GetShaderType(inShaderIx));
                 SpShaderInspectorI inspector(CreateShaderInspectorInstance(
                     inShaderIx,
-                    shared_from_this(),
+                    this,
                     shader_type));
 
                 tTokenInspectorMap::value_type entry(inspect_key, std::move(inspector));
