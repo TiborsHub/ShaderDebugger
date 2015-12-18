@@ -17,7 +17,7 @@
 ShaderCompilerESSL::ShaderCompilerESSL(sh::GLenum inType, ShShaderSpec inSpec) :
     TranslatorESSL(inType, inSpec)
 {
-
+ 
 }
 
 
@@ -31,6 +31,7 @@ ShaderCompilerESSL::CompileToAST(const std::string& inSource, int inCompileOptio
     allocator.push();
     SetGlobalPoolAllocator(&allocator);
 
+    inCompileOptions |= SH_INTERMEDIATE_TREE;
     return compileTreeForTesting(source_arr, 1, inCompileOptions);
 }
 
@@ -39,6 +40,7 @@ ShaderCompilerESSL::CompileToAST(const std::string& inSource, int inCompileOptio
 bool
 ShaderCompilerESSL::CompileFromAST(TIntermNode* inRootAST, int inCompileOptions)
 {
+    assert(GetGlobalPoolAllocator() == &allocator);
     translate(inRootAST, inCompileOptions);
 
     // Release memory
