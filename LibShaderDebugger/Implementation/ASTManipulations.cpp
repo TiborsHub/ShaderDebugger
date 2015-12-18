@@ -77,7 +77,5 @@ GetConsecutiveComponentList(size_t inFieldCount)
 {
     assert(inFieldCount <= 4);
 
-    static TString sFields("xyzw");
-
-    return sFields.substr(0, inFieldCount);
+    return TString("xyzw", inFieldCount);
 }
