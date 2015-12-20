@@ -29,7 +29,7 @@
 ProgramInspectorWebGL::ProgramInspectorWebGL(SpInspectContextI& inInspectContext) :
     ProgramInspectorI(inInspectContext)
 {
-    
+
 }
 
 

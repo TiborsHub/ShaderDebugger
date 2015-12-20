@@ -17,7 +17,7 @@
 ShaderCompilerESSL::ShaderCompilerESSL(sh::GLenum inType, ShShaderSpec inSpec) :
     TranslatorESSL(inType, inSpec)
 {
- 
+
 }
 
 
