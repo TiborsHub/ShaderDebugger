@@ -40,8 +40,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>AngleUtil;TestCases;..\LibShaderDebugger\Interface;..\LibUtil\Interface;D:\Dev\ThirdParty\wxWidgets-3.0.2\include;D:\Dev\ThirdParty\wxWidgets-3.0.2\include\msvc;D:\Dev\angle\include;D:\Dev\angle\util;D:\Dev\angle\src;C:\Program Files (x86)\Visual Leak Detector\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Dev\ThirdParty\wxWidgets-3.0.2\lib\vc_lib;C:\Program Files (x86)\Visual Leak Detector\lib\Win32;$(LibraryPath)</LibraryPath>
+    <IncludePath>AngleUtil;TestCases;..\LibShaderDebugger\Interface;..\LibUtil\Interface;D:\Dev\ThirdParty\wxWidgets-3.0.2\include;D:\Dev\ThirdParty\wxWidgets-3.0.2\include\msvc;D:\Dev\angle\include;D:\Dev\angle\util;D:\Dev\angle\src;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Dev\ThirdParty\wxWidgets-3.0.2\lib\vc_lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)$(Configuration)_$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -88,10 +88,6 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>d3d9.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PreBuildEvent>
-      <Command>../RightTrimSources.cmd</Command>
-      <Message>Right trim all source files</Message>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\AngleUtil\Win32EmbeddedWindow.cpp" />
