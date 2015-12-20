@@ -34,12 +34,13 @@ WinMain(HINSTANCE inInstanceH, HINSTANCE inPrevInstanceH, PSTR inCmdLine, int in
 
     int return_value(wxEntry(inInstanceH, inPrevInstanceH, inCmdLine, inCmdShow));
 
+    // Fixes memory leak in wxWidgets
     wxPersistenceManager::sDestroy();
     wxConfigBase* config(wxConfigBase::Get(false)); // false : Do not create
     delete(config);
 
+    // Fixes memory leaks in ANGLE
     eglFinalize();
-
     gl::DeInitGlobalContext();
 
     return return_value;
