@@ -17,6 +17,11 @@
 #include <wx/persist/toplevel.h>
 
 
+// ANGLE headers
+#include "../src/libANGLE/Display.h"
+#include "../src/libGLESv2/global_state.h"
+
+
 // The application
 wxIMPLEMENT_APP_NO_MAIN(ShaderDebuggerDemo);
 
@@ -25,8 +30,6 @@ int
 WINAPI
 WinMain(HINSTANCE inInstanceH, HINSTANCE inPrevInstanceH, PSTR inCmdLine, int inCmdShow)
 {
-    _CrtSetDbgFlag (_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
     wxDISABLE_DEBUG_SUPPORT();
 
     int return_value(wxEntry(inInstanceH, inPrevInstanceH, inCmdLine, inCmdShow));
@@ -35,9 +38,9 @@ WinMain(HINSTANCE inInstanceH, HINSTANCE inPrevInstanceH, PSTR inCmdLine, int in
     wxConfigBase* config(wxConfigBase::Get(false)); // false : Do not create
     delete(config);
 
-#ifdef _DEBUG
-    _CrtDumpMemoryLeaks();
-#endif
+    eglFinalize();
+
+    gl::DeInitGlobalContext();
 
     return return_value;
 }
