@@ -20,6 +20,27 @@
 #include <assert.h>
 
 
+// Return type of node
+ASTNodeType
+GetNodeType(TIntermNode* inNode)
+{
+    if (inNode->getAsTyped()         != nullptr) return AST_NODE_TYPE_TYPED;
+    if (inNode->getAsConstantUnion() != nullptr) return AST_NODE_TYPE_CONSTANT_UNION;
+    if (inNode->getAsAggregate()     != nullptr) return AST_NODE_TYPE_AGGREGATE;
+    if (inNode->getAsBinaryNode()    != nullptr) return AST_NODE_TYPE_BINARY;
+    if (inNode->getAsUnaryNode()     != nullptr) return AST_NODE_TYPE_UNARY;
+    if (inNode->getAsSelectionNode() != nullptr) return AST_NODE_TYPE_SELECTION;
+    if (inNode->getAsSwitchNode()    != nullptr) return AST_NODE_TYPE_SWITCH;
+    if (inNode->getAsCaseNode()      != nullptr) return AST_NODE_TYPE_CASE;
+    if (inNode->getAsSymbolNode()    != nullptr) return AST_NODE_TYPE_SYMBOL;
+    if (inNode->getAsLoopNode()      != nullptr) return AST_NODE_TYPE_LOOP;
+    if (inNode->getAsRawNode()       != nullptr) return AST_NODE_TYPE_RAW;
+    
+    assert(false);
+    return AST_NODE_TYPE_UNKNOWN;
+}
+
+
 // Returns operator if node is a binary node
 TOperator
 GetBinaryOperator(size_t inNodeIx, const std::vector<TIntermNode*>& inSymbolNodePath)

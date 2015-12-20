@@ -29,6 +29,29 @@ class TIntermSymbol;
 #include <vector>
 
 
+// Node types of ast 
+enum ASTNodeType
+{
+    AST_NODE_TYPE_UNKNOWN,
+    AST_NODE_TYPE_TYPED,
+    AST_NODE_TYPE_CONSTANT_UNION,
+    AST_NODE_TYPE_AGGREGATE,
+    AST_NODE_TYPE_BINARY,
+    AST_NODE_TYPE_UNARY,
+    AST_NODE_TYPE_SELECTION,
+    AST_NODE_TYPE_SWITCH,
+    AST_NODE_TYPE_CASE,
+    AST_NODE_TYPE_SYMBOL,
+    AST_NODE_TYPE_LOOP,
+    AST_NODE_TYPE_RAW
+};
+
+
+// Return type of node
+ASTNodeType
+GetNodeType(TIntermNode* inNode);
+
+
 // Returns operator if node is a binary node
 TOperator
 GetBinaryOperator(size_t inNodeIx, const std::vector<TIntermNode*>& inSymbolNodePath);
