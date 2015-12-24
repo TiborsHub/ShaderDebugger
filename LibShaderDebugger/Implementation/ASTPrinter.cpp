@@ -13,6 +13,10 @@
 #include "ASTPrinter.h"
 
 
+// Library headers
+#include "ASTQueries.h"
+
+
 // Standard headers
 #include <iomanip>
 
@@ -252,6 +256,31 @@ GetOperatorName(TOperator inOperator)
         return "Unknown operator value";
     }
 }
+
+
+const char*
+GetNodeName(TIntermNode* inNode)
+{
+    switch(GetNodeType(inNode))
+    {
+        case AST_NODE_TYPE_TYPED:          return "TYPED";
+        case AST_NODE_TYPE_CONSTANT_UNION: return "CONSTANT UNION";
+        case AST_NODE_TYPE_AGGREGATE:      return "AGGREGATE";
+        case AST_NODE_TYPE_BINARY:         return "BINARY";
+        case AST_NODE_TYPE_UNARY:          return "UNARY";
+        case AST_NODE_TYPE_SELECTION:      return "SELECTION";
+        case AST_NODE_TYPE_SWITCH:         return "SWITCH";
+        case AST_NODE_TYPE_CASE:           return "CASE";
+        case AST_NODE_TYPE_SYMBOL:         return "SYMBOL";
+        case AST_NODE_TYPE_LOOP:           return "LOOP";
+        case AST_NODE_TYPE_RAW:            return "RAW";
+
+        default:
+            assert(false);
+            return "";
+    }
+}
+
 
 } // namespace
 
