@@ -29,21 +29,29 @@ class TIntermSymbol;
 #include <vector>
 
 
-// Node types of ast 
+// Node types of ast
 enum ASTNodeType
 {
-    AST_NODE_TYPE_UNKNOWN,
-    AST_NODE_TYPE_TYPED,
+    // Utility value to assist in bounds checking
+    AST_NODE_TYPE_BEGIN,
+
+    AST_NODE_TYPE_UNKNOWN = AST_NODE_TYPE_BEGIN,
+
+    // Maps to traversable node types
+    AST_NODE_TYPE_SYMBOL,
+    AST_NODE_TYPE_RAW,
     AST_NODE_TYPE_CONSTANT_UNION,
-    AST_NODE_TYPE_AGGREGATE,
     AST_NODE_TYPE_BINARY,
     AST_NODE_TYPE_UNARY,
     AST_NODE_TYPE_SELECTION,
     AST_NODE_TYPE_SWITCH,
     AST_NODE_TYPE_CASE,
-    AST_NODE_TYPE_SYMBOL,
+    AST_NODE_TYPE_AGGREGATE,
     AST_NODE_TYPE_LOOP,
-    AST_NODE_TYPE_RAW
+    AST_NODE_TYPE_BRANCH,
+
+    // Utility value to assist in bounds checking
+    AST_NODE_TYPE_END
 };
 
 

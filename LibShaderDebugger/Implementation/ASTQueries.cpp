@@ -20,24 +20,49 @@
 #include <assert.h>
 
 
+namespace
+{
+
+// Utility class to compute node type
+class TIntermNodeTypeEvaluator : public TIntermTraverser
+{
+public:
+                                // Constructor
+                                TIntermNodeTypeEvaluator() :
+                                    mNodeType        (AST_NODE_TYPE_UNKNOWN),
+                                    TIntermTraverser (false, true, false)
+                                {}
+
+                                // Traverse node
+    virtual void                traverseSymbol        (TIntermSymbol*       ) override { mNodeType = AST_NODE_TYPE_SYMBOL;         }
+    virtual void                traverseRaw           (TIntermRaw*          ) override { mNodeType = AST_NODE_TYPE_RAW;            }
+    virtual void                traverseConstantUnion (TIntermConstantUnion*) override { mNodeType = AST_NODE_TYPE_CONSTANT_UNION; }
+    virtual void                traverseBinary        (TIntermBinary*       ) override { mNodeType = AST_NODE_TYPE_BINARY;         }
+    virtual void                traverseUnary         (TIntermUnary*        ) override { mNodeType = AST_NODE_TYPE_UNARY;          }
+    virtual void                traverseSelection     (TIntermSelection*    ) override { mNodeType = AST_NODE_TYPE_SELECTION;      }
+    virtual void                traverseSwitch        (TIntermSwitch*       ) override { mNodeType = AST_NODE_TYPE_SWITCH;         }
+    virtual void                traverseCase          (TIntermCase*         ) override { mNodeType = AST_NODE_TYPE_CASE;           }
+    virtual void                traverseAggregate     (TIntermAggregate*    ) override { mNodeType = AST_NODE_TYPE_AGGREGATE;      }
+    virtual void                traverseLoop          (TIntermLoop*         ) override { mNodeType = AST_NODE_TYPE_LOOP;           }
+    virtual void                traverseBranch        (TIntermBranch*       ) override { mNodeType = AST_NODE_TYPE_BRANCH;         }
+
+                                // Returns type of node
+    ASTNodeType                 GetNodeType() const   { return mNodeType; }
+
+private:
+    ASTNodeType                 mNodeType;
+};
+
+}; // namespace
+
+
 // Return type of node
 ASTNodeType
 GetNodeType(TIntermNode* inNode)
 {
-    if (inNode->getAsTyped()         != nullptr) return AST_NODE_TYPE_TYPED;
-    if (inNode->getAsConstantUnion() != nullptr) return AST_NODE_TYPE_CONSTANT_UNION;
-    if (inNode->getAsAggregate()     != nullptr) return AST_NODE_TYPE_AGGREGATE;
-    if (inNode->getAsBinaryNode()    != nullptr) return AST_NODE_TYPE_BINARY;
-    if (inNode->getAsUnaryNode()     != nullptr) return AST_NODE_TYPE_UNARY;
-    if (inNode->getAsSelectionNode() != nullptr) return AST_NODE_TYPE_SELECTION;
-    if (inNode->getAsSwitchNode()    != nullptr) return AST_NODE_TYPE_SWITCH;
-    if (inNode->getAsCaseNode()      != nullptr) return AST_NODE_TYPE_CASE;
-    if (inNode->getAsSymbolNode()    != nullptr) return AST_NODE_TYPE_SYMBOL;
-    if (inNode->getAsLoopNode()      != nullptr) return AST_NODE_TYPE_LOOP;
-    if (inNode->getAsRawNode()       != nullptr) return AST_NODE_TYPE_RAW;
-    
-    assert(false);
-    return AST_NODE_TYPE_UNKNOWN;
+    TIntermNodeTypeEvaluator node_type_eval;
+    inNode->traverse(&node_type_eval);
+    return node_type_eval.GetNodeType();
 }
 
 
