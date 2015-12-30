@@ -258,29 +258,35 @@ GetOperatorName(TOperator inOperator)
 }
 
 
+// Intermediate node type names
 const char*
-GetNodeName(TIntermNode* inNode)
+NodeTypeNames[] =
 {
-    switch(GetNodeType(inNode))
-    {
-        case AST_NODE_TYPE_TYPED:          return "TYPED";
-        case AST_NODE_TYPE_CONSTANT_UNION: return "CONSTANT UNION";
-        case AST_NODE_TYPE_AGGREGATE:      return "AGGREGATE";
-        case AST_NODE_TYPE_BINARY:         return "BINARY";
-        case AST_NODE_TYPE_UNARY:          return "UNARY";
-        case AST_NODE_TYPE_SELECTION:      return "SELECTION";
-        case AST_NODE_TYPE_SWITCH:         return "SWITCH";
-        case AST_NODE_TYPE_CASE:           return "CASE";
-        case AST_NODE_TYPE_SYMBOL:         return "SYMBOL";
-        case AST_NODE_TYPE_LOOP:           return "LOOP";
-        case AST_NODE_TYPE_RAW:            return "RAW";
+    "UNKNOWN",
 
-        default:
-            assert(false);
-            return "";
-    }
+    // Maps to traversable node types
+    "SYMBOL",
+    "RAW",
+    "CONSTANT_UNION",
+    "BINARY",
+    "UNARY",
+    "SELECTION",
+    "SWITCH",
+    "CASE",
+    "AGGREGATE",
+    "LOOP",
+    "BRANCH"
+};
+
+static_assert(sizeof(NodeTypeNames) / sizeof(NodeTypeNames[0]) == AST_NODE_TYPE_END - AST_NODE_TYPE_BEGIN,
+    "NodeTypeNames contents does not match enum ASTNodeType");
+
+// Return name of node type
+const char*
+GetNodeTypeName(TIntermNode* inNode)
+{
+    return NodeTypeNames[GetNodeType(inNode)];
 }
-
 
 } // namespace
 
@@ -339,6 +345,8 @@ ASTPrinter::OutputLinePrefix(TIntermNode* inNode)
     {
         mStream << mIndentation;
     }
+
+    mStream << GetNodeTypeName(inNode) << " : ";
 }
 
 
