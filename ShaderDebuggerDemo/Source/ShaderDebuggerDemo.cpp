@@ -24,6 +24,8 @@
 #include "CreateProgramInspectorInstance.h"
 #include "LibShaderDebuggerInitFin.h"
 #include "InspectedProgramCollectionSingleton.h"
+#include "TestCases/TestCaseFactorySingleton.h"
+#include "TestCases/AddTestCasesWebGL1.h"
 
 
 // wxWidgets headers
@@ -51,8 +53,12 @@ ShaderDebuggerDemo::~ShaderDebuggerDemo()
 bool
 ShaderDebuggerDemo::OnInit()
 {
-    if (LibShaderDebuggerInitialize() && CreateInspectedProgramCollectionSingleton())
+    if (LibShaderDebuggerInitialize()
+            && CreateInspectedProgramCollectionSingleton()
+            && CreateTestCaseFactorySingleton())
     {
+        AddTestCasesWebGL1();
+
         MainFrame* main_frame(new MainFrame(
             "Shader debugger",
             wxPoint(200, 100),
@@ -85,6 +91,7 @@ ShaderDebuggerDemo::OnExit()
         exit_status = 1;
     }
 
+    DestroyTestCaseFactorySingleton();
     DestroyInspectedProgramCollectionSingleton();
 
     return exit_status;

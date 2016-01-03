@@ -26,6 +26,8 @@
 #include "../TestCases/InspectContextValueTest.h"
 #include "MousePosEvent.h"
 #include "PixelData.h"
+#include "../TestCases/TestCaseFactorySingleton.h"
+#include "../TestCases/TestCaseFactory.h"
 
 
 // wxWidget headers
@@ -67,19 +69,19 @@ wxString webgl_versions[] =
 
 // Event table
 wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
-    EVT_MENU(ID_FILE_OPEN,     MainFrame::OnFileOpen)
+    EVT_MENU(ID_FILE_OPEN,              MainFrame::OnFileOpen)
 
     EVT_MENU_RANGE(ID_TEST_SHADER_FIRST, ID_TEST_SHADER_LAST, MainFrame::OnTestShader)
 
-    EVT_RADIOBOX(ID_SHADER_TYPE,      MainFrame::OnShaderType)
-    EVT_BUTTON(ID_RUN,                MainFrame::OnRun)
+    EVT_RADIOBOX(ID_SHADER_TYPE,        MainFrame::OnShaderType)
+    EVT_BUTTON(ID_RUN,                  MainFrame::OnRun)
 
-    EVT_LEFT_UP(                      MainFrame::OnLeftSourceClick)
+    EVT_LEFT_UP(                        MainFrame::OnLeftSourceClick)
 
-    EVT_MENU(wxID_EXIT,               MainFrame::OnExit)
-    EVT_MENU(wxID_ABOUT,              MainFrame::OnAbout)
+    EVT_MENU(wxID_EXIT,                 MainFrame::OnExit)
+    EVT_MENU(wxID_ABOUT,                MainFrame::OnAbout)
 
-    EVT_CUST_MOUSE_POS(ID_VIEWPORT_POS,         MainFrame::OnViewportPos)
+    EVT_CUST_MOUSE_POS(ID_VIEWPORT_POS, MainFrame::OnViewportPos)
 
 wxEND_EVENT_TABLE()
 
@@ -105,17 +107,14 @@ MainFrame::MainFrame(
     menu_file->Append(wxID_EXIT);
 
     // Menu test shaders
-    wxMenu *menu_test_shaders = new wxMenu;
-    menu_test_shaders->Append(ID_TEST_SINGLE_TRIANGLE, "Single triangle");
-    menu_test_shaders->Append(ID_TEST_CODE,            "Test code");
-    menu_test_shaders->Append(ID_TEST_FB_READ,         "Test reading floating point data from frame buffer");
-    menu_test_shaders->Append(ID_TEST_READ_RED,        "Test reading red color from frame buffer");
-    menu_test_shaders->Append(ID_TEST_READ_GREEN,      "Test reading green color from frame buffer");
-    menu_test_shaders->Append(ID_TEST_READ_BLUE,       "Test reading blue color from frame buffer");
-    menu_test_shaders->Append(ID_TEST_READ_ALPHA,      "Test reading alpha color from frame buffer");
-    menu_test_shaders->Append(ID_TEST_READ_DEV_COORDS, "Test reading device coords from frame buffer");
-    menu_test_shaders->Append(ID_TEST_FADE_RED_BOTTOM, "Test fade red to bottom");
+    assert(gTestCaseFactorySingleton->GetTestCaseCount() <= MAX_TEST_CASE_COUNT);
 
+    wxMenu *menu_test_shaders = new wxMenu;
+    int test_ix(0);
+    for (auto test_it(gTestCaseFactorySingleton->Begin()); test_it != gTestCaseFactorySingleton->End(); ++test_it, ++test_ix)
+    {
+        menu_test_shaders->Append(ID_TEST_SHADER_FIRST + test_ix, test_it->first);
+    }
 
     // Menu help
     wxMenu *menu_help = new wxMenu;
@@ -421,63 +420,15 @@ MainFrame::OnFileOpen(wxCommandEvent& inEvent)
 void
 MainFrame::OnTestShader(wxCommandEvent& inEvent)
 {
+    assert(inEvent.GetEventType() == wxEVT_MENU);
+    wxMenu* menu( static_cast<wxMenu*>(inEvent.GetEventObject()));
+    wxMenuItem* menu_item(menu->FindItem(inEvent.GetId()));
+    std::string shader_test_id(menu_item->GetItemLabelText());
+
     mInspectData.reset();
     mInspectCtrl->Clear();
     mDebugCtrl->Clear();
-    SpInspectContextI inspect_context;
-    std::string id;
-    switch(inEvent.GetId())
-    {
-        case ID_TEST_SINGLE_TRIANGLE:
-            inspect_context = std::make_shared<InspectContextSingleTriangle>();
-            id = "Single triangle";
-            break;
-
-        case ID_TEST_CODE:
-            inspect_context = std::make_shared<InspectContextTestCode>();
-            id = "Test code";
-            break;
-
-        case ID_TEST_FB_READ:
-            inspect_context = std::make_shared<InspectContextFbReadTest>();
-            id = "Fb read test";
-            break;
-
-        case ID_TEST_READ_RED:
-            inspect_context = std::make_shared<InspectContextValueTest>("vec4(1.0, 0.0, 0.0, 0.4);");
-            id = "read red test";
-            break;
-
-        case ID_TEST_READ_GREEN:
-            inspect_context = std::make_shared<InspectContextValueTest>("vec4(0.0, 1.0, 0.0, 0.4);");
-            id = "Read green test";
-            break;
-
-        case ID_TEST_READ_BLUE:
-            inspect_context = std::make_shared<InspectContextValueTest>("vec4(0.0, 0.0, 1.0, 0.4);");
-            id = "Read blue test";
-            break;
-
-        case ID_TEST_READ_ALPHA:
-            inspect_context = std::make_shared<InspectContextValueTest>("vec4(0.0, 0.0, 0.0, 1.0);");
-            id = "Read alpha test";
-            break;
-
-        case ID_TEST_READ_DEV_COORDS:
-            inspect_context = std::make_shared<InspectContextValueTest>("vec4(gl_FragCoord.xy, vPosition.xy);");
-            id = "Read alpha test";
-            break;
-
-        case ID_TEST_FADE_RED_BOTTOM:
-            inspect_context = std::make_shared<InspectContextValueTest>("vec4(0.5 * (vPosition.y + 1.0), 0.0, 0.0, 1.0);");
-            id = "Fade red at bottom";
-            break;
-
-        default:
-            SetStatusText("Invalid test shader id");
-            break;
-    }
-
+    SpInspectContextI inspect_context(gTestCaseFactorySingleton->CreateTestCase(shader_test_id));
     if (inspect_context.get() != nullptr)
     {
         std::string msg;
@@ -491,7 +442,7 @@ MainFrame::OnTestShader(wxCommandEvent& inEvent)
             SpProgramInspectorI inspector(CreateProgramInspectorInstance(inspect_context));
 
             mInspectedProgram = std::make_shared<InspectedProgram>(
-                id,
+                shader_test_id,
                 inspect_context,
                 inspector);
         }
