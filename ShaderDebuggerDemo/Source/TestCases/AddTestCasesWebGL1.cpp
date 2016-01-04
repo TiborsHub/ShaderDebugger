@@ -253,4 +253,33 @@ AddTestCasesWebGL1()
             viewport_quad_vertices,
             GL_TRIANGLE_STRIP);
         });
+
+    // Test if statement
+    gTestCaseFactorySingleton->AddTestCase(
+        "Test if statement",
+        []() -> SpInspectContextI { return std::make_shared<InspectContextWebGL1Basic>(
+            vertex_shader_pos_varying,
+            SHADER_SOURCE
+            (
+                  precision mediump float;
+
+                  // Input
+                \nvarying vec4 vPosition;
+
+                \nvoid main()
+                \n{
+                \n    if (mod(gl_FragCoord.x - 0.5, 2.0) == 0.0)
+                \n    {
+                \n        gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+                \n    }
+                \n    else
+                \n    {
+                \n        gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
+                \n    }
+                \n}
+            ),
+            viewport_quad_vertices,
+            GL_TRIANGLE_STRIP);
+        });
+
 }
