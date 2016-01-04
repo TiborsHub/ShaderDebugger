@@ -38,8 +38,14 @@ TestCaseFactory::AddTestCase(const std::string& inTitle, tTestCaseCreator inCrea
 SpInspectContextI
 TestCaseFactory::CreateTestCase(const std::string& inTitle) const
 {
+    SpInspectContextI test_case;
     tTestCaseMap::const_iterator it(mTestCaseMap.find(inTitle));
     assert(it != mTestCaseMap.end());
 
-    return it->second();
+    if (it != mTestCaseMap.end())
+    {
+        test_case = it->second();
+    }
+
+    return test_case;
 }
