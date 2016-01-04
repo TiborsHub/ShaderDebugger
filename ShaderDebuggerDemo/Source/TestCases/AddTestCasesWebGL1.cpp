@@ -17,10 +17,7 @@
 #include "TestCaseFactory.h"
 
 // Test cases
-#include "InspectContextTestCode.h"
-#include "InspectContextValueTest.h"
-#include "InspectContextSingleTriangle.h"
-#include "InspectContextFbReadTest.h"
+#include "InspectContextWebGL1Basic.h"
 
 
 // ANGLE headers
