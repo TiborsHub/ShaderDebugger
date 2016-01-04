@@ -30,6 +30,7 @@ int
 WINAPI
 WinMain(HINSTANCE inInstanceH, HINSTANCE inPrevInstanceH, PSTR inCmdLine, int inCmdShow)
 {
+    // No debug support in release builds
     wxDISABLE_DEBUG_SUPPORT();
 
     int return_value(wxEntry(inInstanceH, inPrevInstanceH, inCmdLine, inCmdShow));
