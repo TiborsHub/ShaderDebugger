@@ -101,10 +101,6 @@
     <ClCompile Include="Source\Gui\MousePosEvent.cpp" />
     <ClCompile Include="Source\ShaderDebuggerDemo.cpp" />
     <ClCompile Include="Source\TestCases\AddTestCasesWebGL1.cpp" />
-    <ClCompile Include="Source\TestCases\InspectContextFbReadTest.cpp" />
-    <ClCompile Include="Source\TestCases\InspectContextSingleTriangle.cpp" />
-    <ClCompile Include="Source\TestCases\InspectContextTestCode.cpp" />
-    <ClCompile Include="Source\TestCases\InspectContextValueTest.cpp" />
     <ClCompile Include="Source\TestCases\TestCaseFactory.cpp" />
     <ClCompile Include="Source\TestCases\TestCaseFactorySingleton.cpp" />
   </ItemGroup>
@@ -116,10 +112,6 @@
     <ClInclude Include="Source\Gui\MousePosEvent.h" />
     <ClInclude Include="Source\ShaderDebuggerDemo.h" />
     <ClInclude Include="Source\TestCases\AddTestCasesWebGL1.h" />
-    <ClInclude Include="Source\TestCases\InspectContextFbReadTest.h" />
-    <ClInclude Include="Source\TestCases\InspectContextSingleTriangle.h" />
-    <ClInclude Include="Source\TestCases\InspectContextTestCode.h" />
-    <ClInclude Include="Source\TestCases\InspectContextValueTest.h" />
     <ClInclude Include="Source\TestCases\TestCaseFactory.h" />
     <ClInclude Include="Source\TestCases\TestCaseFactorySingleton.h" />
   </ItemGroup>

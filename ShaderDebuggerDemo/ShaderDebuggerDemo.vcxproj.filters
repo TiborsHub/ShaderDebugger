@@ -24,9 +24,6 @@
     <ClCompile Include="Source\Gui\MainFrame.cpp">
       <Filter>Gui</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TestCases\InspectContextSingleTriangle.cpp">
-      <Filter>TestCases</Filter>
-    </ClCompile>
     <ClCompile Include="Source\AngleUtil\Win32EmbeddedWindow.cpp">
       <Filter>AngleUtil</Filter>
     </ClCompile>
@@ -35,15 +32,6 @@
     </ClCompile>
     <ClCompile Include="Source\Gui\MousePosEvent.cpp">
       <Filter>Gui</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TestCases\InspectContextTestCode.cpp">
-      <Filter>TestCases</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TestCases\InspectContextFbReadTest.cpp">
-      <Filter>TestCases</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TestCases\InspectContextValueTest.cpp">
-      <Filter>TestCases</Filter>
     </ClCompile>
     <ClCompile Include="Source\TestCases\AddTestCasesWebGL1.cpp">
       <Filter>TestCases</Filter>
@@ -62,9 +50,6 @@
     <ClInclude Include="Source\Gui\MainFrame.h">
       <Filter>Gui</Filter>
     </ClInclude>
-    <ClInclude Include="Source\TestCases\InspectContextSingleTriangle.h">
-      <Filter>TestCases</Filter>
-    </ClInclude>
     <ClInclude Include="Source\AngleUtil\Win32EmbeddedWindow.h">
       <Filter>AngleUtil</Filter>
     </ClInclude>
@@ -76,15 +61,6 @@
     </ClInclude>
     <ClInclude Include="Source\Gui\MousePosEvent.h">
       <Filter>Gui</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TestCases\InspectContextTestCode.h">
-      <Filter>TestCases</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TestCases\InspectContextFbReadTest.h">
-      <Filter>TestCases</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TestCases\InspectContextValueTest.h">
-      <Filter>TestCases</Filter>
     </ClInclude>
     <ClInclude Include="Source\TestCases\AddTestCasesWebGL1.h">
       <Filter>TestCases</Filter>

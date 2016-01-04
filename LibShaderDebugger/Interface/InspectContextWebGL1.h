@@ -28,7 +28,9 @@ class InspectContextWebGL1 : public InspectContextI
 {
 public:
                                 // Constructor
-                                InspectContextWebGL1();
+                                InspectContextWebGL1(
+                                    const std::string& inSourceVertex,
+                                    const std::string& inSourceFragment);
 
                                 // Destructor
     virtual                     ~InspectContextWebGL1() override;

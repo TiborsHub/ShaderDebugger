@@ -14,16 +14,19 @@
 
 
 // Constructor
-InspectContextWebGL1Basic::InspectContextWebGL1Basic()
+InspectContextWebGL1Basic::InspectContextWebGL1Basic(
+    const std::string&          inSourceVertex,
+    const std::string&          inSourceFragment,
+    const std::vector<GLfloat>& inVertexList,
+    GLenum                      inVertexListType)
+:
+    InspectContextWebGL1(
+        inSourceVertex,
+        inSourceFragment),
+
+    mVertexList     (inVertexList),
+    mVertexListType (inVertexListType)
 {
-    // Triangle strip covering the complete viewport
-    mVertices =
-    {
-        -1.0f,  1.0f, 0.0f, // Left  top
-        -1.0f, -1.0f, 0.0f, // Left  bottom
-         1.0f,  1.0f, 0.0f, // Right top
-         1.0f, -1.0f, 0.0f, // Right bottom
-    };
 }
 
 
@@ -37,12 +40,12 @@ InspectContextWebGL1Basic::RunTargetProgram()
 
     // Load the vertex data
     const size_t vx_comp_count(3);
-    const size_t vx_count(mVertices.size() / vx_comp_count);
+    const size_t vx_count(mVertexList.size() / vx_comp_count);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, vx_comp_count, GL_FLOAT, GL_FALSE, 0, mVertices.data());
+    glVertexAttribPointer(0, vx_comp_count, GL_FLOAT, GL_FALSE, 0, mVertexList.data());
 
     // Draw
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, vx_count);
+    glDrawArrays(mVertexListType, 0, vx_count);
 
     return (glGetError() == GL_NO_ERROR);
 }

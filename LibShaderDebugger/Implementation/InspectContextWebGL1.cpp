@@ -28,7 +28,12 @@
 
 
 // Constructor
-InspectContextWebGL1::InspectContextWebGL1() :
+InspectContextWebGL1::InspectContextWebGL1(
+    const std::string& inSourceVertex,
+    const std::string& inSourceFragment)
+:
+    mSourceVertex   (inSourceVertex),
+    mSourceFragment (inSourceFragment),
     mHandleProgram  (GL_ZERO),
     mHandleVertex   (GL_ZERO),
     mHandleFragment (GL_ZERO)

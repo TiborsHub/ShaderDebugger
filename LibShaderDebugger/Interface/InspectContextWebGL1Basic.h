@@ -24,13 +24,18 @@ class InspectContextWebGL1Basic : public InspectContextWebGL1
 {
 public:
                                 // Constructor
-                                InspectContextWebGL1Basic();
+                                InspectContextWebGL1Basic(
+                                    const std::string&          inSourceVertex,
+                                    const std::string&          inSourceFragment,
+                                    const std::vector<GLfloat>& inVertices,
+                                    GLenum                      inVertexListType);
 
                                 // Run the program which is the subject of the inspection
     virtual bool                RunTargetProgram() override;
 
 protected:
-    std::vector<GLfloat>        mVertices;
+    std::vector<GLfloat>        mVertexList;
+    GLenum                      mVertexListType;
 };
 
 
