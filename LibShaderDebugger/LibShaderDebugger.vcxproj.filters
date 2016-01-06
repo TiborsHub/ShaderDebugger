@@ -93,6 +93,9 @@
     <ClInclude Include="Interface\InspectedProgramCollectionSingleton.h">
       <Filter>Interface</Filter>
     </ClInclude>
+    <ClInclude Include="Implementation\ASTGetBranchNodes.h">
+      <Filter>Implementation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Implementation\CreateProgramInspectorInstance.cpp">
@@ -168,6 +171,9 @@
       <Filter>Implementation</Filter>
     </ClCompile>
     <ClCompile Include="Implementation\ASTNodeLocation.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\ASTGetBranchNodes.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>
   </ItemGroup>

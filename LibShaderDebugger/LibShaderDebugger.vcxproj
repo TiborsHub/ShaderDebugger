@@ -85,6 +85,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Implementation\ASTGetBranchNodes.h" />
     <ClInclude Include="Implementation\ASTManipulations.h" />
     <ClInclude Include="Implementation\ASTNodeLocation.h" />
     <ClInclude Include="Implementation\ASTPrinter.h" />
@@ -114,6 +115,7 @@
     <ClInclude Include="Interface\ProgramInspectorI.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Implementation\ASTGetBranchNodes.cpp" />
     <ClCompile Include="Implementation\ASTManipulations.cpp" />
     <ClCompile Include="Implementation\ASTNodeLocation.cpp" />
     <ClCompile Include="Implementation\ASTPrinter.cpp" />
