@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class    : InspectedProgramCollection					            *
-*			Purpose  : Collection of program inspector inspect context pairs    *
-*			File     : InspectedProgramCollection.h							    *
-*			Author   : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class    : InspectedProgramCollection                               *
+*           Purpose  : Collection of program inspector inspect context pairs    *
+*           File     : InspectedProgramCollection.h                             *
+*           Author   : Tibor den Ouden                                          *
+*                                                                               *
 \*******************************************************************************/
 
 

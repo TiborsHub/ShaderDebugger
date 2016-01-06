@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class   : PixelData                                                 *
-*			Purpose : Stores floating point color data in a 2 dimensional array *
-*			File    : PixelData.cpp							                    *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class   : PixelData                                                 *
+*           Purpose : Stores floating point color data in a 2 dimensional array *
+*           File    : PixelData.cpp                                             *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 
@@ -22,6 +22,3 @@ PixelData2dF4::SetDimensions(size_t inWidth, size_t inHeight)
     mHeight = inHeight;
     mData.resize(inWidth * inHeight);
 }
-
-
-

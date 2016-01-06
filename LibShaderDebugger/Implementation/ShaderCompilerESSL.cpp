@@ -1,11 +1,11 @@
 /*******************************************************************************\
-*																				*
-*			Class   : ShaderCompilerESSL				                            *
-*			Purpose : Compiler a shader to intermediate node tree or object     *
+*                                                                               *
+*           Class   : ShaderCompilerESSL                                        *
+*           Purpose : Compiler a shader to intermediate node tree or object     *
 *                     code for WebGL 1.0 GLSL dialect                           *
-*			File    : ShaderCompilerESSL.cpp							            *
-*			Author  : Tibor den Ouden											*
-*																				*
+*           File    : ShaderCompilerESSL.cpp                                    *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

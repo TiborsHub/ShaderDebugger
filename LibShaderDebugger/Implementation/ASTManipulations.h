@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Utility : ASTManipulations					                        *
-*			Purpose : Utility functions to change / extend part of the AST      *
-*			File    : ASTManipulations.h							                *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Utility : ASTManipulations                                          *
+*           Purpose : Utility functions to change / extend part of the AST      *
+*           File    : ASTManipulations.h                                        *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

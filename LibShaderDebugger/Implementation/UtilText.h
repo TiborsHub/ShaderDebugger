@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Utility : UtilText					                                *
-*			Purpose : TExt related utility functions                            *
-*			File    : UtilText.h							                        *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Utility : UtilText                                                  *
+*           Purpose : TExt related utility functions                            *
+*           File    : UtilText.h                                                *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

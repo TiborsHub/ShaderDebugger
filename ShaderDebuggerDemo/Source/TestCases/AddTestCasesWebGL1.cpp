@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Utility : AddTestCasesWebGL1                                        *
-*			Purpose : Add WebGL 1.0 test cases to test case factory singleton   *
-*			File    : AddTestCasesWebGL1.cpp							            *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Utility : AddTestCasesWebGL1                                        *
+*           Purpose : Add WebGL 1.0 test cases to test case factory singleton   *
+*           File    : AddTestCasesWebGL1.cpp                                    *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

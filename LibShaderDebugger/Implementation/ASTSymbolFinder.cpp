@@ -1,11 +1,11 @@
 /*******************************************************************************\
-*																				*
-*			Class   : ASTSymbolFinder					                        *
-*			Purpose : AST traverser which searches for the node which contains  *
+*                                                                               *
+*           Class   : ASTSymbolFinder                                           *
+*           Purpose : AST traverser which searches for the node which contains  *
 *                     the target symbol                                         *
-*			File    : ASTSymbolFinder.cpp							            *
-*			Author  : Tibor den Ouden											*
-*																				*
+*           File    : ASTSymbolFinder.cpp                                       *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 
@@ -44,4 +44,3 @@ ASTSymbolFinder::visitSymbol(TIntermSymbol* inNode)
         mPathToSymbolNode.push_back(inNode);
     }
 }
-

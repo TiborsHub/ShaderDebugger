@@ -1,11 +1,11 @@
 /*******************************************************************************\
-*																				*
-*			Class    : ASTPrinter  									            *
-*			Purpose  : Prints the ANGLE AST to a stream                         *
+*                                                                               *
+*           Class    : ASTPrinter                                               *
+*           Purpose  : Prints the ANGLE AST to a stream                         *
 *                      Based on \angle\src\compiler\translator\intermOut.cpp    *
-*			File     : ASTPrinter.cpp										    *
-*			Author   : Tibor den Ouden											*
-*																				*
+*           File     : ASTPrinter.cpp                                           *
+*           Author   : Tibor den Ouden                                          *
+*                                                                               *
 \*******************************************************************************/
 
 
@@ -836,4 +836,3 @@ ASTPrinter::visitBranch(Visit inVisit, TIntermBranch* inBranchNode)
 
     return false;
 }
-

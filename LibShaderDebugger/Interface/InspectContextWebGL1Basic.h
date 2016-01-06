@@ -1,11 +1,11 @@
 /*******************************************************************************\
-*																				*
-*			Class   : InspectContextWebGL1Basic	                                *
-*			Purpose : Inspect context with default functionality to render      *
+*                                                                               *
+*           Class   : InspectContextWebGL1Basic                                 *
+*           Purpose : Inspect context with default functionality to render      *
 *                     one vertex buffer and update the viewport                 *
-*			File    : InspectContextWebGL1Basic.h							    *
-*			Author  : Tibor den Ouden											*
-*																				*
+*           File    : InspectContextWebGL1Basic.h                               *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

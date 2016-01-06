@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Utility  : InspectedProgramCollectionSingleton			            *
-*			Purpose  : The single inspected program collection instance         *
-*			File     : InspectedProgramCollectionSingleton.cpp				    *
-*			Author   : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Utility  : InspectedProgramCollectionSingleton                      *
+*           Purpose  : The single inspected program collection instance         *
+*           File     : InspectedProgramCollectionSingleton.cpp                  *
+*           Author   : Tibor den Ouden                                          *
+*                                                                               *
 \*******************************************************************************/
 
 
@@ -45,4 +45,3 @@ DestroyInspectedProgramCollectionSingleton()
     delete gInspectedProgramCollectionSingleton;
     gInspectedProgramCollectionSingleton = nullptr;
 }
-

@@ -1,11 +1,11 @@
 /*******************************************************************************\
-*																				*
-*			Class    : MousePosEvent  									        *
-*			Purpose  : Event to send the mouse position inside a control to     *
+*                                                                               *
+*           Class    : MousePosEvent                                            *
+*           Purpose  : Event to send the mouse position inside a control to     *
 *                      other parts of the gui                                   *
-*			File     : MousePosEvent.cpp										    *
-*			Author   : Tibor den Ouden											*
-*																				*
+*           File     : MousePosEvent.cpp                                        *
+*           Author   : Tibor den Ouden                                          *
+*                                                                               *
 \*******************************************************************************/
 
 

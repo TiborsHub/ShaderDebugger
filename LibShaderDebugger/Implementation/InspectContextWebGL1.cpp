@@ -1,11 +1,11 @@
 /*******************************************************************************\
-*																				*
-*			Class   : InspectContextWebGL1	                                    *
-*			Purpose : Interface to program and all state needed to run a        *
+*                                                                               *
+*           Class   : InspectContextWebGL1                                      *
+*           Purpose : Interface to program and all state needed to run a        *
 *                     WebGL 1 shader program                                    *
-*			File    : InspectContextWebGL1.cpp						            *
-*			Author  : Tibor den Ouden											*
-*																				*
+*           File    : InspectContextWebGL1.cpp                                  *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

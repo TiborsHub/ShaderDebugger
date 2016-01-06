@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class    : EglRenderWindow								            *
-*			Purpose  : Gui window on which the EGL system renders               *
-*			File     : EglRenderWindow.cpp										*
-*			Author   : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class    : EglRenderWindow                                          *
+*           Purpose  : Gui window on which the EGL system renders               *
+*           File     : EglRenderWindow.cpp                                      *
+*           Author   : Tibor den Ouden                                          *
+*                                                                               *
 \*******************************************************************************/
 
 
@@ -104,7 +104,7 @@ EglRenderWindow::OnResize(wxSizeEvent& inEvent)
 
 // Return viewport dimensions
 // Return width and height for now
-void 
+void
 EglRenderWindow::GetViewport(int& outWidth, int& outHeight)
 {
     GLint viewport[4];

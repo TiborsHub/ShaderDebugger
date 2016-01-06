@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class   : ShaderInspectorWebGL					                    *
-*			Purpose : Inspector of a shader using the ANGLE library             *
-*			File    : ShaderInspectorWebGL.cpp						            *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class   : ShaderInspectorWebGL                                      *
+*           Purpose : Inspector of a shader using the ANGLE library             *
+*           File    : ShaderInspectorWebGL.cpp                                  *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 
@@ -24,6 +24,7 @@
 #include "DataFramebuffer.h"
 #include "ShaderCompilerESSL.h"
 #include "GlUtil.h"
+#include "ASTNodeLocation.h"
 
 
 // ANGLE headers
@@ -109,6 +110,31 @@ ShaderInspectorWebGL::Initialize()
 }
 
 
+// Compute all ast nodes where the shader can take different paths through the code
+void
+ShaderInspectorWebGL::ComputeDecisionNodes()
+{
+    std::string source(GetInspectContext()->GetShaderSource(mShaderIx));
+    TIntermNode* ast(mCompiler->CompileToAST(source, mCompileOptions));
+
+
+}
+
+
+/*
+// Returns ast node of first statement to execute
+// virtual
+TIntermNode*
+ShaderInspectorWebGL::GetFirstStatement()
+{
+    // Find function main()
+    // AGGREGATE : EOpFunction main(
+
+
+    return nullptr;
+}
+*/
+
 // Inspect a token at the given source position
 void
 ShaderInspectorWebGL::Inspect(
@@ -133,6 +159,16 @@ ShaderInspectorWebGL::Inspect(
     ast->traverse(&symbol_finder);
     if (!symbol_finder.GetPathToSymbolNode().empty())
     {
+        // Test conversion from/to node location by index
+        std::vector<TIntermNode*> path_to_symbol(symbol_finder.GetPathToSymbolNode());
+        std::vector<int> node_indices;
+        GetNodeIndexPath(path_to_symbol, node_indices);
+        // Convert back to node path and verify
+        std::vector<TIntermNode*> shadow_node_path;
+        GetNodePath(path_to_symbol[0], node_indices, shadow_node_path);
+        assert(path_to_symbol == shadow_node_path);
+
+
         // Transform node tree to generate inspect shader
         TransformAST(
             symbol_finder.GetPathToSymbolNode(),

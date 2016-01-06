@@ -107,6 +107,7 @@
     <ClInclude Include="Interface\InspectContextWebGL1Basic.h" />
     <ClInclude Include="Interface\InspectedProgram.h" />
     <ClInclude Include="Interface\InspectedProgramCollection.h" />
+    <ClInclude Include="Interface\InspectedProgramCollectionSingleton.h" />
     <ClInclude Include="Interface\InspectResult.h" />
     <ClInclude Include="Interface\LibShaderDebuggerInitFin.h" />
     <ClInclude Include="Interface\PixelData.h" />

@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Utility : ASTQueries					                                *
-*			Purpose : Queries to compute certain properties of an AST           *
-*			File    : ASTQueries	.h							                    *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Utility : ASTQueries                                                *
+*           Purpose : Queries to compute certain properties of an AST           *
+*           File    : ASTQueries.h                                              *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

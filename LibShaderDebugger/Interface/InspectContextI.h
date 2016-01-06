@@ -1,11 +1,11 @@
 /*******************************************************************************\
-*																				*
-*			Class   : InspectContext	I	                                        *
-*			Purpose : Interface to program and all state needed to run          *
+*                                                                               *
+*           Class   : InspectContext    I                                       *
+*           Purpose : Interface to program and all state needed to run          *
 *                     program                                                   *
-*			File    : InspectContext	I.h							                *
-*			Author  : Tibor den Ouden											*
-*																				*
+*           File    : InspectContext    I.h                                     *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 
@@ -59,4 +59,3 @@ public:
 
 
 #endif // __INSPECT_CONTEXT_I_H__
-

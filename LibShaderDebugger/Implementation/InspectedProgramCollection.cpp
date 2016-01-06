@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class    : InspectedProgramCollection					            *
-*			Purpose  : Collection of program inspector inspect context pairs    *
-*			File     : InspectedProgramCollection.cpp						    *
-*			Author   : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class    : InspectedProgramCollection                               *
+*           Purpose  : Collection of program inspector inspect context pairs    *
+*           File     : InspectedProgramCollection.cpp                           *
+*           Author   : Tibor den Ouden                                          *
+*                                                                               *
 \*******************************************************************************/
 
 
@@ -50,4 +50,3 @@ InspectedProgramCollection::Delete(const std::string& inId)
 {
     return (mInspectedProgramMap.erase(inId) == 1);
 }
-

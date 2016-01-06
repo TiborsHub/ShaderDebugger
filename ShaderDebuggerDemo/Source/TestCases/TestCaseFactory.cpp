@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class   : TestCaseFactory	                                        *
-*			Purpose : Factory object which creates test cases                   *
-*			File    : TestCaseFactory.cpp						                *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class   : TestCaseFactory                                           *
+*           Purpose : Factory object which creates test cases                   *
+*           File    : TestCaseFactory.cpp                                       *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

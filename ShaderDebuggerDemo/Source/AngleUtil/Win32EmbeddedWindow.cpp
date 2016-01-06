@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class   : Win32EmbeddedWindow					                    *
-*			Purpose : Renderer for WebGL programs                               *
-*			File    : Win32EmbeddedWindow.cpp						            *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class   : Win32EmbeddedWindow                                       *
+*           Purpose : Renderer for WebGL programs                               *
+*           File    : Win32EmbeddedWindow.cpp                                   *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

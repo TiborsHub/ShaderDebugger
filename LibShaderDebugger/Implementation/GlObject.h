@@ -1,11 +1,11 @@
 /*******************************************************************************\
-*																				*
-*			Class   : GlObject	                                                *
-*			Purpose : Base class for all objects which live in/on the OpenGL ES *
+*                                                                               *
+*           Class   : GlObject                                                  *
+*           Purpose : Base class for all objects which live in/on the OpenGL ES *
 *                     context                                                   *
-*			File    : GlObject.h							                        *
-*			Author  : Tibor den Ouden											*
-*																				*
+*           File    : GlObject.h                                                *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

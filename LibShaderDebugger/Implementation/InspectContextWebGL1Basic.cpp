@@ -1,11 +1,11 @@
 /*******************************************************************************\
-*																				*
-*			Class   : InspectContextWebGL1Basic	                                *
-*			Purpose : Inspect context with default functionality to render      *
+*                                                                               *
+*           Class   : InspectContextWebGL1Basic                                 *
+*           Purpose : Inspect context with default functionality to render      *
 *                     one vertex buffer and update the viewport                 *
-*			File    : InspectContextWebGL1Basic.cpp							    *
-*			Author  : Tibor den Ouden											*
-*																				*
+*           File    : InspectContextWebGL1Basic.cpp                             *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 
@@ -49,5 +49,3 @@ InspectContextWebGL1Basic::RunTargetProgram()
 
     return (glGetError() == GL_NO_ERROR);
 }
-
-

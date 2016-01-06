@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Utility : ASTQueries					                                *
-*			Purpose : Queries to compute certain properties of an AST           *
-*			File    : ASTQueries	.cpp							                    *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Utility : ASTQueries                                                *
+*           Purpose : Queries to compute certain properties of an AST           *
+*           File    : ASTQueries.cpp                                            *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 
@@ -237,4 +237,3 @@ FindValueExpressionNode(const std::vector<TIntermNode*>& inSymbolNodePath)
         return inSymbolNodePath.back();
     }
 }
-

@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class   : ProgramInspectorWebGL					                    *
-*			Purpose : Inspector for WebGL shader programs                       *
-*			File    : ProgramInspectorWebGL.cpp							        *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class   : ProgramInspectorWebGL                                     *
+*           Purpose : Inspector for WebGL shader programs                       *
+*           File    : ProgramInspectorWebGL.cpp                                 *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 
@@ -30,6 +30,19 @@ ProgramInspectorWebGL::ProgramInspectorWebGL(SpInspectContextI& inInspectContext
     ProgramInspectorI(inInspectContext)
 {
 
+}
+
+
+// Returns ast node of first statement to execute
+// virtual
+TIntermNode*
+ProgramInspectorWebGL::GetFirstStatement()
+{
+    // Find function main()
+    // AGGREGATE : EOpFunction main(
+
+
+    return nullptr;
 }
 
 
@@ -99,5 +112,3 @@ ProgramInspectorWebGL::Inspect(size_t inShaderIx, size_t inSourceIx, InspectResu
         outResult.mResultCode = INSPECT_RESULT_INVALID_SOURCE_POS;
     }
 }
-
-

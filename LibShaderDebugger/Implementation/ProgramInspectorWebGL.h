@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class   : ProgramInspectorWebGL					                    *
-*			Purpose : Inspector for WebGL shader programs                       *
-*			File    : ProgramInspectorWebGL.h							        *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class   : ProgramInspectorWebGL                                     *
+*           Purpose : Inspector for WebGL shader programs                       *
+*           File    : ProgramInspectorWebGL.h                                   *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 
@@ -35,6 +35,9 @@ class ProgramInspectorWebGL : public ProgramInspectorI
 public:
                                 // Constructor
                                 ProgramInspectorWebGL(SpInspectContextI& inInspectContext);
+
+                                // Returns ast node of first statement to execute
+    virtual TIntermNode*        GetFirstStatement() override;
 
                                 // Inspect a token in a shader at the given source position
     virtual void                Inspect(size_t inShaderIx, size_t inSourceIx, InspectResult& outResult) override;

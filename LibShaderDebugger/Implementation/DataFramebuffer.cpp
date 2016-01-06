@@ -1,11 +1,11 @@
 /*******************************************************************************\
-*																				*
-*			Class   : DataFramebuffer	                                        *
-*			Purpose : Framebuffer object which renders to a floating point      *
+*                                                                               *
+*           Class   : DataFramebuffer                                           *
+*           Purpose : Framebuffer object which renders to a floating point      *
 *                     texture to capture the nummeric output of a shader        *
-*			File    : DataFramebuffer.cpp							            *
-*			Author  : Tibor den Ouden											*
-*																				*
+*           File    : DataFramebuffer.cpp                                       *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

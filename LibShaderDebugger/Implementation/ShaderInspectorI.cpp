@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class   : ShaderInspectorI                                          *
-*			Purpose : Interface to inspector shader                             *
-*			File    : ShaderInspectorI.cpp						                *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class   : ShaderInspectorI                                          *
+*           Purpose : Interface to inspector shader                             *
+*           File    : ShaderInspectorI.cpp                                      *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

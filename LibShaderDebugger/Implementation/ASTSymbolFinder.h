@@ -1,11 +1,11 @@
 /*******************************************************************************\
-*																				*
-*			Class   : ASTSymbolFinder					                        *
-*			Purpose : AST traverser which searches for the node which contains  *
+*                                                                               *
+*           Class   : ASTSymbolFinder                                           *
+*           Purpose : AST traverser which searches for the node which contains  *
 *                     the target symbol                                         *
-*			File    : ASTSymbolFinder.h							                *
-*			Author  : Tibor den Ouden											*
-*																				*
+*           File    : ASTSymbolFinder.h                                         *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

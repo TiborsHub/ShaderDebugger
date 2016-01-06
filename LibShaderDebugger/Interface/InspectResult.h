@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class   : InspectResult	                                            *
-*			Purpose : Result of inspection request                              *
-*			File    : InspectResult.h							                *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class   : InspectResult                                             *
+*           Purpose : Result of inspection request                              *
+*           File    : InspectResult.h                                           *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

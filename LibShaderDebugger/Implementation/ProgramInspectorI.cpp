@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class   : ProgramInspectorI					                        *
-*			Purpose : Interface to hide all details of inspecting a program     *
-*			File    : ProgramInspectorI.cpp							            *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class   : ProgramInspectorI                                         *
+*           Purpose : Interface to hide all details of inspecting a program     *
+*           File    : ProgramInspectorI.cpp                                     *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

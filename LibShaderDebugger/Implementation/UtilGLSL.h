@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Utility : UtilGLSL					                                *
-*			Purpose : Utility functions for GLSL shader sources                 *
-*			File    : UtilGLSL.h							                        *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Utility : UtilGLSL                                                  *
+*           Purpose : Utility functions for GLSL shader sources                 *
+*           File    : UtilGLSL.h                                                *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

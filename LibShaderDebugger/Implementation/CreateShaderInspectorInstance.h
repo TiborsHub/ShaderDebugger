@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Utility : CreateShaderInspectorInstance					            *
-*			Purpose : Factory function for creating shader inspectors           *
-*			File    : CreateShaderInspectorInstance.h							*
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Utility : CreateShaderInspectorInstance                             *
+*           Purpose : Factory function for creating shader inspectors           *
+*           File    : CreateShaderInspectorInstance.h                           *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

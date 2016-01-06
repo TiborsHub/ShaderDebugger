@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class    : ShaderDebuggerDemo								        *
-*			Purpose  : Main class of shader debugger demo application           *
-*			File     : ShaderDebuggerDemo.h										*
-*			Author   : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class    : ShaderDebuggerDemo                                       *
+*           Purpose  : Main class of shader debugger demo application           *
+*           File     : ShaderDebuggerDemo.h                                     *
+*           Author   : Tibor den Ouden                                          *
+*                                                                               *
 \*******************************************************************************/
 
 

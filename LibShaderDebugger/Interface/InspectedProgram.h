@@ -1,11 +1,11 @@
 /*******************************************************************************\
-*																				*
-*			Class    : InspectedProgram					                        *
-*			Purpose  : Keeps track of corresponding inspect context and         *
+*                                                                               *
+*           Class    : InspectedProgram                                         *
+*           Purpose  : Keeps track of corresponding inspect context and         *
 *                      inspector objects                                        *
-*			File     : InspectedProgram.h							            *
-*			Author   : Tibor den Ouden											*
-*																				*
+*           File     : InspectedProgram.h                                       *
+*           Author   : Tibor den Ouden                                          *
+*                                                                               *
 \*******************************************************************************/
 
 

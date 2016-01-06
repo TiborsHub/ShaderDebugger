@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Utilities : SmartPointerDeclarations 							    *
-*			Purpose   : Some utility macros to define smart pointer type names  *
-*			File      : SmartPointerDeclarations.h							    *
-*			Author    : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Utilities : SmartPointerDeclarations                                *
+*           Purpose   : Some utility macros to define smart pointer type names  *
+*           File      : SmartPointerDeclarations.h                              *
+*           Author    : Tibor den Ouden                                         *
+*                                                                               *
 \*******************************************************************************/
 
 

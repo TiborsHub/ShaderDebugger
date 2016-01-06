@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Utility  : InspectedProgramCollectionSingleton			            *
-*			Purpose  : The single inspected program collection instance         *
-*			File     : InspectedProgramCollectionSingleton.h					    *
-*			Author   : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Utility  : InspectedProgramCollectionSingleton                      *
+*           Purpose  : The single inspected program collection instance         *
+*           File     : InspectedProgramCollectionSingleton.h                    *
+*           Author   : Tibor den Ouden                                          *
+*                                                                               *
 \*******************************************************************************/
 
 

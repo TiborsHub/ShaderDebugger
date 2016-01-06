@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class   : ProgramInspectorI					                        *
-*			Purpose : Interface to hide all details of inspecting a program     *
-*			File    : ProgramInspectorI.h							            *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class   : ProgramInspectorI                                         *
+*           Purpose : Interface to hide all details of inspecting a program     *
+*           File    : ProgramInspectorI.h                                       *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 
@@ -21,6 +21,7 @@
 // Forward declarations
 CLASS_FORWARD_DECLARATIONS(InspectContextI);
 class InspectResult;
+class TIntermNode;
 
 
 // Standard headers
@@ -38,6 +39,9 @@ public:
 
                                 // Returns context
     SpInspectContextI           GetContext();
+
+                                // Returns ast node of first statement to execute
+    virtual TIntermNode*        GetFirstStatement() = 0;
 
                                 // Inspect a token in a shader at the given source position
     virtual void                Inspect(size_t inShaderIx, size_t inSourceIx, InspectResult& outResult) = 0;

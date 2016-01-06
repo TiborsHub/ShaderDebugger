@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			enum     : EventId					                                *
-*			Purpose  : Collection of program inspector inspect context pairs    *
-*			File     : EventId.h							                        *
-*			Author   : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           enum     : EventId                                                  *
+*           Purpose  : Collection of program inspector inspect context pairs    *
+*           File     : EventId.h                                                *
+*           Author   : Tibor den Ouden                                          *
+*                                                                               *
 \*******************************************************************************/
 
 

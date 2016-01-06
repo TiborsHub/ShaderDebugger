@@ -1,11 +1,11 @@
 /*******************************************************************************\
-*																				*
-*			Function : CreateProgramInspectorInstance					        *
-*			Purpose  : Factory function to create concrete instance of          *
+*                                                                               *
+*           Function : CreateProgramInspectorInstance                           *
+*           Purpose  : Factory function to create concrete instance of          *
 *                      program inspector                                        *
-*			File     : CreateProgramInspectorInstance.cpp						*
-*			Author   : Tibor den Ouden											*
-*																				*
+*           File     : CreateProgramInspectorInstance.cpp                       *
+*           Author   : Tibor den Ouden                                          *
+*                                                                               *
 \*******************************************************************************/
 
 

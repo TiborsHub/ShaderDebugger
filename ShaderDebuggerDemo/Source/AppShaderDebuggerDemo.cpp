@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Utility  : ShaderDebuggerDemoApp						                *
-*			Purpose  : Creates the shader debugger demo application             *
-*			File     : ShaderDebuggerDemoApp.h							        *
-*			Author   : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Utility  : AppShaderDebuggerDemo                                    *
+*           Purpose  : Creates the shader debugger demo application             *
+*           File     : AppShaderDebuggerDemo.h                                  *
+*           Author   : Tibor den Ouden                                          *
+*                                                                               *
 \*******************************************************************************/
 
 

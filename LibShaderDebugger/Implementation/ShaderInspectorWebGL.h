@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class   : ShaderInspectorWebGL					                    *
-*			Purpose : Inspector of a shader using the ANGLE library             *
-*			File    : ShaderInspectorWebGL.h							            *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class   : ShaderInspectorWebGL                                      *
+*           Purpose : Inspector of a shader using the ANGLE library             *
+*           File    : ShaderInspectorWebGL.h                                    *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 
@@ -58,6 +58,7 @@ public:
                                 // Initialize the inspector
     virtual bool                Initialize();
 
+
                                 // Inspect a token at the given source position
     virtual void                Inspect(
                                     const std::string& inSymbol,
@@ -66,6 +67,9 @@ public:
                                     InspectResult&     outResult) override;
 
 private:
+                                // Compute all ast nodes where the shader can take different paths through the code
+    void                        ComputeDecisionNodes();
+
                                 // Transform AST to return target symbol
     void                        TransformAST(
                                     const std::vector<TIntermNode*>& inTargetSymbolPath,
@@ -93,4 +97,3 @@ private:
 
 
 #endif // __SHADER_INSPECTOR_ANGLE_H__
-

@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Utility : CreateShaderInspectorInstance					            *
-*			Purpose : Factory function for creating shader inspectors           *
-*			File    : CreateShaderInspectorInstance.cpp							*
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Utility : CreateShaderInspectorInstance                             *
+*           Purpose : Factory function for creating shader inspectors           *
+*           File    : CreateShaderInspectorInstance.cpp                         *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 
@@ -31,4 +31,3 @@ CreateShaderInspectorInstance(
         SH_HLSL11_OUTPUT,
         SH_VALIDATE);
 }
-

@@ -1,11 +1,11 @@
 /*******************************************************************************\
-*																				*
-*			Utility : LibShaderDebuggerInitFin					                *
-*			Purpose : Utility functions to initialize and finalize the          *
+*                                                                               *
+*           Utility : LibShaderDebuggerInitFin                                  *
+*           Purpose : Utility functions to initialize and finalize the          *
 *                     shader debugger library                                   *
-*			File    : LibShaderDebuggerInitFin.cpp							    *
-*			Author  : Tibor den Ouden											*
-*																				*
+*           File    : LibShaderDebuggerInitFin.cpp                              *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 
@@ -50,4 +50,3 @@ LibShaderDebuggerFinalize()
 
     return ShFinalize();
 }
-

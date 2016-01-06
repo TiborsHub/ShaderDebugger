@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class   : TestCaseFactory	                                        *
-*			Purpose : Factory object which creates test cases                   *
-*			File    : TestCaseFactory.h							                *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class   : TestCaseFactory                                           *
+*           Purpose : Factory object which creates test cases                   *
+*           File    : TestCaseFactory.h                                         *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 
@@ -90,4 +90,3 @@ TestCaseFactory::End() const
 
 
 #endif // __TEST_CASE_FACTORY_H__
-

@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class   : Texture2D	                                                *
-*			Purpose : Object which contains a 2 dimension array of color data   *
-*			File    : Texture2D.h							                    *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class   : Texture2D                                                 *
+*           Purpose : Object which contains a 2 dimension array of color data   *
+*           File    : Texture2D.h                                               *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 
@@ -72,5 +72,3 @@ Texture2D::GetHeight() const
 
 
 #endif // __TEXTURE_2D_H__
-
-

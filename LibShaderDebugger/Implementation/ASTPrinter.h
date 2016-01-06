@@ -1,11 +1,11 @@
 /*******************************************************************************\
-*																				*
-*			Class    : ASTPrinter  									            *
-*			Purpose  : Prints the ANGLE AST to a stream                         *
+*                                                                               *
+*           Class    : ASTPrinter                                               *
+*           Purpose  : Prints the ANGLE AST to a stream                         *
 *                      Based on \angle\src\compiler\translator\intermOut.cpp    *
-*			File     : ASTPrinter.h										        *
-*			Author   : Tibor den Ouden											*
-*																				*
+*           File     : ASTPrinter.h                                             *
+*           Author   : Tibor den Ouden                                          *
+*                                                                               *
 \*******************************************************************************/
 
 

@@ -1,11 +1,11 @@
 /*******************************************************************************\
-*																				*
-*			Utility : LibShaderDebuggerInitFin					                *
-*			Purpose : Utility functions to initialize and finalize the          *
+*                                                                               *
+*           Utility : LibShaderDebuggerInitFin                                  *
+*           Purpose : Utility functions to initialize and finalize the          *
 *                     shader debugger library                                   *
-*			File    : LibShaderDebuggerInitFin.h							        *
-*			Author  : Tibor den Ouden											*
-*																				*
+*           File    : LibShaderDebuggerInitFin.h                                *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

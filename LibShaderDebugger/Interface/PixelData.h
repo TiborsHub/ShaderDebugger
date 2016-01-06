@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class   : PixelData                                                 *
-*			Purpose : Stores floating point color data in a 2 dimensional array *
-*			File    : PixelData.h							                    *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class   : PixelData                                                 *
+*           Purpose : Stores floating point color data in a 2 dimensional array *
+*           File    : PixelData.h                                               *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

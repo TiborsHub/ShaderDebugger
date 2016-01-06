@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Utility : TestCaseFactorySingleton                                  *
-*			Purpose : The single test case factory instance                     *
-*			File    : TestCaseFactorySingleton.cpp							    *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Utility : TestCaseFactorySingleton                                  *
+*           Purpose : The single test case factory instance                     *
+*           File    : TestCaseFactorySingleton.cpp                              *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

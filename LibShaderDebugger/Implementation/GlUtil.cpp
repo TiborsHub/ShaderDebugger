@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class   : GlUtil	                                                    *
-*			Purpose : Utility functions to simplify some gl manipulations       *
-*			File    : GlUtil.h							                        *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class   : GlUtil                                                    *
+*           Purpose : Utility functions to simplify some gl manipulations       *
+*           File    : GlUtil.h                                                  *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 

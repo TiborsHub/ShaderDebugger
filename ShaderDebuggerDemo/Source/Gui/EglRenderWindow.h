@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class    : EglRenderWindow								            *
-*			Purpose  : Gui window on which the EGL system renders               *
-*			File     : EglRenderWindow.h										    *
-*			Author   : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class    : EglRenderWindow                                          *
+*           Purpose  : Gui window on which the EGL system renders               *
+*           File     : EglRenderWindow.h                                        *
+*           Author   : Tibor den Ouden                                          *
+*                                                                               *
 \*******************************************************************************/
 
 

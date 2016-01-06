@@ -1,11 +1,11 @@
 /*******************************************************************************\
-*																				*
-*			Class    : MousePosEvent  									        *
-*			Purpose  : Event to send the mouse position inside a control to     *
+*                                                                               *
+*           Class    : MousePosEvent                                            *
+*           Purpose  : Event to send the mouse position inside a control to     *
 *                      other parts of the gui                                   *
-*			File     : MousePosEvent.h										    *
-*			Author   : Tibor den Ouden											*
-*																				*
+*           File     : MousePosEvent.h                                          *
+*           Author   : Tibor den Ouden                                          *
+*                                                                               *
 \*******************************************************************************/
 
 
@@ -37,19 +37,19 @@ class MousePosEvent: public wxCommandEvent
 {
 public:
                                 // Constructor
-	                            MousePosEvent(wxEventType inCmdType, int inId, const wxPoint& inPosition);
+                                MousePosEvent(wxEventType inCmdType, int inId, const wxPoint& inPosition);
 
-                                	// Clone object
-	virtual wxEvent*            Clone() const override;
+                                    // Clone object
+    virtual wxEvent*            Clone() const override;
 
                                 // Return mouse position
-	wxPoint                     GetPosition() const;
+    wxPoint                     GetPosition() const;
 
                                 // Set mouse position
-	void                        SetPosition(const wxPoint& inPosition);
+    void                        SetPosition(const wxPoint& inPosition);
 
 private:
-	wxPoint                     mPosition;
+    wxPoint                     mPosition;
 };
 
 
@@ -60,7 +60,7 @@ typedef void (wxEvtHandler::*tFnMousePosEvent)(MousePosEvent&);
 
 // Event table entry
 #define EVT_CUST_MOUSE_POS(inId, inFunc) \
- 	wx__DECLARE_EVT1(EVT_TYPE_CUST_MOUSE_POS, inId, MOUSE_POS_EVENT_HANDLER(inFunc))
+    wx__DECLARE_EVT1(EVT_TYPE_CUST_MOUSE_POS, inId, MOUSE_POS_EVENT_HANDLER(inFunc))
 
 
 // Inline definitions

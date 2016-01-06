@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class   : Texture2D	                                                *
-*			Purpose : Object which contains a 2 dimension array of color data   *
-*			File    : Texture2D.cpp							                    *
-*			Author  : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class   : Texture2D                                                 *
+*           Purpose : Object which contains a 2 dimension array of color data   *
+*           File    : Texture2D.cpp                                             *
+*           Author  : Tibor den Ouden                                           *
+*                                                                               *
 \*******************************************************************************/
 
 
@@ -54,11 +54,11 @@ Texture2D::Texture2D(
         glBindTexture(GL_TEXTURE_2D, mHandle);
         assert(glGetError() == GL_NO_ERROR);
 
-  	    // Set the parameters
-  	    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, 	  inWrapType);
-  	    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, 	  inWrapType);
-  	    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, inFilterType);
-  	    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, inFilterType);
+        // Set the parameters
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,     inWrapType);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,     inWrapType);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, inFilterType);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, inFilterType);
 
         // Set texture data
         // No pixel format conversion
