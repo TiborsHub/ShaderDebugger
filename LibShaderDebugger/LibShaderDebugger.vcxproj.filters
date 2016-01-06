@@ -8,7 +8,7 @@
       <UniqueIdentifier>{886156a7-f36d-4009-a2ac-41671f4d8743}</UniqueIdentifier>
     </Filter>
     <Filter Include="Doc">
-      <UniqueIdentifier>{77033882-d2e2-4cbc-9849-8d9f8e58658d}</UniqueIdentifier>
+      <UniqueIdentifier>{e716a978-e21e-4777-b1a0-94066a6cde9c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +87,9 @@
     <ClInclude Include="Interface\PixelData.h">
       <Filter>Interface</Filter>
     </ClInclude>
+    <ClInclude Include="Implementation\ASTNodeLocation.h">
+      <Filter>Implementation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Implementation\CreateProgramInspectorInstance.cpp">
@@ -159,6 +162,9 @@
       <Filter>Implementation</Filter>
     </ClCompile>
     <ClCompile Include="Implementation\InspectContextWebGL1Basic.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\ASTNodeLocation.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>
   </ItemGroup>
