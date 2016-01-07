@@ -3,7 +3,7 @@ Introduction
 	This document describes the design of a software shader debugger.
 	By software shader debugger is meant that the debugger does not need
 	hardware support to retrieve the state. The debugger uses the
-	abstract syntax tree (ast) to analyse the structure of the shader code
+	abstract syntax tree (ast) to analyze the structure of the shader code
 	and adds extra instructions to the shader (instrumentation) to retrieve the
 	value of intermediate variables (expressions) for inspection.
 	This method is also used to retrieve the value of conditional expressions
@@ -28,13 +28,13 @@ Introduction
 	The parsing of the shaders is done by the compiler from the ANGLE library
 	(https://chromium.googlesource.com/angle/angle)
 	
-	LibShaderDebugger containst the functionality.
+	LibShaderDebugger contains the functionality.
 	LibShaderDebugger\Interface is the directory to include if this library is added to a project.
 	LibShaderDebugger\Implementation contains the implementation.
 
 	The first concrete gpu language to support is the GLSL dialect as defined in WebGL 1.0.
 	The architecture will be done in a way that adding support for other gpu languages like
-	WebCL, Compute shaders, or a geometry shader step should be easy to incorperate.
+	WebCL, Compute shaders, or a geometry shader step should be easy to incorporate.
 	
 	If this turns out to be of some use it will	be converted to Javascript with emscripten.
 	So the debugger can be integrated in web based development tools as well.
@@ -57,7 +57,7 @@ Terms used
 	and destination component count.
 	
 	
-Lineair statement sequence in main function
+Linear statement sequence in main function
 
 	Target is inspect expression in main() 
 	Modified shader is assignment of inspect expression to gl_FragColor.
@@ -114,7 +114,7 @@ Fragment shader with loop
 
 	inspect_out;
 	inspect_loop_count;
-	inspect_loop_count_target;
+	uniform inspect_loop_count_target;
 	
 	bar()
 	{
@@ -141,6 +141,8 @@ Fragment shader with loop
 		gl_FragColor = inspect_out
 	}
 	
+	inspect_loop_count_target is a uniform which is added to the shader and set to the correct value
+	by the debugger.
 	
 Fragment shader with nested function reachable through multiple code paths
 
@@ -180,8 +182,8 @@ Fragment shader with nested function reachable through multiple code paths
 	inspect_out;
 	inspect_cond;
 	inspect_loop_count;
-	inspect_cond_target;
-	inspect_loop_count_target;
+	uniform inspect_cond_target;
+	uniform inspect_loop_count_target;
 	
 	bar()
 	{
@@ -239,7 +241,7 @@ Generalization
 	The generalization of the above examples is this:
 	All possible unique paths through the shader code can be enumerated.
 	This can be done by adding a boolean variable for every binary branch 
-	and a execution instance counter for loops. In some cases there is a variable
+	and an execution instance counter for loops. In some cases there is a variable
 	in the original shader which can be used (for instance the loop index variable).
 	These state variables should be at global scope.
 	If this proves to be problematic they could be defined in main() and passed on as extra variables.
@@ -263,7 +265,7 @@ Generalization
 	Note: the assignment of the inspect-output to gl_FragColor should be the last statement in main
 	to avoid the overwriting of gl_FragColor by some other assignment;
 
-	Not: If there are a lot of boolean branch state variables these can be compacted into a bitfield.
+	Not: If there are a lot of boolean branch state variables these can be compacted into a bit field.
 	(This works fine with floats as long as you stay inside the representable integer range of the float type).
 	
 	Due to that most shaders are relative small and recursion is not allowed, this method to keep track 
@@ -289,9 +291,9 @@ Large sized inspect expressions
 	...
 	
 	
-	If the extra introduced branching becomes problematic, another method would be to multiply the diferent parts
+	If the extra introduced branching becomes problematic, another method would be to multiply the different parts
 	of the expression with a weight factor (0 or 1) and sum the result of the multiplications.
-	The weight factors will be input through a uniforms (packing in a float as bitfield is possible).
+	The weight factors will be input through a uniforms (packing in a float as bit field is possible).
 	
 	
 Debugging functionality
@@ -302,12 +304,12 @@ Debugging functionality
 	Using these state variables it can present a single stepping experience by advancing the line nr
 	and if the line contains a state variable, retrieve the value of the condition and determine 
 	if the line nr needs to be advanced to the next line or the shader jumped to another line.
-	If the user wants to inspect a expression, the debugger can retrieve the value by generating
+	If the user wants to inspect an expression, the debugger can retrieve the value by generating
 	an inspect shader as described in the previous section using the set of state variables.
 	
 	This debugging experience is for one pixel with all inputs (attributes, uniforms and textures) equal to 
-	the ones used in the original shader.
-
+	the ones used in the original shader. But the debugger can allow the user to set these to specific values.
+	
 
 Source elements the user can select 
 
