@@ -282,4 +282,46 @@ AddTestCasesWebGL1()
             GL_TRIANGLE_STRIP);
         });
 
+    // Test shader with loop, function call and selection
+    gTestCaseFactorySingleton->AddTestCase(
+        "Test shader with loop, function call and selection",
+        []() -> SpInspectContextI { return std::make_shared<InspectContextWebGL1Basic>(
+            vertex_shader_pos_varying,
+            SHADER_SOURCE
+            (
+                  precision mediump float;
+
+                  // Input
+                \nvarying vec4 vPosition;
+
+                \nfloat Sum(in float inCount)
+                \n{
+                \n    float sum = 0.0;
+                \n    for (float ix = 0.0; ix < 100.0; ++ix)
+                \n    {
+                \n        sum += sin(ix);
+                \n        if (ix >= inCount)
+                \n        {
+                \n            break;
+                \n        }
+                \n    }
+                \n
+                \n    return sum;
+                \n}
+
+                \nvoid main()
+                \n{
+                \n    if (mod(gl_FragCoord.x - 0.5, 2.0) == 0.0)
+                \n    {
+                \n        gl_FragColor = vec4(1.0, Sum(gl_FragCoord.x - 0.5), gl_FragCoord.x, 1.0);
+                \n    }
+                \n    else
+                \n    {
+                \n        gl_FragColor = vec4(Sum(gl_FragCoord.y - 0.5), 1.0, gl_FragCoord.x, 1.0);
+                \n    }
+                \n}
+            ),
+            viewport_quad_vertices,
+            GL_TRIANGLE_STRIP);
+        });
 }
