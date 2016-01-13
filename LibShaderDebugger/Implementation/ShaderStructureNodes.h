@@ -2,7 +2,7 @@
 *                                                                               *
 *           Class   : ShaderStructureNodes                                      *
 *           Purpose : Information about all nodes at which the shader excution  *
-*                     path can deviate from sequencial execution                *
+*                     path can deviate from sequential execution                *
 *           File    : ShaderStructureNodes.h                                    *
 *           Author  : Tibor den Ouden                                           *
 *                                                                               *
