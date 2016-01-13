@@ -1,0 +1,12 @@
+Plan
+
+Simple single stepping
+Single step through the source based on the ast.
+No inspection of conditions in selection and loops yet.
+
+--------------------------------------------------------------------------------
+
+Log
+
+13 Jan 2016 (wed)
+	Working towards simple single stepping
