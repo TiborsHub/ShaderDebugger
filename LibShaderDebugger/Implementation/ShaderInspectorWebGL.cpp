@@ -96,8 +96,7 @@ ShaderInspectorWebGL::Initialize()
         mCompileOptions,
         true,
         mInfoSink,
-        mResources
-        ));
+        mResources));
 
 
     if (mParseContext.get() == nullptr)
