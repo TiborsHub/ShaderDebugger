@@ -146,7 +146,9 @@ ShaderInspectorWebGL::GetSourceLocation(
         const TSourceLoc& src_loc(node_location.back()->getLine());
         outSourceLocation.mLineNrFirst = src_loc.first_line;
         outSourceLocation.mLineNrLast  = src_loc.last_line;
+
         // Column information is not available through the ANGLE parser
+        // Set column information to a long line
         outSourceLocation.mColIxFirst  =   0;
         outSourceLocation.mColIxLast   = 250;
 
