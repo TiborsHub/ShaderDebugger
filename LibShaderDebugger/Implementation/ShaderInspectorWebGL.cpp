@@ -27,6 +27,7 @@
 #include "ASTNodeLocationConversion.h"
 #include "ShaderStructureNodes.h"
 #include "ASTGetShaderStructureNodes.h"
+#include "SourceLocation.h"
 
 
 // ANGLE headers
@@ -126,6 +127,33 @@ ShaderInspectorWebGL::GetShaderStructureNodes(ShaderStructureNodes& outShaderStr
     }
 
     return result;
+}
+
+
+// Return location in source code for an ast node
+// virtual
+bool
+ShaderInspectorWebGL::GetSourceLocation(
+    const tASTLocation& inASTLocation,
+    SourceLocation&     outSourceLocation)
+{
+    std::string source(GetInspectContext()->GetShaderSource(mShaderIx));
+    TIntermNode* ast(mCompiler->CompileToAST(source, mCompileOptions));
+
+    tASTNodeLocation node_location;
+    if (ast != nullptr && GetNodePath(ast, inASTLocation, node_location))
+    {
+        const TSourceLoc& src_loc(node_location.back()->getLine());
+        outSourceLocation.mLineNrFirst = src_loc.first_line;
+        outSourceLocation.mLineNrLast  = src_loc.last_line;
+        // Column information is not available through the ANGLE parser
+        outSourceLocation.mColIxFirst  =   0;
+        outSourceLocation.mColIxLast   = 250;
+
+        return true;
+    }
+
+    return false;
 }
 
 

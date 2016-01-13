@@ -21,8 +21,14 @@
 // Forward declaration
 class InspectResult;
 class ShaderStructureNodes;
+class SourceLocation;
 CLASS_FORWARD_DECLARATIONS(ProgramInspectorI);
 CLASS_FORWARD_DECLARATIONS(InspectContextI);
+
+
+// Library headers
+#include "ASTLocation.h"
+#include "ASTNodeLocation.h"
 
 
 // Standard headers
@@ -43,6 +49,11 @@ public:
 
                                 // Return the nodes from the ast where the shader execution path can branch
     virtual bool                GetShaderStructureNodes(ShaderStructureNodes& outShaderStructure) = 0;
+
+                                // Return location in source code for an ast node
+    virtual bool                GetSourceLocation(
+                                    const tASTLocation& inASTLocation,
+                                    SourceLocation&     outSourceLocation) = 0;
 
                                 // Inspect a token at the given source position
     virtual void                Inspect(

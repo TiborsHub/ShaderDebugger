@@ -30,7 +30,6 @@ CLASS_FORWARD_DECLARATIONS(DataFramebuffer);
 
 // Library headers
 #include "ShaderInspectorI.h"
-#include "ASTNodeLocation.h"
 
 
 // Standard headers
@@ -62,6 +61,11 @@ public:
 
                                 // Return the nodes from the ast where the shader execution path can branch
     virtual bool                GetShaderStructureNodes(ShaderStructureNodes& outShaderStructure) override;
+
+                                // Return location in source code for an ast node
+    virtual bool                GetSourceLocation(
+                                    const tASTLocation& inASTLocation,
+                                    SourceLocation&     outSourceLocation) override;
 
                                 // Inspect a token at the given source position
     virtual void                Inspect(
