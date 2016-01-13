@@ -90,6 +90,9 @@
     <ClInclude Include="Interface\InspectedProgramCollectionSingleton.h">
       <Filter>Interface</Filter>
     </ClInclude>
+    <ClInclude Include="Interface\Debugger.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
     <ClInclude Include="Interface\ASTLocation.h">
       <Filter>Interface</Filter>
     </ClInclude>

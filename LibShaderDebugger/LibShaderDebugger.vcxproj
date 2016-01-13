@@ -106,6 +106,7 @@
     <ClInclude Include="Implementation\UtilText.h" />
     <ClInclude Include="Interface\ASTLocation.h" />
     <ClInclude Include="Interface\CreateProgramInspectorInstance.h" />
+    <ClInclude Include="Interface\Debugger.h" />
     <ClInclude Include="Interface\InspectContextI.h" />
     <ClInclude Include="Interface\InspectContextWebGL1.h" />
     <ClInclude Include="Interface\InspectContextWebGL1Basic.h" />
@@ -128,6 +129,7 @@
     <ClCompile Include="Implementation\CreateProgramInspectorInstance.cpp" />
     <ClCompile Include="Implementation\CreateShaderInspectorInstance.cpp" />
     <ClCompile Include="Implementation\DataFramebuffer.cpp" />
+    <ClCompile Include="Implementation\Debugger.cpp" />
     <ClCompile Include="Implementation\GlObject.cpp" />
     <ClCompile Include="Implementation\GlUtil.cpp" />
     <ClCompile Include="Implementation\InspectContextWebGL1.cpp" />
