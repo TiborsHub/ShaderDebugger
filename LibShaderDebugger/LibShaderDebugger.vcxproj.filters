@@ -104,6 +104,9 @@
     <ClInclude Include="Interface\SourceLocation.h">
       <Filter>Interface</Filter>
     </ClInclude>
+    <ClInclude Include="Implementation\ShaderStructureNodes.h">
+      <Filter>Implementation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Implementation\CreateProgramInspectorInstance.cpp">

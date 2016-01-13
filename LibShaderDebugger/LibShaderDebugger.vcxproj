@@ -100,6 +100,7 @@
     <ClInclude Include="Implementation\ShaderCompilerESSL.h" />
     <ClInclude Include="Implementation\ShaderInspectorI.h" />
     <ClInclude Include="Implementation\ShaderInspectorWebGL.h" />
+    <ClInclude Include="Implementation\ShaderStructureNodes.h" />
     <ClInclude Include="Implementation\Texture2D.h" />
     <ClInclude Include="Implementation\UtilGLSL.h" />
     <ClInclude Include="Implementation\UtilText.h" />
