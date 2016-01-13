@@ -1,10 +1,10 @@
 /*******************************************************************************\
-*																				*
-*			Class    : MainFrame  									            *
-*			Purpose  : Main frame of shader debugger application                *
-*			File     : MainFrame.cpp										        *
-*			Author   : Tibor den Ouden											*
-*																				*
+*                                                                               *
+*           Class    : MainFrame                                                *
+*           Purpose  : Main frame of shader debugger application                *
+*           File     : MainFrame.cpp                                            *
+*           Author   : Tibor den Ouden                                          *
+*                                                                               *
 \*******************************************************************************/
 
 
