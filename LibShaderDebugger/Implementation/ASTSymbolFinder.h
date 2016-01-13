@@ -16,6 +16,10 @@
 #define __AST_SYMBOL_FINDER_H__
 
 
+// Library headers
+#include "ASTNodeLocation.h"
+
+
 // ANGLE headers
 #include <compiler/translator/IntermNode.h>
 
@@ -32,7 +36,7 @@ public:
                                 // Return path through node tree up to (including) symbol node
                                 // result.front() is root node
                                 // result.back() is target node
-    const std::vector<TIntermNode*>& GetPathToSymbolNode() const;
+    const tASTNodeLocation&     GetPathToSymbolNode() const;
 
 protected:
                                 // Visit symbol type node
@@ -42,7 +46,7 @@ private:
     std::string                 mSymbol;
     int                         mLine;
     int                         mColumn;
-    std::vector<TIntermNode*>   mPathToSymbolNode;
+    tASTNodeLocation            mPathToSymbolNode;
 };
 
 
@@ -52,7 +56,7 @@ private:
 // result.front() is root node
 // result.back() is target node
 inline
-const std::vector<TIntermNode*>&
+const tASTNodeLocation&
 ASTSymbolFinder::GetPathToSymbolNode() const
 {
     return mPathToSymbolNode;

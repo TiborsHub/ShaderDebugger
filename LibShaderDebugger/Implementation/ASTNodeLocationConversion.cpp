@@ -248,8 +248,8 @@ NodePathFromIndexPath::sGetChildNode(
 // Return path in node tree by depth and index
 void
 GetNodeIndexPath(
-    const std::vector<TIntermNode*>& inNodePath,
-    tASTLocation&                    outNodeIndexPath)
+    const tASTNodeLocation& inNodePath,
+    tASTLocation&           outNodeIndexPath)
 {
     assert(outNodeIndexPath.empty());
     assert(inNodePath.size() >= 2);
@@ -267,9 +267,9 @@ GetNodeIndexPath(
 // Return path to node as list of direct child nodes
 bool
 GetNodePath(
-    TIntermNode*               inAST,
-    const tASTLocation&        inNodeIndexPath,
-    std::vector<TIntermNode*>& outNodePath)
+    TIntermNode*        inAST,
+    const tASTLocation& inNodeIndexPath,
+    tASTNodeLocation&   outNodePath)
 {
     assert(!inNodeIndexPath.empty());
     assert(outNodePath.empty());

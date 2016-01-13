@@ -171,7 +171,7 @@ GetNodeType(TIntermNode* inNode)
 
 // Returns operator if node is a binary node
 TOperator
-GetBinaryOperator(size_t inNodeIx, const std::vector<TIntermNode*>& inSymbolNodePath)
+GetBinaryOperator(size_t inNodeIx, const tASTNodeLocation& inSymbolNodePath)
 {
     assert(inNodeIx < inSymbolNodePath.size());
 
@@ -182,7 +182,7 @@ GetBinaryOperator(size_t inNodeIx, const std::vector<TIntermNode*>& inSymbolNode
 
 // Returns true if target node is part of a declaration
 bool
-IsInDeclaration(const std::vector<TIntermNode*>& inSymbolNodePath)
+IsInDeclaration(const tASTNodeLocation& inSymbolNodePath)
 {
     TIntermNode* parent(inSymbolNodePath[inSymbolNodePath.size() - 2]);
     TIntermAggregate* op_node(parent->getAsAggregate());
@@ -193,7 +193,7 @@ IsInDeclaration(const std::vector<TIntermNode*>& inSymbolNodePath)
 
 // Return true if target node is part of an assignment
 bool
-IsInAssignment(const std::vector<TIntermNode*>& inSymbolNodePath)
+IsInAssignment(const tASTNodeLocation& inSymbolNodePath)
 {
     int parent_ix(inSymbolNodePath.size() - 2);
     TOperator parent_node_op(GetBinaryOperator(parent_ix, inSymbolNodePath));
@@ -224,7 +224,7 @@ IsInAssignment(const std::vector<TIntermNode*>& inSymbolNodePath)
 
 // Find sequence statement which the direct parent of the target (last) node
 int
-FindDirectParentSequence(const std::vector<TIntermNode*>& inSymbolNodePath)
+FindDirectParentSequence(const tASTNodeLocation& inSymbolNodePath)
 {
     for (int n_ix(inSymbolNodePath.size() - 1); n_ix > -1; --n_ix)
     {
@@ -322,7 +322,7 @@ GetScalarCountFromExpression(TIntermNode* inTargetNode)
 
 // Returns top node which makes up the value targeted by the symbol node (front node)
 TIntermNode*
-FindValueExpressionNode(const std::vector<TIntermNode*>& inSymbolNodePath)
+FindValueExpressionNode(const tASTNodeLocation& inSymbolNodePath)
 {
     assert(inSymbolNodePath.back()->getAsSymbolNode() != nullptr);
     assert(inSymbolNodePath.size() > 1);
@@ -344,12 +344,12 @@ FindValueExpressionNode(const std::vector<TIntermNode*>& inSymbolNodePath)
 
 // Return next child node in AST from current node
 void
-GetNextChildNode(const std::vector<TIntermNode*>& inCurrNodePath, std::vector<TIntermNode*>& outNextNodePath)
+GetNextChildNode(const tASTNodeLocation& inCurrNodePath, tASTNodeLocation& outNextNodePath)
 {
     // Test if node path contains at least a parent and a child node
     if (inCurrNodePath.size() >= 2)
     {
-        std::vector<TIntermNode*>::const_iterator parent_it(inCurrNodePath.end() - 1);
+        tASTNodeLocation::const_iterator parent_it(inCurrNodePath.end() - 1);
         TIntermNode* next_child_node;
         do
         {

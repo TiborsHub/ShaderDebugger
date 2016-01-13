@@ -16,17 +16,16 @@
 
 
 // Forward declarations
-class TIntermNode;
 class TIntermAggregate;
 class TIntermSymbol;
 
 
+// Library headers
+#include "ASTNodeLocation.h"
+
+
 // ANGLE headers
 #include <compiler/translator/Operator.h>
-
-
-// Standard headers
-#include <vector>
 
 
 // Node types of ast
@@ -62,22 +61,22 @@ GetNodeType(TIntermNode* inNode);
 
 // Returns operator if node is a binary node
 TOperator
-GetBinaryOperator(size_t inNodeIx, const std::vector<TIntermNode*>& inSymbolNodePath);
+GetBinaryOperator(size_t inNodeIx, const tASTNodeLocation& inSymbolNodePath);
 
 
 // Returns true if target node is part of a declaration
 bool
-IsInDeclaration(const std::vector<TIntermNode*>& inSymbolNodePath);
+IsInDeclaration(const tASTNodeLocation& inSymbolNodePath);
 
 
 // Return true if target node is part of an assignment
 bool
-IsInAssignment(const std::vector<TIntermNode*>& inSymbolNodePath);
+IsInAssignment(const tASTNodeLocation& inSymbolNodePath);
 
 
 // Find sequence statement which the direct parent of the target (last) node
 int
-FindDirectParentSequence(const std::vector<TIntermNode*>& inSymbolNodePath);
+FindDirectParentSequence(const tASTNodeLocation& inSymbolNodePath);
 
 
 // Find target node in sequence
@@ -97,12 +96,12 @@ GetScalarCountFromExpression(TIntermNode* inTargetNode);
 
 // Returns top node which makes up the value targeted by the symbol node (front node)
 TIntermNode*
-FindValueExpressionNode(const std::vector<TIntermNode*>& inSymbolNodePath);
+FindValueExpressionNode(const tASTNodeLocation& inSymbolNodePath);
 
 
 // Return next child node in AST from current node
 void
-GetNextChildNode(const std::vector<TIntermNode*>& inCurrNodePath, std::vector<TIntermNode*>& outNextNodePath);
+GetNextChildNode(const tASTNodeLocation& inCurrNodePath, tASTNodeLocation& outNextNodePath);
 
 
 #endif // __AST_QUERIES_H__
