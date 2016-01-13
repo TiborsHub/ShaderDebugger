@@ -1,16 +1,16 @@
 /*******************************************************************************\
 *                                                                               *
-*           Utility : ASTNodeLocation                                           *
+*           Utility : ASTNodeLocationConversion                                 *
 *           Purpose : Functions to convert from/to a tree independent node      *
 *                     path description                                          *
-*           File    : ASTNodeLocation.cpp                                       *
+*           File    : ASTNodeLocationConversion.cpp                             *
 *           Author  : Tibor den Ouden                                           *
 *                                                                               *
 \*******************************************************************************/
 
 
 // Translation unit header
-#include "ASTNodeLocation.h"
+#include "ASTNodeLocationConversion.h"
 
 
 // ANGLE headers
@@ -249,7 +249,7 @@ NodePathFromIndexPath::sGetChildNode(
 void
 GetNodeIndexPath(
     const std::vector<TIntermNode*>& inNodePath,
-    std::vector<int>&                outNodeIndexPath)
+    tASTLocation&                    outNodeIndexPath)
 {
     assert(outNodeIndexPath.empty());
     assert(inNodePath.size() >= 2);
@@ -268,7 +268,7 @@ GetNodeIndexPath(
 bool
 GetNodePath(
     TIntermNode*               inAST,
-    const std::vector<int>&    inNodeIndexPath,
+    const tASTLocation&        inNodeIndexPath,
     std::vector<TIntermNode*>& outNodePath)
 {
     assert(!inNodeIndexPath.empty());

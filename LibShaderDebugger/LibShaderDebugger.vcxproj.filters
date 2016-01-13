@@ -87,13 +87,18 @@
     <ClInclude Include="Interface\PixelData.h">
       <Filter>Interface</Filter>
     </ClInclude>
-    <ClInclude Include="Implementation\ASTNodeLocation.h">
-      <Filter>Implementation</Filter>
-    </ClInclude>
     <ClInclude Include="Interface\InspectedProgramCollectionSingleton.h">
       <Filter>Interface</Filter>
     </ClInclude>
     <ClInclude Include="Implementation\ASTGetBranchNodes.h">
+    <ClInclude Include="Interface\ASTLocation.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\ShaderStructureState.h">
+    <ClInclude Include="Implementation\ASTNodeLocationConversion.h">
+      <Filter>Implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="Implementation\ASTNodeLocation.h">
       <Filter>Implementation</Filter>
     </ClInclude>
   </ItemGroup>
@@ -170,9 +175,13 @@
     <ClCompile Include="Implementation\InspectContextWebGL1Basic.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>
-    <ClCompile Include="Implementation\ASTNodeLocation.cpp">
+    <ClCompile Include="Implementation\Debugger.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>
+    <ClCompile Include="Implementation\ASTNodeLocationConversion.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\ASTGetShaderStructureNodes.cpp">
     <ClCompile Include="Implementation\ASTGetBranchNodes.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>

@@ -24,7 +24,8 @@
 #include "DataFramebuffer.h"
 #include "ShaderCompilerESSL.h"
 #include "GlUtil.h"
-#include "ASTNodeLocation.h"
+#include "ASTNodeLocationConversion.h"
+#include "ShaderStructureNodes.h"
 
 
 // ANGLE headers
@@ -159,7 +160,9 @@ ShaderInspectorWebGL::Inspect(
     ast->traverse(&symbol_finder);
     if (!symbol_finder.GetPathToSymbolNode().empty())
     {
-        // Test conversion from/to node location by index
+
+#ifdef _DEBUG
+        // Test conversion node path from/to location by index
         std::vector<TIntermNode*> path_to_symbol(symbol_finder.GetPathToSymbolNode());
         std::vector<int> node_indices;
         GetNodeIndexPath(path_to_symbol, node_indices);
@@ -167,7 +170,7 @@ ShaderInspectorWebGL::Inspect(
         std::vector<TIntermNode*> shadow_node_path;
         GetNodePath(path_to_symbol[0], node_indices, shadow_node_path);
         assert(path_to_symbol == shadow_node_path);
-
+#endif
 
         // Transform node tree to generate inspect shader
         TransformAST(

@@ -88,6 +88,7 @@
     <ClInclude Include="Implementation\ASTGetBranchNodes.h" />
     <ClInclude Include="Implementation\ASTManipulations.h" />
     <ClInclude Include="Implementation\ASTNodeLocation.h" />
+    <ClInclude Include="Implementation\ASTNodeLocationConversion.h" />
     <ClInclude Include="Implementation\ASTPrinter.h" />
     <ClInclude Include="Implementation\ASTQueries.h" />
     <ClInclude Include="Implementation\ASTSymbolFinder.h" />
@@ -102,6 +103,7 @@
     <ClInclude Include="Implementation\Texture2D.h" />
     <ClInclude Include="Implementation\UtilGLSL.h" />
     <ClInclude Include="Implementation\UtilText.h" />
+    <ClInclude Include="Interface\ASTLocation.h" />
     <ClInclude Include="Interface\CreateProgramInspectorInstance.h" />
     <ClInclude Include="Interface\InspectContextI.h" />
     <ClInclude Include="Interface\InspectContextWebGL1.h" />
@@ -117,7 +119,7 @@
   <ItemGroup>
     <ClCompile Include="Implementation\ASTGetBranchNodes.cpp" />
     <ClCompile Include="Implementation\ASTManipulations.cpp" />
-    <ClCompile Include="Implementation\ASTNodeLocation.cpp" />
+    <ClCompile Include="Implementation\ASTNodeLocationConversion.cpp" />
     <ClCompile Include="Implementation\ASTPrinter.cpp" />
     <ClCompile Include="Implementation\ASTQueries.cpp" />
     <ClCompile Include="Implementation\ASTSymbolFinder.cpp" />

@@ -1,8 +1,7 @@
 /*******************************************************************************\
 *                                                                               *
-*           Utility : ASTNodeLocation                                           *
-*           Purpose : Functions to convert from/to a tree independent node      *
-*                     path description                                          *
+*           Typedef : ASTNodeLocation                                           *
+*           Purpose : Type definition for node location as list of child nodes  *
 *           File    : ASTNodeLocation.h                                         *
 *           Author  : Tibor den Ouden                                           *
 *                                                                               *
@@ -16,7 +15,7 @@
 #define __AST_NODE_LOCATION_H__
 
 
-// Forward declarations
+// Forward declaration
 class TIntermNode;
 
 
@@ -24,19 +23,9 @@ class TIntermNode;
 #include <vector>
 
 
-// Return path in node tree by depth and index
-void
-GetNodeIndexPath(
-    const std::vector<TIntermNode*>& inNodePath,
-    std::vector<int>&                outNodeIndexPath);
-
-
-// Return path to node as list of direct child nodes
-bool
-GetNodePath(
-    TIntermNode*               inAST,
-    const std::vector<int>&    inNodeIndexPath,
-    std::vector<TIntermNode*>& outNodePath);
+// Typedef for node location as list of child nodes
+// [0] : root node
+typedef std::vector<TIntermNode*> tASTNodeLocation;
 
 
 #endif // __AST_NODE_LOCATION_H__
