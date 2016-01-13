@@ -138,7 +138,6 @@ ShaderInspectorWebGL::Inspect(
     InspectResult&     outResult)
 {
     std::string source(GetInspectContext()->GetShaderSource(mShaderIx));
-
     TIntermNode* ast(mCompiler->CompileToAST(source, mCompileOptions));
 
     outResult.mInfoText =
@@ -156,11 +155,11 @@ ShaderInspectorWebGL::Inspect(
 
 #ifdef _DEBUG
         // Test conversion node path from/to location by index
-        std::vector<TIntermNode*> path_to_symbol(symbol_finder.GetPathToSymbolNode());
+        tASTNodeLocation path_to_symbol(symbol_finder.GetPathToSymbolNode());
         std::vector<int> node_indices;
         GetNodeIndexPath(path_to_symbol, node_indices);
         // Convert back to node path and verify
-        std::vector<TIntermNode*> shadow_node_path;
+        tASTNodeLocation shadow_node_path;
         GetNodePath(path_to_symbol[0], node_indices, shadow_node_path);
         assert(path_to_symbol == shadow_node_path);
 #endif
