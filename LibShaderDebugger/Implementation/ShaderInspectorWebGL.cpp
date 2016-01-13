@@ -154,7 +154,7 @@ ShaderInspectorWebGL::Inspect(
     {
 
 #ifdef _DEBUG
-        // Test conversion node path from/to location by index
+        // Test conversion node path from/to location by child node index
         tASTNodeLocation path_to_symbol(symbol_finder.GetPathToSymbolNode());
         std::vector<int> node_indices;
         GetNodeIndexPath(path_to_symbol, node_indices);
