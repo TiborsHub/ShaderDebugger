@@ -27,8 +27,14 @@
 
 // Constructor
 ProgramInspectorWebGL::ProgramInspectorWebGL(SpInspectContextI& inInspectContext, size_t inShaderIx) :
-    ProgramInspectorI(inInspectContext, inShaderIx)
+    ProgramInspectorI (inInspectContext, inShaderIx),
+    mShaderInspector  (CreateShaderInspectorInstance(
+        inShaderIx,
+        this,
+        inInspectContext->GetShaderType(inShaderIx)))
 {
+
+}
 
 
 // Returns information about the structure of the shader
