@@ -27,7 +27,8 @@ enum EventId
     ID_WEBGL_VERSION,
     ID_PARSE,
     ID_RUN,
-    ID_COMPILE,
+    ID_STEP,
+    ID_RESET,
 
     ID_VIEWPORT_POS,
 

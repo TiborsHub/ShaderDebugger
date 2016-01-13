@@ -23,6 +23,7 @@
 #include "EglRenderWindow.h"
 #include "MousePosEvent.h"
 #include "PixelData.h"
+#include "Debugger.h"
 #include "../TestCases/TestCaseFactorySingleton.h"
 #include "../TestCases/TestCaseFactory.h"
 
@@ -73,6 +74,10 @@ wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
     EVT_RADIOBOX(ID_SHADER_TYPE,        MainFrame::OnShaderType)
     EVT_BUTTON(ID_RUN,                  MainFrame::OnRun)
 
+    // Debugger commands
+    EVT_BUTTON(ID_STEP,                 MainFrame::OnStep)
+    EVT_BUTTON(ID_RESET,                MainFrame::OnReset)
+
     EVT_LEFT_UP(                        MainFrame::OnLeftSourceClick)
 
     EVT_MENU(wxID_EXIT,                 MainFrame::OnExit)
@@ -89,7 +94,7 @@ MainFrame::MainFrame(
     wxPoint         inPos,
     wxSize          inSize
 ) :
-    wxFrame            (nullptr, wxID_ANY, inTitle, inPos, inSize)
+    wxFrame (nullptr, wxID_ANY, inTitle, inPos, inSize)
 {
     // Menu file
     wxMenu *menu_file = new wxMenu;
@@ -224,7 +229,31 @@ MainFrame::MainFrame(
         mWebGlVersion,
         wxGBPosition(1, 1),
         wxGBSpan(2, 1),
+        wxSTRETCH_NOT);
+
+    // Debugger step
+    wxButton* btn_step = new wxButton(
+        left_panel,
+        ID_STEP,
+        "Step");
+
+    left_sizer->Add(
+        btn_step,
+        wxGBPosition(1, 2),
+        wxGBSpan(1, 1),
         wxSTRETCH_NOT | wxLEFT);
+
+    // Debugger reset
+    wxButton* btn_reset = new wxButton(
+        left_panel,
+        ID_RESET,
+        "Reset");
+
+    left_sizer->Add(
+        btn_reset,
+        wxGBPosition(2, 2),
+        wxGBSpan(1, 1),
+        wxSTRETCH_NOT);
 
     // Source CODE control should get extra space
     left_sizer->AddGrowableRow(0);
@@ -313,6 +342,11 @@ MainFrame::MainFrame(
         glViewport(0, 0, mRenderWindow->getWidth(), mRenderWindow->getHeight());
         SetStatusText("EGL : Successful initialized");
     }
+
+    mDebugStatementFocus = std::make_unique<wxRichTextRange>();
+    mDebugFocusStyle     = std::make_unique<wxTextAttr>();
+    *mDebugFocusStyle    = mSourceCtrl->GetDefaultStyle();
+    mDebugFocusStyle->SetBackgroundColour(*wxCYAN);
 }
 
 
@@ -442,6 +476,8 @@ MainFrame::OnTestShader(wxCommandEvent& inEvent)
                 shader_test_id,
                 inspect_context,
                 inspector);
+
+            mDebugger = std::make_unique<Debugger>(inspector);
         }
     }
 
@@ -486,6 +522,29 @@ MainFrame::OnRun(wxCommandEvent& inEvent)
 
         mEglWindow->swap();
     }
+}
+
+
+// Execute current statement and advance to next statement
+void
+MainFrame::OnStep(wxCommandEvent& event)
+{
+    DebugStepResult step_result;
+    mDebugger->Step(step_result);
+
+    // Show result of step
+
+}
+
+
+// Reset debug state of shader
+void
+MainFrame::OnReset(wxCommandEvent& event)
+{
+    DebugResetResult reset_result;
+    mDebugger->Reset(reset_result);
+
+    // Show result of reset
 }
 
 
@@ -565,5 +624,3 @@ MainFrame::OnViewportPos(MousePosEvent& inEvent)
 {
     UpdateViewportInfo(inEvent.GetPosition());
 }
-
-

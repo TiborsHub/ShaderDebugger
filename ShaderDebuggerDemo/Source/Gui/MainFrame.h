@@ -32,6 +32,9 @@ CLASS_FORWARD_DECLARATIONS(Program);
 CLASS_FORWARD_DECLARATIONS(InspectContextI);
 CLASS_FORWARD_DECLARATIONS(InspectedProgram);
 CLASS_FORWARD_DECLARATIONS(PixelData2dF4);
+CLASS_FORWARD_DECLARATIONS(wxRichTextRange);
+CLASS_FORWARD_DECLARATIONS(wxTextAttr);
+CLASS_FORWARD_DECLARATIONS(Debugger);
 
 
 // wxWidgets headers
@@ -68,6 +71,12 @@ private:
                                 // Run shader
     void                        OnRun(wxCommandEvent& event);
 
+                                // Execute current statement and advance to next statement
+    void                        OnStep(wxCommandEvent& event);
+
+                                // Reset debug state of shader
+    void                        OnReset(wxCommandEvent& event);
+
                                 // User selected a token in shader source
     void                        OnLeftSourceClick(wxMouseEvent& inEvent);
 
@@ -98,6 +107,10 @@ private:
     UpEglRenderWindow           mEglRenderWindow;
     SpInspectedProgram          mInspectedProgram;
     SpConstPixelData2dF4        mInspectData;
+
+    UpDebugger                  mDebugger;
+    UpwxRichTextRange           mDebugStatementFocus;
+    UpwxTextAttr                mDebugFocusStyle;
 
     wxDECLARE_EVENT_TABLE();
 };
