@@ -436,7 +436,7 @@ MainFrame::OnTestShader(wxCommandEvent& inEvent)
         }
         else
         {
-            SpProgramInspectorI inspector(CreateProgramInspectorInstance(inspect_context));
+            SpProgramInspectorI inspector(CreateProgramInspectorInstance(inspect_context, GetSelectedShaderIndex()));
 
             mInspectedProgram = std::make_shared<InspectedProgram>(
                 shader_test_id,
@@ -500,7 +500,7 @@ MainFrame::OnLeftSourceClick(wxMouseEvent& inEvent)
     {
         // Selected a valid character in the source
         InspectResult inspect_result;
-        mInspectedProgram->GetInspector()->Inspect(GetSelectedShaderIndex(), source_pos_ix, inspect_result);
+        mInspectedProgram->GetInspector()->Inspect(source_pos_ix, inspect_result);
 
         if (!inspect_result.mInfoText.empty())
         {

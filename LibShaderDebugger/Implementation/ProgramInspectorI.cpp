@@ -13,8 +13,9 @@
 
 
 // Constructor
-ProgramInspectorI::ProgramInspectorI(SpInspectContextI& inInspectContext) :
-    mContext(inInspectContext)
+ProgramInspectorI::ProgramInspectorI(SpInspectContextI& inInspectContext, size_t inShaderIx) :
+    mContext  (inInspectContext),
+    mShaderIx (inShaderIx)
 {
 
 }

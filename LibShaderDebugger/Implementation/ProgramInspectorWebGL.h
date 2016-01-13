@@ -34,13 +34,13 @@ class ProgramInspectorWebGL : public ProgramInspectorI
 {
 public:
                                 // Constructor
-                                ProgramInspectorWebGL(SpInspectContextI& inInspectContext);
+                                ProgramInspectorWebGL(SpInspectContextI& inInspectContext, size_t inShaderIx);
 
                                 // Returns ast node of first statement to execute
     virtual TIntermNode*        GetFirstStatement() override;
 
                                 // Inspect a token in a shader at the given source position
-    virtual void                Inspect(size_t inShaderIx, size_t inSourceIx, InspectResult& outResult) override;
+    virtual void                Inspect(size_t inSourceIx, InspectResult& outResult) override;
 
 private:
     typedef std::pair<size_t, size_t> tInspectKey;

@@ -18,8 +18,8 @@
 
 
 SpProgramInspectorI
-CreateProgramInspectorInstance(SpInspectContextI& inInspectContext)
+CreateProgramInspectorInstance(SpInspectContextI& inInspectContext, size_t inShaderIx)
 {
     // Create inspector based on type of context
-    return std::make_shared<ProgramInspectorWebGL>(inInspectContext);
+    return std::make_shared<ProgramInspectorWebGL>(inInspectContext, inShaderIx);
 }

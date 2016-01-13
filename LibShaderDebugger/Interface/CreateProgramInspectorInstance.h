@@ -29,7 +29,7 @@ CLASS_FORWARD_DECLARATIONS(InspectContextI);
 
 
 SpProgramInspectorI
-CreateProgramInspectorInstance(SpInspectContextI& inInspectContext);
+CreateProgramInspectorInstance(SpInspectContextI& inInspectContext, size_t inShaderIx);
 
 
 #endif // __CREATE_PROGRAM_INSPECTOR_INSTANCE_H__

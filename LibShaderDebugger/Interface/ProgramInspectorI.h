@@ -32,7 +32,7 @@ class ProgramInspectorI
 {
 public:
                                 // Constructor
-                                ProgramInspectorI(SpInspectContextI& inInspectContext);
+                                ProgramInspectorI(SpInspectContextI& inInspectContext, size_t inShaderIx);
 
                                 // Destructor
     virtual                     ~ProgramInspectorI() {};
@@ -44,10 +44,11 @@ public:
     virtual TIntermNode*        GetFirstStatement() = 0;
 
                                 // Inspect a token in a shader at the given source position
-    virtual void                Inspect(size_t inShaderIx, size_t inSourceIx, InspectResult& outResult) = 0;
+    virtual void                Inspect(size_t inSourceIx, InspectResult& outResult) = 0;
 
 protected:
     SpInspectContextI           mContext;
+    size_t                      mShaderIx;
 };
 
 

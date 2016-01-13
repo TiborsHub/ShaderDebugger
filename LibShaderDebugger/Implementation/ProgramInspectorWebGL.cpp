@@ -26,8 +26,8 @@
 
 
 // Constructor
-ProgramInspectorWebGL::ProgramInspectorWebGL(SpInspectContextI& inInspectContext) :
-    ProgramInspectorI(inInspectContext)
+ProgramInspectorWebGL::ProgramInspectorWebGL(SpInspectContextI& inInspectContext, size_t inShaderIx) :
+    ProgramInspectorI(inInspectContext, inShaderIx)
 {
 
 }
@@ -49,9 +49,9 @@ ProgramInspectorWebGL::GetFirstStatement()
 // Inspect a token in a shader at the given source position
 // virtual
 void
-ProgramInspectorWebGL::Inspect(size_t inShaderIx, size_t inSourceIx, InspectResult& outResult)
+ProgramInspectorWebGL::Inspect(size_t inSourceIx, InspectResult& outResult)
 {
-    std::string shader_source(mContext->GetShaderSource(inShaderIx));
+    std::string shader_source(mContext->GetShaderSource(mShaderIx));
 
     // Find token in ast
     if (inSourceIx >=0 && inSourceIx < shader_source.size())
@@ -64,14 +64,14 @@ ProgramInspectorWebGL::Inspect(size_t inShaderIx, size_t inSourceIx, InspectResu
         {
             // Potential value returning token selected
             size_t first_ch_ix(FindFirstCharOfSymbolGLSL(shader_source, inSourceIx));
-            tInspectKey inspect_key(inShaderIx, first_ch_ix);
+            tInspectKey inspect_key(mShaderIx, first_ch_ix);
             tTokenInspectorMap::iterator inspect_it(mTokenInspectorMap.find(inspect_key));
             if (inspect_it == mTokenInspectorMap.end())
             {
                 // Insert new inspector
-                uint64_t shader_type(mContext->GetShaderType(inShaderIx));
+                uint64_t shader_type(mContext->GetShaderType(mShaderIx));
                 SpShaderInspectorI inspector(CreateShaderInspectorInstance(
-                    inShaderIx,
+                    mShaderIx,
                     this,
                     shader_type));
 
