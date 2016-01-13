@@ -85,7 +85,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Implementation\ASTGetBranchNodes.h" />
+    <ClInclude Include="Implementation\ASTGetShaderStructureNodes.h" />
     <ClInclude Include="Implementation\ASTManipulations.h" />
     <ClInclude Include="Implementation\ASTNodeLocation.h" />
     <ClInclude Include="Implementation\ASTNodeLocationConversion.h" />
@@ -119,7 +119,7 @@
     <ClInclude Include="Interface\SourceLocation.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Implementation\ASTGetBranchNodes.cpp" />
+    <ClCompile Include="Implementation\ASTGetShaderStructureNodes.cpp" />
     <ClCompile Include="Implementation\ASTManipulations.cpp" />
     <ClCompile Include="Implementation\ASTNodeLocationConversion.cpp" />
     <ClCompile Include="Implementation\ASTPrinter.cpp" />
