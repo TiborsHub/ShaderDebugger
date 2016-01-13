@@ -29,4 +29,13 @@ FindLineColumnForOffset(
     size_t&            outColumn);
 
 
+// Return offset in text from line nr and column index
+// (One based)
+size_t
+GetOffsetFromLineColumn(
+    const std::string& inText,
+    size_t             inLineNr,
+    size_t             inColumn);
+
+
 #endif // __UTIL_TEXT_H__
