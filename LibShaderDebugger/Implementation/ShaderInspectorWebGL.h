@@ -22,6 +22,7 @@
 class InspectResult;
 class TIntermNode;
 class TIntermSymbol;
+class ShaderStructureNodes;
 CLASS_FORWARD_DECLARATIONS(ShaderCompilerESSL);
 CLASS_FORWARD_DECLARATIONS(TParseContext);
 CLASS_FORWARD_DECLARATIONS(DataFramebuffer);
@@ -59,6 +60,8 @@ public:
                                 // Initialize the inspector
     virtual bool                Initialize();
 
+                                // Return the nodes from the ast where the shader execution path can branch
+    virtual bool                GetShaderStructureNodes(ShaderStructureNodes& outShaderStructure) override;
 
                                 // Inspect a token at the given source position
     virtual void                Inspect(
@@ -68,8 +71,7 @@ public:
                                     InspectResult&     outResult) override;
 
 private:
-                                // Compute all ast nodes where the shader can take different paths through the code
-    void                        ComputeDecisionNodes();
+
 
                                 // Transform AST to return target symbol
     void                        TransformAST(

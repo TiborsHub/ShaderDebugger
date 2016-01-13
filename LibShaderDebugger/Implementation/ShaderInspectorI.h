@@ -20,6 +20,7 @@
 
 // Forward declaration
 class InspectResult;
+class ShaderStructureNodes;
 CLASS_FORWARD_DECLARATIONS(ProgramInspectorI);
 CLASS_FORWARD_DECLARATIONS(InspectContextI);
 
@@ -39,6 +40,9 @@ public:
 
                                 // Initialize the inspector
     virtual bool                Initialize() = 0;
+
+                                // Return the nodes from the ast where the shader execution path can branch
+    virtual bool                GetShaderStructureNodes(ShaderStructureNodes& outShaderStructure) = 0;
 
                                 // Inspect a token at the given source position
     virtual void                Inspect(

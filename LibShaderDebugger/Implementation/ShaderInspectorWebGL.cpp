@@ -26,6 +26,7 @@
 #include "GlUtil.h"
 #include "ASTNodeLocationConversion.h"
 #include "ShaderStructureNodes.h"
+#include "ASTGetShaderStructureNodes.h"
 
 
 // ANGLE headers
@@ -110,30 +111,23 @@ ShaderInspectorWebGL::Initialize()
 }
 
 
-// Compute all ast nodes where the shader can take different paths through the code
-void
-ShaderInspectorWebGL::ComputeDecisionNodes()
+// Return the nodes from the ast where the shader execution path can branch
+// virtual
+bool
+ShaderInspectorWebGL::GetShaderStructureNodes(ShaderStructureNodes& outShaderStructure)
 {
     std::string source(GetInspectContext()->GetShaderSource(mShaderIx));
     TIntermNode* ast(mCompiler->CompileToAST(source, mCompileOptions));
 
+    bool result(ast != nullptr);
+    if (result)
+    {
+        ::GetShaderStructureNodes(ast, outShaderStructure);
+    }
 
+    return result;
 }
 
-
-/*
-// Returns ast node of first statement to execute
-// virtual
-TIntermNode*
-ShaderInspectorWebGL::GetFirstStatement()
-{
-    // Find function main()
-    // AGGREGATE : EOpFunction main(
-
-
-    return nullptr;
-}
-*/
 
 // Inspect a token at the given source position
 void
