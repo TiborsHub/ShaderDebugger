@@ -65,7 +65,7 @@ ProgramInspectorWebGL::GetSourceLocation(
     const tASTLocation& inASTLocation,
     SourceLocation&     outSourceLocation)
 {
-    return false;
+    return mShaderInspector->GetSourceLocation(inASTLocation, outSourceLocation);
 }
 
 
