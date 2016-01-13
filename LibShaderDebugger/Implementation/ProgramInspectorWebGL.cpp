@@ -30,19 +30,36 @@ ProgramInspectorWebGL::ProgramInspectorWebGL(SpInspectContextI& inInspectContext
     ProgramInspectorI(inInspectContext, inShaderIx)
 {
 
+
+// Returns information about the structure of the shader
+// virtual
+void
+ProgramInspectorWebGL::GetShaderStructure(ShaderStructureState& outShaderStructure)
+{
+
 }
 
 
-// Returns ast node of first statement to execute
+// Return next statement
 // virtual
-TIntermNode*
-ProgramInspectorWebGL::GetFirstStatement()
+void
+ProgramInspectorWebGL::GetNextStatement(
+    const tASTLocation&         inCurrLocation,
+    const ShaderStructureState& inCurrentState,
+    const tASTLocation&         outNextLocation)
 {
-    // Find function main()
-    // AGGREGATE : EOpFunction main(
+
+}
 
 
-    return nullptr;
+// Return location in source code for an ast node
+// virtual
+bool
+ProgramInspectorWebGL::GetSourceLocation(
+    const tASTLocation& inASTLocation,
+    SourceLocation&     outSourceLocation)
+{
+    return false;
 }
 
 

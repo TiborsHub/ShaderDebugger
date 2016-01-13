@@ -36,8 +36,19 @@ public:
                                 // Constructor
                                 ProgramInspectorWebGL(SpInspectContextI& inInspectContext, size_t inShaderIx);
 
-                                // Returns ast node of first statement to execute
-    virtual TIntermNode*        GetFirstStatement() override;
+                                // Returns information about the structure of the shader
+    virtual void                GetShaderStructure(ShaderStructureState& outShaderStructure) override;
+
+                                // Return next statement
+    virtual void                GetNextStatement(
+                                    const tASTLocation&         inCurrLocation,
+                                    const ShaderStructureState& inCurrentState,
+                                    const tASTLocation&         outNextLocation);
+
+                                // Return location in source code for an ast node
+    virtual bool                GetSourceLocation(
+                                    const tASTLocation& inASTLocation,
+                                    SourceLocation&     outSourceLocation) override;
 
                                 // Inspect a token in a shader at the given source position
     virtual void                Inspect(size_t inSourceIx, InspectResult& outResult) override;
@@ -46,6 +57,8 @@ private:
     typedef std::pair<size_t, size_t> tInspectKey;
     typedef std::map<tInspectKey, SpShaderInspectorI> tTokenInspectorMap;
     tTokenInspectorMap          mTokenInspectorMap;
+
+    SpShaderInspectorI          mShaderInspector;
 };
 
 
