@@ -115,6 +115,7 @@
     <ClInclude Include="Interface\LibShaderDebuggerInitFin.h" />
     <ClInclude Include="Interface\PixelData.h" />
     <ClInclude Include="Interface\ProgramInspectorI.h" />
+    <ClInclude Include="Interface\SourceLocation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Implementation\ASTGetBranchNodes.cpp" />
