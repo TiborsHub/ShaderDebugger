@@ -117,6 +117,7 @@
     <ClInclude Include="Interface\LibShaderDebuggerInitFin.h" />
     <ClInclude Include="Interface\PixelData.h" />
     <ClInclude Include="Interface\ProgramInspectorI.h" />
+    <ClInclude Include="Interface\ShaderStructureState.h" />
     <ClInclude Include="Interface\SourceLocation.h" />
   </ItemGroup>
   <ItemGroup>
