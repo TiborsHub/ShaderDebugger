@@ -28,6 +28,7 @@
 #include "ShaderStructureNodes.h"
 #include "ASTGetShaderStructureNodes.h"
 #include "SourceLocation.h"
+#include "ShaderStructureNodes.h"
 
 
 // ANGLE headers
@@ -55,7 +56,8 @@ ShaderInspectorWebGL::ShaderInspectorWebGL(
     mShaderSpec      (inShaderSpec),
     mOutputLanguage  (inOutputLanguage),
     mCompileOptions  (inCompileOptions),
-    mNodeFactory     (mInfoSink)
+    mNodeFactory     (mInfoSink),
+    mStructureNodes  (new ShaderStructureNodes)
 {
 
 }
@@ -107,6 +109,8 @@ ShaderInspectorWebGL::Initialize()
     }
 
     mDataReader.reset(new DataFramebuffer);
+
+    GetShaderStructureNodes(*mStructureNodes);
 
     return (mDataReader.get() != nullptr);
 }

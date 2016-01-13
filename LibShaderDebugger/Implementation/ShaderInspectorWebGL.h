@@ -22,10 +22,10 @@
 class InspectResult;
 class TIntermNode;
 class TIntermSymbol;
-class ShaderStructureNodes;
 CLASS_FORWARD_DECLARATIONS(ShaderCompilerESSL);
 CLASS_FORWARD_DECLARATIONS(TParseContext);
 CLASS_FORWARD_DECLARATIONS(DataFramebuffer);
+CLASS_FORWARD_DECLARATIONS(ShaderStructureNodes);
 
 
 // Library headers
@@ -75,8 +75,6 @@ public:
                                     InspectResult&     outResult) override;
 
 private:
-
-
                                 // Transform AST to return target symbol
     void                        TransformAST(
                                     const tASTNodeLocation& inTargetSymbolPath,
@@ -100,6 +98,7 @@ private:
     UpTParseContext             mParseContext; // For generating statements as node trees
     ShBuiltInResources          mResources;
     UpDataFramebuffer           mDataReader;
+    UpShaderStructureNodes      mStructureNodes;
 };
 
 
