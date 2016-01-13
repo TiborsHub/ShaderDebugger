@@ -100,4 +100,9 @@ TIntermNode*
 FindValueExpressionNode(const std::vector<TIntermNode*>& inSymbolNodePath);
 
 
+// Return next child node in AST from current node
+void
+GetNextChildNode(const std::vector<TIntermNode*>& inCurrNodePath, std::vector<TIntermNode*>& outNextNodePath);
+
+
 #endif // __AST_QUERIES_H__

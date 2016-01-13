@@ -53,6 +53,109 @@ private:
     ASTNodeType                 mNodeType;
 };
 
+
+// Utility class to compute child node index
+class FindNextChildNode : public TIntermTraverser
+{
+public:
+                                // Constructor
+                                FindNextChildNode(TIntermNode* inTargetChildNode);
+
+                                // Return next child node
+    TIntermNode*                GetNextChildNode() const { return mNextChildNode; }
+
+                                // Compute index in list of direct children according to traverse order
+    static TIntermNode*         sGetNextChildNode(TIntermNode* inParentNode, TIntermNode* inChildNode);
+
+private:
+                                // Visit of terminal nodes
+    virtual void                visitSymbol        (TIntermSymbol*        inNode) override { visitTerminalNode(inNode); }
+    virtual void                visitRaw           (TIntermRaw*           inNode) override { visitTerminalNode(inNode); }
+    virtual void                visitConstantUnion (TIntermConstantUnion* inNode) override { visitTerminalNode(inNode); }
+
+                                // Visit of non-terminal nodes
+    virtual bool                visitBinary    (Visit inVisit, TIntermBinary*    inNode) override { return visitNonTerminalNode(inVisit, inNode); }
+    virtual bool                visitUnary     (Visit inVisit, TIntermUnary*     inNode) override { return visitNonTerminalNode(inVisit, inNode); }
+    virtual bool                visitSelection (Visit inVisit, TIntermSelection* inNode) override { return visitNonTerminalNode(inVisit, inNode); }
+    virtual bool                visitSwitch    (Visit inVisit, TIntermSwitch*    inNode) override { return visitNonTerminalNode(inVisit, inNode); }
+    virtual bool                visitCase      (Visit inVisit, TIntermCase*      inNode) override { return visitNonTerminalNode(inVisit, inNode); }
+    virtual bool                visitAggregate (Visit inVisit, TIntermAggregate* inNode) override { return visitNonTerminalNode(inVisit, inNode); }
+    virtual bool                visitLoop      (Visit inVisit, TIntermLoop*      inNode) override { return visitNonTerminalNode(inVisit, inNode); }
+    virtual bool                visitBranch    (Visit inVisit, TIntermBranch*    inNode) override { return visitNonTerminalNode(inVisit, inNode); }
+
+                                // Common implementation for terminal nodes
+    void                        visitTerminalNode(TIntermNode* inNode);
+
+                                // Common implementation of non terminal nodes
+    bool                        visitNonTerminalNode(Visit inVisit, TIntermNode* inNode);
+
+    TIntermNode*                mTargetChildNode;
+    bool                        mTargetFound;
+    TIntermNode*                mNextChildNode;
+};
+
+
+// Constructor
+FindNextChildNode::FindNextChildNode(TIntermNode* inTargetChildNode) :
+    mTargetChildNode (inTargetChildNode),
+    mTargetFound     (false),
+    mNextChildNode   (nullptr),
+    TIntermTraverser (true, false, false) // pre visit, visit, post visit
+{
+
+}
+
+
+// Common implementation for terminal nodes
+void
+FindNextChildNode::visitTerminalNode(TIntermNode* inNode)
+{
+    if (mDepth == 1)
+    {
+        if (mTargetFound)
+        {
+            mNextChildNode = inNode;
+        }
+        else
+        {
+            mTargetFound = (inNode == mTargetChildNode);
+        }
+    }
+}
+
+
+// Common implementation of non terminal nodes
+bool
+FindNextChildNode::visitNonTerminalNode(Visit inVisit, TIntermNode* inNode)
+{
+    if (mDepth == 1)
+    {
+        if (mTargetFound)
+        {
+            mNextChildNode = inNode;
+        }
+        else
+        {
+            mTargetFound = (inNode == mTargetChildNode);
+        }
+    }
+
+    return (mNextChildNode == nullptr);
+}
+
+
+// Compute index in list of direct children according to traverse order
+//static
+TIntermNode*
+FindNextChildNode::sGetNextChildNode(TIntermNode* inParentNode, TIntermNode* inChildNode)
+{
+    FindNextChildNode find_next_child_node(inChildNode);
+    inParentNode->traverse(&find_next_child_node);
+
+    return find_next_child_node.GetNextChildNode();
+}
+
+
 }; // namespace
 
 
@@ -235,5 +338,33 @@ FindValueExpressionNode(const std::vector<TIntermNode*>& inSymbolNodePath)
     else
     {
         return inSymbolNodePath.back();
+    }
+}
+
+
+// Return next child node in AST from current node
+void
+GetNextChildNode(const std::vector<TIntermNode*>& inCurrNodePath, std::vector<TIntermNode*>& outNextNodePath)
+{
+    // Test if node path contains at least a parent and a child node
+    if (inCurrNodePath.size() >= 2)
+    {
+        std::vector<TIntermNode*>::const_iterator parent_it(inCurrNodePath.end() - 1);
+        TIntermNode* next_child_node;
+        do
+        {
+            --parent_it;
+            next_child_node = FindNextChildNode::sGetNextChildNode(*parent_it, *(parent_it + 1));
+        }
+        while (next_child_node == nullptr && parent_it >= inCurrNodePath.begin());
+
+        if (next_child_node != nullptr)
+        {
+            outNextNodePath.reserve(parent_it - inCurrNodePath.begin() + 2);
+            // Copy path to parent
+            outNextNodePath.assign(inCurrNodePath.begin(), parent_it + 1);
+
+            outNextNodePath.push_back(next_child_node);
+        }
     }
 }
