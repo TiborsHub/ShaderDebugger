@@ -199,9 +199,8 @@ ShaderInspectorWebGL::Inspect(
 // Transform AST to return target symbol
 void
 ShaderInspectorWebGL::TransformAST(
-    const std::vector<TIntermNode*>& inTargetSymbolPath,
-    InspectResult&                   outResult
-)
+    const tASTNodeLocation& inTargetSymbolPath,
+    InspectResult&          outResult)
 {
     // Determine type of symbol
 

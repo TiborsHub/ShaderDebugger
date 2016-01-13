@@ -29,6 +29,7 @@ CLASS_FORWARD_DECLARATIONS(DataFramebuffer);
 
 // Library headers
 #include "ShaderInspectorI.h"
+#include "ASTNodeLocation.h"
 
 
 // Standard headers
@@ -72,8 +73,8 @@ private:
 
                                 // Transform AST to return target symbol
     void                        TransformAST(
-                                    const std::vector<TIntermNode*>& inTargetSymbolPath,
-                                    InspectResult&                   outResult);
+                                    const tASTNodeLocation& inTargetSymbolPath,
+                                    InspectResult&          outResult);
 
                                 // Returns node which receives the output value
     TIntermTyped*               CreateOutputVariableNode();
