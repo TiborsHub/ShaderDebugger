@@ -146,6 +146,9 @@
     <ProjectReference Include="..\LibShaderDebugger\LibShaderDebugger.vcxproj">
       <Project>{65ffb1e6-fbbf-4dc7-a982-fdf70100d0f3}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\LibUtil\LibUtil.vcxproj">
+      <Project>{b1c85a35-e76a-484c-b1de-3c2d83e3c4a7}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
