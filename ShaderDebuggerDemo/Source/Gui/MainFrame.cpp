@@ -26,6 +26,7 @@
 #include "Debugger.h"
 #include "../TestCases/TestCaseFactorySingleton.h"
 #include "../TestCases/TestCaseFactory.h"
+#include "UtilText.h"
 
 
 // wxWidget headers
@@ -61,6 +62,22 @@ wxString webgl_versions[] =
     wxT("1"),
     wxT("2"),
 };
+
+
+// Return an interval in the shader source as two offsets
+std::pair<int, int>
+GetSourceInterval(const std::string& inSource, const SourceLocation& inSrcLoc)
+{
+    return std::pair<int, int>(
+        GetOffsetFromLineColumn(
+        inSource,
+        inSrcLoc.mLineNrFirst,
+        inSrcLoc.mColIxFirst),
+        GetOffsetFromLineColumn(
+        inSource,
+        inSrcLoc.mLineNrLast,
+        inSrcLoc.mColIxLast));
+}
 
 } // namespace
 
@@ -483,6 +500,7 @@ MainFrame::OnTestShader(wxCommandEvent& inEvent)
 
     wxCommandEvent dummy_event;
     OnShaderType(dummy_event);
+    OnReset(dummy_event);
     OnRun(dummy_event);
 }
 
@@ -493,14 +511,13 @@ MainFrame::OnShaderType(wxCommandEvent& inEvent)
 {
     (void)inEvent;
 
-    std::string shader_source;
     if (mInspectedProgram.get() != nullptr)
     {
         size_t shader_ix(GetSelectedShaderIndex());
-        shader_source = mInspectedProgram->GetInspectContext()->GetShaderSource(shader_ix);
+        mShaderSource = mInspectedProgram->GetInspectContext()->GetShaderSource(shader_ix);
     }
 
-    SetShaderSource(shader_source);
+    SetShaderSource(mShaderSource);
 }
 
 
@@ -531,9 +548,13 @@ MainFrame::OnStep(wxCommandEvent& event)
 {
     DebugStepResult step_result;
     mDebugger->Step(step_result);
+    std::pair<int, int> src_interval(GetSourceInterval(mShaderSource, step_result.mNextLocation));
 
-    // Show result of step
+    // Erase previous focus
+    mSourceCtrl->SetStyleEx(*mDebugStatementFocus, mSourceCtrl->GetDefaultStyle());
 
+    mDebugStatementFocus->SetRange(src_interval.first, src_interval.second);
+    mSourceCtrl->SetStyleEx(*mDebugStatementFocus, *mDebugFocusStyle);
 }
 
 
@@ -544,7 +565,10 @@ MainFrame::OnReset(wxCommandEvent& event)
     DebugResetResult reset_result;
     mDebugger->Reset(reset_result);
 
-    // Show result of reset
+    std::pair<int, int> src_interval(GetSourceInterval(mShaderSource, reset_result.mMainLocation));
+
+    mDebugStatementFocus->SetRange(src_interval.first, src_interval.second);
+    mSourceCtrl->SetStyleEx(*mDebugStatementFocus, *mDebugFocusStyle);
 }
 
 

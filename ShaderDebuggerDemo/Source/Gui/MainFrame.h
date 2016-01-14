@@ -95,6 +95,7 @@ private:
                                 // Update viewport information
     void                        UpdateViewportInfo(const wxPoint& inViewportMousePos);
 
+    std::string                 mShaderSource;
     wxPanel*                    mSourcePanel;
     wxRichTextCtrl*             mSourceCtrl;
     wxRadioBox*                 mShaderType;
