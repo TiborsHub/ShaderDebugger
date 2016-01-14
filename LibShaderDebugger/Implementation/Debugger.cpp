@@ -31,10 +31,17 @@ Debugger::Debugger(SpProgramInspectorI& inInspector) :
 bool
 Debugger::Step(DebugStepResult& outStepResult)
 {
+    tASTLocation next_statement;
     mInspector->GetNextStatement(
         mCurrentStatement,
         mShaderState,
-        mCurrentStatement);
+        next_statement);
+
+    if (!next_statement.empty())
+    {
+        mCurrentStatement = next_statement;
+        return mInspector->GetSourceLocation(mCurrentStatement, outStepResult.mNextLocation);
+    }
 
     return false;
 }

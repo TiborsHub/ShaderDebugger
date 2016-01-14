@@ -193,7 +193,7 @@ ShaderInspectorWebGL::GetNextStatement(
     if (ast != nullptr && GetNodePath(ast, inCurrLocation, curr_node_loc))
     {
         tASTNodeLocation next_node_loc;
-        GetNextChildNodeAtSameDepth(curr_node_loc, next_node_loc);
+        GetNextChildNodeDepthFirst(curr_node_loc, next_node_loc);
         if (!next_node_loc.empty())
         {
             GetNodeIndexPath(next_node_loc, outNextLocation);
