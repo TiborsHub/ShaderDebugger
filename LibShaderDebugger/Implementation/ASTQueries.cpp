@@ -29,8 +29,8 @@ class TIntermNodeTypeEvaluator : public TIntermTraverser
 public:
                                 // Constructor
                                 TIntermNodeTypeEvaluator() :
-                                    mNodeType        (AST_NODE_TYPE_UNKNOWN),
-                                    TIntermTraverser (false, true, false)
+                                    TIntermTraverser (false, true, false),
+                                    mNodeType        (AST_NODE_TYPE_UNKNOWN)
                                 {}
 
                                 // Traverse node
@@ -97,10 +97,10 @@ private:
 
 // Constructor
 FindNextChildNodeAtSameDepth::FindNextChildNodeAtSameDepth(TIntermNode* inTargetChildNode) :
+    TIntermTraverser (true, false, false), // pre visit, visit, post visit
     mTargetChildNode (inTargetChildNode),
     mTargetFound     (false),
-    mNextChildNode   (nullptr),
-    TIntermTraverser (true, false, false) // pre visit, visit, post visit
+    mNextChildNode   (nullptr)
 {
 
 }
