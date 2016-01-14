@@ -48,9 +48,6 @@
     <ClInclude Include="Implementation\CreateShaderInspectorInstance.h">
       <Filter>Implementation</Filter>
     </ClInclude>
-    <ClInclude Include="Implementation\UtilText.h">
-      <Filter>Implementation</Filter>
-    </ClInclude>
     <ClInclude Include="Implementation\ASTSymbolFinder.h">
       <Filter>Implementation</Filter>
     </ClInclude>
@@ -144,9 +141,6 @@
       <Filter>Implementation</Filter>
     </ClCompile>
     <ClCompile Include="Implementation\CreateShaderInspectorInstance.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\UtilText.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>
     <ClCompile Include="Implementation\ASTSymbolFinder.cpp">

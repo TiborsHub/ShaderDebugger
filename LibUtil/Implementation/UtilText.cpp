@@ -69,9 +69,17 @@ GetOffsetFromLineColumn(
         {
             ++col_ix;
         }
-        if (line_nr == inLineNr && col_ix == inColumn)
+        if (line_nr == inLineNr)
         {
-            return ch_ix;
+            if (col_ix >= inColumn)
+            {
+                return ch_ix;
+            }
+        }
+        else if (line_nr > inLineNr)
+        {
+            // Previous line was not long enough
+            return ch_ix - 1;
         }
     }
 

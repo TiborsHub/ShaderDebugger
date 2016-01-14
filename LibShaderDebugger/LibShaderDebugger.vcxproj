@@ -103,7 +103,6 @@
     <ClInclude Include="Implementation\ShaderStructureNodes.h" />
     <ClInclude Include="Implementation\Texture2D.h" />
     <ClInclude Include="Implementation\UtilGLSL.h" />
-    <ClInclude Include="Implementation\UtilText.h" />
     <ClInclude Include="Interface\ASTLocation.h" />
     <ClInclude Include="Interface\CreateProgramInspectorInstance.h" />
     <ClInclude Include="Interface\Debugger.h" />
@@ -147,7 +146,6 @@
     <ClCompile Include="Implementation\ShaderInspectorWebGL.cpp" />
     <ClCompile Include="Implementation\Texture2D.cpp" />
     <ClCompile Include="Implementation\UtilGLSL.cpp" />
-    <ClCompile Include="Implementation\UtilText.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\angle\src\angle_common.vcxproj">

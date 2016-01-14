@@ -4,10 +4,21 @@
     <Filter Include="Interface">
       <UniqueIdentifier>{32868bb3-e3cb-4cd7-845b-118b513748c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Implementation">
+      <UniqueIdentifier>{4d9f2a55-ea32-4594-ba02-dee73bce3b60}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Interface\SmartPointerDeclarations.h">
       <Filter>Interface</Filter>
     </ClInclude>
+    <ClInclude Include="Interface\UtilText.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Implementation\UtilText.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
