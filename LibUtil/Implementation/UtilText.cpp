@@ -14,7 +14,6 @@
 
 // Standard headers
 #include <assert.h>
-#include <limits>
 
 
 // Find corresponding line number and column for an offset
@@ -83,5 +82,5 @@ GetOffsetFromLineColumn(
         }
     }
 
-    return std::numeric_limits<size_t>::max();
+    return txt_len - 1;
 }
