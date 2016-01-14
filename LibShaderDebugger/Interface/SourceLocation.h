@@ -8,6 +8,14 @@ class SourceLocation
 {
 public:
                                 // Constructor
+                                SourceLocation() :
+                                    mLineNrFirst (-1),
+                                    mColIxFirst  (-1),
+                                    mLineNrLast  (-1),
+                                    mColIxLast   (-1)
+                                {}
+
+                                // Constructor
                                 SourceLocation(
                                     int inLineNrFirst,
                                     int inColIxFirst,
