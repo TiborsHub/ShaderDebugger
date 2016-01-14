@@ -106,4 +106,11 @@ GetNextChildNodeAtSameDepth(
     tASTNodeLocation&       outNextNodePath);
 
 
+// Return next child node in AST from current node depth first
+void
+GetNextChildNodeDepthFirst(
+    const tASTNodeLocation& inCurrNodePath,
+    tASTNodeLocation&       outNextNodePath);
+
+
 #endif // __AST_QUERIES_H__

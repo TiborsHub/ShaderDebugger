@@ -156,6 +156,76 @@ FindNextChildNodeAtSameDepth::sGetNextChildNode(TIntermNode* inParentNode, TInte
 }
 
 
+// Utility class to compute child node index
+class FindNextChildNodeDepthFirst : public TIntermTraverser
+{
+public:
+                                // Constructor
+                                FindNextChildNodeDepthFirst();
+
+                                // Return next child node
+    TIntermNode*                GetNextChildNode() const { return mNextChildNode; }
+
+                                // Compute index in list of direct children according to traverse order
+    static TIntermNode*         sGetNextChildNode(TIntermNode* inParentNode, TIntermNode* inChildNode);
+
+private:
+                                // Visit of terminal nodes
+    virtual void                visitSymbol        (TIntermSymbol*        inNode) override { VisitNode(inNode); }
+    virtual void                visitRaw           (TIntermRaw*           inNode) override { VisitNode(inNode); }
+    virtual void                visitConstantUnion (TIntermConstantUnion* inNode) override { VisitNode(inNode); }
+
+                                // Visit of non-terminal nodes
+    virtual bool                visitBinary    (Visit, TIntermBinary*    inNode) override { return VisitNode(inNode); }
+    virtual bool                visitUnary     (Visit, TIntermUnary*     inNode) override { return VisitNode(inNode); }
+    virtual bool                visitSelection (Visit, TIntermSelection* inNode) override { return VisitNode(inNode); }
+    virtual bool                visitSwitch    (Visit, TIntermSwitch*    inNode) override { return VisitNode(inNode); }
+    virtual bool                visitCase      (Visit, TIntermCase*      inNode) override { return VisitNode(inNode); }
+    virtual bool                visitAggregate (Visit, TIntermAggregate* inNode) override { return VisitNode(inNode); }
+    virtual bool                visitLoop      (Visit, TIntermLoop*      inNode) override { return VisitNode(inNode); }
+    virtual bool                visitBranch    (Visit, TIntermBranch*    inNode) override { return VisitNode(inNode); }
+
+                                // Common implementation for terminal nodes
+    bool                        VisitNode(TIntermNode* inNode);
+
+    TIntermNode*                mNextChildNode;
+};
+
+
+// Constructor
+FindNextChildNodeDepthFirst::FindNextChildNodeDepthFirst() :
+    TIntermTraverser (true, false, false), // pre visit, visit, post visit
+    mNextChildNode   (nullptr)
+{
+
+}
+
+
+// Common implementation for all nodes
+bool
+FindNextChildNodeDepthFirst::VisitNode(TIntermNode* inNode)
+{
+    if (mNextChildNode == nullptr)
+    {
+        mNextChildNode = inNode;
+    }
+
+    // To stop traversing
+    return false;
+}
+
+
+// Compute index in list of direct children according to traverse order
+// static
+TIntermNode*
+FindNextChildNodeDepthFirst::sGetNextChildNode(TIntermNode* inParentNode, TIntermNode* inChildNode)
+{
+    FindNextChildNodeDepthFirst next_node;
+    inParentNode->traverse(&next_node);
+    return next_node.GetNextChildNode();
+}
+
+
 }; // namespace
 
 
@@ -369,4 +439,15 @@ GetNextChildNodeAtSameDepth(
             outNextNodePath.push_back(next_child_node);
         }
     }
+}
+
+
+// Return next child node in AST from current node depth first
+void
+GetNextChildNodeDepthFirst(
+    const tASTNodeLocation& inCurrNodePath,
+    tASTNodeLocation&       outNextNodePath)
+{
+
+
 }
