@@ -161,12 +161,13 @@ class FindNextChildNodeDepthFirst : public TIntermTraverser
 {
 public:
                                 // Constructor
-                                FindNextChildNodeDepthFirst();
+                                FindNextChildNodeDepthFirst(TIntermNode* inParentNode,TIntermNode* inTargetChildNode);
 
                                 // Return next child node
     TIntermNode*                GetNextChildNode() const { return mNextChildNode; }
 
-                                // Compute index in list of direct children according to traverse order
+                                // Find next child node
+                                // the child node to pass can be nullptr
     static TIntermNode*         sGetNextChildNode(TIntermNode* inParentNode, TIntermNode* inChildNode);
 
 private:
@@ -188,13 +189,20 @@ private:
                                 // Common implementation for terminal nodes
     bool                        VisitNode(TIntermNode* inNode);
 
+    TIntermNode*                mParentNode;
+    TIntermNode*                mTargetChildNode;
     TIntermNode*                mNextChildNode;
 };
 
 
 // Constructor
-FindNextChildNodeDepthFirst::FindNextChildNodeDepthFirst() :
+FindNextChildNodeDepthFirst::FindNextChildNodeDepthFirst(
+    TIntermNode* inParentNode,
+    TIntermNode* inTargetChildNode)
+:
     TIntermTraverser (true, false, false), // pre visit, visit, post visit
+    mParentNode      (inParentNode),
+    mTargetChildNode (inTargetChildNode),
     mNextChildNode   (nullptr)
 {
 
@@ -205,22 +213,41 @@ FindNextChildNodeDepthFirst::FindNextChildNodeDepthFirst() :
 bool
 FindNextChildNodeDepthFirst::VisitNode(TIntermNode* inNode)
 {
-    if (mNextChildNode == nullptr)
+    if (inNode != mParentNode)
     {
-        mNextChildNode = inNode;
+        if (mTargetChildNode == nullptr)
+        {
+            // Target child node has been passed or was not set
+            if (mNextChildNode == nullptr)
+            {
+                mNextChildNode = inNode;
+            }
+
+            // To stop traversing
+            return false;
+        }
+        else
+        {
+            if (mTargetChildNode == inNode)
+            {
+                // Remove target child node, next node in traverse is the one to return
+                mTargetChildNode = nullptr;
+            }
+        }
     }
 
-    // To stop traversing
-    return false;
+    // Continue traversing
+    return true;
 }
 
 
-// Compute index in list of direct children according to traverse order
+// Find next child node
+// the child node to pass can be nullptr
 // static
 TIntermNode*
 FindNextChildNodeDepthFirst::sGetNextChildNode(TIntermNode* inParentNode, TIntermNode* inChildNode)
 {
-    FindNextChildNodeDepthFirst next_node;
+    FindNextChildNodeDepthFirst next_node(inParentNode, inChildNode);
     inParentNode->traverse(&next_node);
     return next_node.GetNextChildNode();
 }
@@ -448,6 +475,21 @@ GetNextChildNodeDepthFirst(
     const tASTNodeLocation& inCurrNodePath,
     tASTNodeLocation&       outNextNodePath)
 {
+    tASTNodeLocation::const_reverse_iterator rparent_it(inCurrNodePath.rbegin());
+    TIntermNode* next_node(nullptr);
+    TIntermNode* child_node(nullptr);
+    do
+    {
+        next_node = FindNextChildNodeDepthFirst::sGetNextChildNode(*rparent_it, child_node);
+        child_node = *rparent_it;
+        ++rparent_it;
+    }
+    while (next_node == nullptr && rparent_it != inCurrNodePath.rend());
 
-
+    if (next_node != nullptr)
+    {
+        // Copy parent node path
+        outNextNodePath.assign(inCurrNodePath.begin(), (rparent_it - 1).base());
+        outNextNodePath.push_back(next_node);
+    }
 }
