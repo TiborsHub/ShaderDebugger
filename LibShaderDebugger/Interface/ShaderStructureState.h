@@ -26,6 +26,7 @@
 
 class ShaderStructureState
 {
+public:
     tASTLocation                mMain;
     std::vector<tASTLocation>   mSelections;
     std::vector<tASTLocation>   mBranches;
