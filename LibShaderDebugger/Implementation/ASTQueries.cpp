@@ -55,11 +55,11 @@ private:
 
 
 // Utility class to compute child node index
-class FindNextChildNode : public TIntermTraverser
+class FindNextChildNodeAtSameDepth : public TIntermTraverser
 {
 public:
                                 // Constructor
-                                FindNextChildNode(TIntermNode* inTargetChildNode);
+                                FindNextChildNodeAtSameDepth(TIntermNode* inTargetChildNode);
 
                                 // Return next child node
     TIntermNode*                GetNextChildNode() const { return mNextChildNode; }
@@ -96,7 +96,7 @@ private:
 
 
 // Constructor
-FindNextChildNode::FindNextChildNode(TIntermNode* inTargetChildNode) :
+FindNextChildNodeAtSameDepth::FindNextChildNodeAtSameDepth(TIntermNode* inTargetChildNode) :
     mTargetChildNode (inTargetChildNode),
     mTargetFound     (false),
     mNextChildNode   (nullptr),
@@ -108,7 +108,7 @@ FindNextChildNode::FindNextChildNode(TIntermNode* inTargetChildNode) :
 
 // Common implementation for terminal nodes
 void
-FindNextChildNode::visitTerminalNode(TIntermNode* inNode)
+FindNextChildNodeAtSameDepth::visitTerminalNode(TIntermNode* inNode)
 {
     if (mDepth == 1)
     {
@@ -126,7 +126,7 @@ FindNextChildNode::visitTerminalNode(TIntermNode* inNode)
 
 // Common implementation of non terminal nodes
 bool
-FindNextChildNode::visitNonTerminalNode(Visit inVisit, TIntermNode* inNode)
+FindNextChildNodeAtSameDepth::visitNonTerminalNode(Visit inVisit, TIntermNode* inNode)
 {
     if (mDepth == 1)
     {
@@ -147,9 +147,9 @@ FindNextChildNode::visitNonTerminalNode(Visit inVisit, TIntermNode* inNode)
 // Compute index in list of direct children according to traverse order
 //static
 TIntermNode*
-FindNextChildNode::sGetNextChildNode(TIntermNode* inParentNode, TIntermNode* inChildNode)
+FindNextChildNodeAtSameDepth::sGetNextChildNode(TIntermNode* inParentNode, TIntermNode* inChildNode)
 {
-    FindNextChildNode find_next_child_node(inChildNode);
+    FindNextChildNodeAtSameDepth find_next_child_node(inChildNode);
     inParentNode->traverse(&find_next_child_node);
 
     return find_next_child_node.GetNextChildNode();
@@ -344,25 +344,27 @@ FindValueExpressionNode(const tASTNodeLocation& inSymbolNodePath)
 
 // Return next child node in AST from current node
 void
-GetNextChildNode(const tASTNodeLocation& inCurrNodePath, tASTNodeLocation& outNextNodePath)
+GetNextChildNodeAtSameDepth(
+    const tASTNodeLocation& inCurrNodePath,
+    tASTNodeLocation&       outNextNodePath)
 {
     // Test if node path contains at least a parent and a child node
     if (inCurrNodePath.size() >= 2)
     {
-        tASTNodeLocation::const_iterator parent_it(inCurrNodePath.end() - 1);
+        tASTNodeLocation::const_reverse_iterator parent_it(inCurrNodePath.rbegin() + 1);
         TIntermNode* next_child_node;
         do
         {
-            --parent_it;
-            next_child_node = FindNextChildNode::sGetNextChildNode(*parent_it, *(parent_it + 1));
+            next_child_node = FindNextChildNodeAtSameDepth::sGetNextChildNode(*parent_it, *(parent_it - 1));
+            ++parent_it;
         }
-        while (next_child_node == nullptr && parent_it >= inCurrNodePath.begin());
+        while (next_child_node == nullptr && parent_it < inCurrNodePath.rend());
 
         if (next_child_node != nullptr)
         {
-            outNextNodePath.reserve(parent_it - inCurrNodePath.begin() + 2);
-            // Copy path to parent
-            outNextNodePath.assign(inCurrNodePath.begin(), parent_it + 1);
+            outNextNodePath.reserve(parent_it.base() - inCurrNodePath.begin() + 2);
+            // Copy path to parent (including parent)
+            outNextNodePath.assign(inCurrNodePath.begin(), parent_it.base() + 1);
 
             outNextNodePath.push_back(next_child_node);
         }

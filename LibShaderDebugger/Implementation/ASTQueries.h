@@ -99,9 +99,11 @@ TIntermNode*
 FindValueExpressionNode(const tASTNodeLocation& inSymbolNodePath);
 
 
-// Return next child node in AST from current node
+// Return next child node in AST from current node at same depth
 void
-GetNextChildNode(const tASTNodeLocation& inCurrNodePath, tASTNodeLocation& outNextNodePath);
+GetNextChildNodeAtSameDepth(
+    const tASTNodeLocation& inCurrNodePath,
+    tASTNodeLocation&       outNextNodePath);
 
 
 #endif // __AST_QUERIES_H__
