@@ -29,6 +29,7 @@
 #include "ASTGetShaderStructureNodes.h"
 #include "SourceLocation.h"
 #include "ShaderStructureNodes.h"
+#include "ShaderStructureState.h"
 
 
 // ANGLE headers
@@ -117,7 +118,6 @@ ShaderInspectorWebGL::Initialize()
 
 
 // Return the nodes from the ast where the shader execution path can branch
-// virtual
 bool
 ShaderInspectorWebGL::GetShaderStructureNodes(ShaderStructureNodes& outShaderStructure)
 {
@@ -131,6 +131,22 @@ ShaderInspectorWebGL::GetShaderStructureNodes(ShaderStructureNodes& outShaderStr
     }
 
     return result;
+}
+
+
+// Returns information about the ast where the shader execution path can branch
+// and other information necessary to keep track of the state of the shader
+// virtual
+bool
+ShaderInspectorWebGL::GetShaderStructure(ShaderStructureState& outShaderStructure)
+{
+    ShaderStructureNodes structure_nodes;
+    if (GetShaderStructureNodes(structure_nodes))
+    {
+        GetNodeIndexPath(structure_nodes.mMain, outShaderStructure.mMain);
+    }
+
+    return false;
 }
 
 
@@ -153,10 +169,37 @@ ShaderInspectorWebGL::GetSourceLocation(
 
         // Column information is not available through the ANGLE parser
         // Set column information to a long line
-        outSourceLocation.mColIxFirst  =   0;
+        outSourceLocation.mColIxFirst  =   1;
         outSourceLocation.mColIxLast   = 250;
 
         return true;
+    }
+
+    return false;
+}
+
+
+// Return next statement
+// virtual
+bool
+ShaderInspectorWebGL::GetNextStatement(
+    const tASTLocation&         inCurrLocation,
+    const ShaderStructureState& inCurrentState,
+     tASTLocation&              outNextLocation)
+{
+    std::string source(GetInspectContext()->GetShaderSource(mShaderIx));
+    TIntermNode* ast(mCompiler->CompileToAST(source, mCompileOptions));
+    tASTNodeLocation curr_node_loc;
+    if (ast != nullptr && GetNodePath(ast, inCurrLocation, curr_node_loc))
+    {
+        tASTNodeLocation next_node_loc;
+        GetNextChildNodeAtSameDepth(curr_node_loc, next_node_loc);
+        if (!next_node_loc.empty())
+        {
+            GetNodeIndexPath(next_node_loc, outNextLocation);
+
+            return true;
+        }
     }
 
     return false;

@@ -50,10 +50,10 @@ public:
     virtual void                GetShaderStructure(ShaderStructureState& outShaderStructure) = 0;
 
                                 // Return next statement
-    virtual void                GetNextStatement(
+    virtual bool                GetNextStatement(
                                     const tASTLocation&         inCurrLocation,
                                     const ShaderStructureState& inCurrentState,
-                                    const tASTLocation&         outNextLocation) = 0;
+                                    tASTLocation&               outNextLocation) = 0;
 
                                 // Return location in source code for an ast node
     virtual bool                GetSourceLocation(

@@ -31,6 +31,7 @@ CLASS_FORWARD_DECLARATIONS(ProgramInspectorI);
 // Library headers
 #include "ASTLocation.h"
 #include "ShaderStructureState.h"
+#include "SourceLocation.h"
 
 
 // Standard headers
@@ -40,14 +41,17 @@ CLASS_FORWARD_DECLARATIONS(ProgramInspectorI);
 // Result of resetting debug state of shader
 struct DebugResetResult
 {
+                                // Constructor
+                                DebugResetResult() {};
 
+    SourceLocation              mMainLocation;
 };
 
 
 // Result of advancing debug state of shader to next statement
 struct DebugStepResult
 {
-
+    SourceLocation              mNextLocation;
 };
 
 

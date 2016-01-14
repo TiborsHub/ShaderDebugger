@@ -44,7 +44,9 @@ Debugger::Step(DebugStepResult& outStepResult)
 void
 Debugger::Reset(DebugResetResult& outResetResult)
 {
-//    mCurrentStatement = mInspector->GetFirstStatement();
+    mInspector->GetShaderStructure(mShaderState);
+    mCurrentStatement = mShaderState.mMain;
+    mInspector->GetSourceLocation(mCurrentStatement, outResetResult.mMainLocation);
 }
 
 

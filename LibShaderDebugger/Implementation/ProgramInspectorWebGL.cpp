@@ -33,7 +33,7 @@ ProgramInspectorWebGL::ProgramInspectorWebGL(SpInspectContextI& inInspectContext
         this,
         inInspectContext->GetShaderType(inShaderIx)))
 {
-
+    mShaderInspector->Initialize();
 }
 
 
@@ -42,19 +42,22 @@ ProgramInspectorWebGL::ProgramInspectorWebGL(SpInspectContextI& inInspectContext
 void
 ProgramInspectorWebGL::GetShaderStructure(ShaderStructureState& outShaderStructure)
 {
-
+    mShaderInspector->GetShaderStructure(outShaderStructure);
 }
 
 
 // Return next statement
 // virtual
-void
+bool
 ProgramInspectorWebGL::GetNextStatement(
     const tASTLocation&         inCurrLocation,
     const ShaderStructureState& inCurrentState,
-    const tASTLocation&         outNextLocation)
+    tASTLocation&               outNextLocation)
 {
-
+    return mShaderInspector->GetNextStatement(
+        inCurrLocation,
+        inCurrentState,
+        outNextLocation);
 }
 
 

@@ -59,13 +59,20 @@ public:
                                 // Initialize the inspector
     virtual bool                Initialize();
 
-                                // Return the nodes from the ast where the shader execution path can branch
-    virtual bool                GetShaderStructureNodes(ShaderStructureNodes& outShaderStructure) override;
+                                // Returns information about the ast where the shader execution path can branch
+                                // and other information necessary to keep track of the state of the shader
+    virtual bool                GetShaderStructure(ShaderStructureState& outShaderStructure) override;
 
                                 // Return location in source code for an ast node
     virtual bool                GetSourceLocation(
                                     const tASTLocation& inASTLocation,
                                     SourceLocation&     outSourceLocation) override;
+
+                                // Return next statement
+    virtual bool                GetNextStatement(
+                                    const tASTLocation&         inCurrLocation,
+                                    const ShaderStructureState& inCurrentState,
+                                    tASTLocation&               outNextLocation) override;
 
                                 // Inspect a token at the given source position
     virtual void                Inspect(
@@ -75,6 +82,9 @@ public:
                                     InspectResult&     outResult) override;
 
 private:
+                                // Return the nodes from the ast where the shader execution path can branch
+    bool                        GetShaderStructureNodes(ShaderStructureNodes& outShaderStructure);
+
                                 // Transform AST to return target symbol
     void                        TransformAST(
                                     const tASTNodeLocation& inTargetSymbolPath,

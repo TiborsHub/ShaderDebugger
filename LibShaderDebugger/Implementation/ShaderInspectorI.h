@@ -20,7 +20,7 @@
 
 // Forward declaration
 class InspectResult;
-class ShaderStructureNodes;
+class ShaderStructureState;
 class SourceLocation;
 CLASS_FORWARD_DECLARATIONS(ProgramInspectorI);
 CLASS_FORWARD_DECLARATIONS(InspectContextI);
@@ -47,13 +47,20 @@ public:
                                 // Initialize the inspector
     virtual bool                Initialize() = 0;
 
-                                // Return the nodes from the ast where the shader execution path can branch
-    virtual bool                GetShaderStructureNodes(ShaderStructureNodes& outShaderStructure) = 0;
+                                // Returns information about the ast where the shader execution path can branch
+                                // and other information necessary to keep track of the state of the shader
+    virtual bool                GetShaderStructure(ShaderStructureState& outShaderStructure) = 0;
 
                                 // Return location in source code for an ast node
     virtual bool                GetSourceLocation(
                                     const tASTLocation& inASTLocation,
                                     SourceLocation&     outSourceLocation) = 0;
+
+                                // Return next statement
+    virtual bool                GetNextStatement(
+                                    const tASTLocation&         inCurrLocation,
+                                    const ShaderStructureState& inCurrentState,
+                                    tASTLocation&               outNextLocation) = 0;
 
                                 // Inspect a token at the given source position
     virtual void                Inspect(
