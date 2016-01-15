@@ -551,7 +551,7 @@ MainFrame::OnStep(wxCommandEvent& event)
     std::pair<int, int> src_interval(GetSourceInterval(mShaderSource, step_result.mNextLocation));
 
     // Erase previous focus
-    mSourceCtrl->SetStyleEx(*mDebugStatementFocus, mSourceCtrl->GetDefaultStyle());
+    mSourceCtrl->SetStyleEx(*mDebugStatementFocus, *mDebugFocusStyle, wxRICHTEXT_SETSTYLE_REMOVE);
 
     mDebugStatementFocus->SetRange(src_interval.first, src_interval.second);
     mSourceCtrl->SetStyleEx(*mDebugStatementFocus, *mDebugFocusStyle);
