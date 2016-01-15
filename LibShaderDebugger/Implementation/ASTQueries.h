@@ -99,24 +99,16 @@ TIntermNode*
 FindValueExpressionNode(const tASTNodeLocation& inSymbolNodePath);
 
 
-// Return next child node in AST from current node at same depth
+// Return next child node in traverse order
+// Return child of leave node if it exist
+// Otherwise return next child of parent of leave node
 void
-GetNextChildNodeAtSameDepth(
-    const tASTNodeLocation& inCurrNodePath,
-    tASTNodeLocation&       outNextNodePath);
-
-
-// Return next child node in AST from current node depth first
-void
-GetNextChildNodeDepthFirst(
-    const tASTNodeLocation& inCurrNodePath,
-    tASTNodeLocation&       outNextNodePath);
+GetNextChildNode(const tASTNodeLocation& inCurrNodePath, tASTNodeLocation& outNextNodePath);
 
 
 // Tests if child node is a direct descendent of the parent
 bool
 IsDirectChildNode(TIntermNode* inParentNode, TIntermNode* inChildNode);
-
 
 
 #if !defined(NDEBUG)
