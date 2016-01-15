@@ -205,7 +205,7 @@ FindNextChildNodeDepthFirst::FindNextChildNodeDepthFirst(
     mTargetChildNode (inTargetChildNode),
     mNextChildNode   (nullptr)
 {
-
+    assert(IsDirectChildNode(inParentNode, inTargetChildNode));
 }
 
 
@@ -252,6 +252,76 @@ FindNextChildNodeDepthFirst::sGetNextChildNode(TIntermNode* inParentNode, TInter
     return next_node.GetNextChildNode();
 }
 
+
+// Utility class to compute child node index
+class DirectChildTester : public TIntermTraverser
+{
+public:
+                                // Constructor
+                                DirectChildTester(TIntermNode* inTargetChildNode);
+
+                                // Returns if child is direct descendent of parent
+    bool                        IsDirectChildNode() const { return (mTargetChildNode == nullptr); }
+
+                                // Returns if child is direct descendent of parent
+    static bool                 sIsDirectChildNode(TIntermNode* inParentNode, TIntermNode* inChildNode);
+
+private:
+                                // Visit of terminal nodes
+    virtual void                visitSymbol        (TIntermSymbol*        inNode) override { VisitNode(inNode); }
+    virtual void                visitRaw           (TIntermRaw*           inNode) override { VisitNode(inNode); }
+    virtual void                visitConstantUnion (TIntermConstantUnion* inNode) override { VisitNode(inNode); }
+
+                                // Visit of non-terminal nodes
+    virtual bool                visitBinary    (Visit, TIntermBinary*    inNode) override { return VisitNode(inNode); }
+    virtual bool                visitUnary     (Visit, TIntermUnary*     inNode) override { return VisitNode(inNode); }
+    virtual bool                visitSelection (Visit, TIntermSelection* inNode) override { return VisitNode(inNode); }
+    virtual bool                visitSwitch    (Visit, TIntermSwitch*    inNode) override { return VisitNode(inNode); }
+    virtual bool                visitCase      (Visit, TIntermCase*      inNode) override { return VisitNode(inNode); }
+    virtual bool                visitAggregate (Visit, TIntermAggregate* inNode) override { return VisitNode(inNode); }
+    virtual bool                visitLoop      (Visit, TIntermLoop*      inNode) override { return VisitNode(inNode); }
+    virtual bool                visitBranch    (Visit, TIntermBranch*    inNode) override { return VisitNode(inNode); }
+
+                                // Common implementation for terminal nodes
+    bool                        VisitNode(TIntermNode* inNode);
+
+    TIntermNode*                mTargetChildNode;
+};
+
+
+// Constructor
+DirectChildTester::DirectChildTester(TIntermNode* inTargetChildNode) :
+    TIntermTraverser (true, false, false), // pre visit, visit, post visit
+    mTargetChildNode (inTargetChildNode)
+{
+
+}
+
+
+// Common implementation for all nodes
+bool
+DirectChildTester::VisitNode(TIntermNode* inNode)
+{
+    if (inNode == mTargetChildNode && mDepth == 1)
+    {
+        // Child node found
+        mTargetChildNode = nullptr;
+    }
+
+    // Continue traversing if target node not found and tree maximum one level deep
+    return (mTargetChildNode != nullptr && mDepth <= 1);
+}
+
+
+// Returns if child is direct descendent of parent
+// static
+bool
+DirectChildTester::sIsDirectChildNode(TIntermNode* inParentNode, TIntermNode* inChildNode)
+{
+    DirectChildTester is_direct_child(inChildNode);
+    inParentNode->traverse(&is_direct_child);
+    return is_direct_child.IsDirectChildNode();
+}
 
 }; // namespace
 
@@ -491,5 +561,30 @@ GetNextChildNodeDepthFirst(
         // Copy parent node path
         outNextNodePath.assign(inCurrNodePath.begin(), (rparent_it - 1).base());
         outNextNodePath.push_back(next_node);
+
+        AssertNodeLocationDirectParentChild(outNextNodePath);
     }
+}
+
+
+// Tests if child node is a direct descendent of the parent
+bool
+IsDirectChildNode(TIntermNode* inParentNode, TIntermNode* inChildNode)
+{
+    return DirectChildTester::sIsDirectChildNode(inParentNode, inChildNode);
+}
+
+
+// Verify that  consecutive nodes have a direct parent - child relation
+void
+AssertNodeLocationDirectParentChild(const tASTNodeLocation& inNodeLocation)
+{
+#if !defined(NDEBUG)
+    size_t node_count(inNodeLocation.size());
+    assert(node_count>= 2);
+    for (size_t n_ix(0); n_ix < node_count - 1; ++n_ix)
+    {
+        assert(IsDirectChildNode(inNodeLocation[n_ix], inNodeLocation[n_ix + 1]));
+    }
+#endif
 }

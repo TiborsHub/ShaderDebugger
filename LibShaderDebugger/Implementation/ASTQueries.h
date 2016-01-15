@@ -113,4 +113,18 @@ GetNextChildNodeDepthFirst(
     tASTNodeLocation&       outNextNodePath);
 
 
+// Tests if child node is a direct descendent of the parent
+bool
+IsDirectChildNode(TIntermNode* inParentNode, TIntermNode* inChildNode);
+
+
+
+#if !defined(NDEBUG)
+
+// Verify that consecutive nodes have a direct parent - child relation
+void
+AssertNodeLocationDirectParentChild(const tASTNodeLocation& inNodeLocation);
+
+#endif
+
 #endif // __AST_QUERIES_H__
