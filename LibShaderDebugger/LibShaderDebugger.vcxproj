@@ -114,6 +114,8 @@
     <ClInclude Include="Interface\InspectedProgramCollectionSingleton.h" />
     <ClInclude Include="Interface\InspectResult.h" />
     <ClInclude Include="Interface\LibShaderDebuggerInitFin.h" />
+    <ClInclude Include="Interface\Log.h" />
+    <ClInclude Include="Interface\LoggerI.h" />
     <ClInclude Include="Interface\PixelData.h" />
     <ClInclude Include="Interface\ProgramInspectorI.h" />
     <ClInclude Include="Interface\ShaderStructureState.h" />
@@ -138,6 +140,7 @@
     <ClCompile Include="Implementation\InspectedProgramCollectionSingleton.cpp" />
     <ClCompile Include="Implementation\InspectResult.cpp" />
     <ClCompile Include="Implementation\LibShaderDebuggerInitFin.cpp" />
+    <ClCompile Include="Implementation\Log.cpp" />
     <ClCompile Include="Implementation\PixelData.cpp" />
     <ClCompile Include="Implementation\ProgramInspectorI.cpp" />
     <ClCompile Include="Implementation\ProgramInspectorWebGL.cpp" />

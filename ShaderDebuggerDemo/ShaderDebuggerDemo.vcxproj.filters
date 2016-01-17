@@ -42,6 +42,9 @@
     <ClCompile Include="Source\TestCases\TestCaseFactorySingleton.cpp">
       <Filter>TestCases</Filter>
     </ClCompile>
+    <ClCompile Include="Source\LoggerUI.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\ShaderDebuggerDemo.h">
@@ -70,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="Source\TestCases\TestCaseFactorySingleton.h">
       <Filter>TestCases</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoggerUI.h">
+      <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

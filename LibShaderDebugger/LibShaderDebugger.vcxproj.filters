@@ -111,6 +111,12 @@
     <ClInclude Include="Implementation\ShaderStructureNodes.h">
       <Filter>Implementation</Filter>
     </ClInclude>
+    <ClInclude Include="Interface\Log.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\LoggerI.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Implementation\CreateProgramInspectorInstance.cpp">
@@ -189,6 +195,9 @@
       <Filter>Implementation</Filter>
     </ClCompile>
     <ClCompile Include="Implementation\ASTGetShaderStructureNodes.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\Log.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>
   </ItemGroup>

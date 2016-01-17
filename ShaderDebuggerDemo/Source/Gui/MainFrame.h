@@ -53,6 +53,9 @@ public:
                                     wxPoint         inPos,
                                     wxSize          inSize);
 
+                                // Destructor
+                                ~MainFrame();
+
 private:
                                 // Returns the selected shader type
     size_t                      GetSelectedShaderIndex() const;

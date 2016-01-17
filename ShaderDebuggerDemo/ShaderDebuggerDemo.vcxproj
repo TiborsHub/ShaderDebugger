@@ -99,6 +99,7 @@
     <ClCompile Include="Source\Gui\EglRenderWindow.cpp" />
     <ClCompile Include="Source\Gui\MainFrame.cpp" />
     <ClCompile Include="Source\Gui\MousePosEvent.cpp" />
+    <ClCompile Include="Source\LoggerUI.cpp" />
     <ClCompile Include="Source\ShaderDebuggerDemo.cpp" />
     <ClCompile Include="Source\TestCases\AddTestCasesWebGL1.cpp" />
     <ClCompile Include="Source\TestCases\TestCaseFactory.cpp" />
@@ -110,6 +111,7 @@
     <ClInclude Include="Source\Gui\EventId.h" />
     <ClInclude Include="Source\Gui\MainFrame.h" />
     <ClInclude Include="Source\Gui\MousePosEvent.h" />
+    <ClInclude Include="Source\LoggerUI.h" />
     <ClInclude Include="Source\ShaderDebuggerDemo.h" />
     <ClInclude Include="Source\TestCases\AddTestCasesWebGL1.h" />
     <ClInclude Include="Source\TestCases\TestCaseFactory.h" />

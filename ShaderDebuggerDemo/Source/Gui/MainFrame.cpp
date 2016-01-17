@@ -27,6 +27,7 @@
 #include "../TestCases/TestCaseFactorySingleton.h"
 #include "../TestCases/TestCaseFactory.h"
 #include "UtilText.h"
+#include "../LoggerUI.h"
 
 
 // wxWidget headers
@@ -364,6 +365,15 @@ MainFrame::MainFrame(
     mDebugFocusStyle     = std::make_unique<wxTextAttr>();
     *mDebugFocusStyle    = mSourceCtrl->GetDefaultStyle();
     mDebugFocusStyle->SetBackgroundColour(*wxCYAN);
+
+    LoggerUI::sCreateInstance(mDebugCtrl);
+}
+
+
+// Destructor
+MainFrame::~MainFrame()
+{
+    LoggerUI::sDestroyInstance();
 }
 
 
