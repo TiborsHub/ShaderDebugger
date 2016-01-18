@@ -556,15 +556,24 @@ MainFrame::OnRun(wxCommandEvent& inEvent)
 void
 MainFrame::OnStep(wxCommandEvent& event)
 {
-    DebugStepResult step_result;
-    mDebugger->Step(step_result);
-    std::pair<int, int> src_interval(GetSourceInterval(mShaderSource, step_result.mNextLocation));
-
     // Erase previous focus
     mSourceCtrl->SetStyleEx(*mDebugStatementFocus, *mDebugFocusStyle, wxRICHTEXT_SETSTYLE_REMOVE);
 
-    mDebugStatementFocus->SetRange(src_interval.first, src_interval.second);
-    mSourceCtrl->SetStyleEx(*mDebugStatementFocus, *mDebugFocusStyle);
+    DebugStepResult step_result;
+    if (mDebugger->Step(step_result))
+    {
+        std::pair<int, int> src_interval(GetSourceInterval(mShaderSource, step_result.mNextLocation));
+
+        mDebugStatementFocus->SetRange(src_interval.first, src_interval.second);
+        mSourceCtrl->SetStyleEx(*mDebugStatementFocus, *mDebugFocusStyle);
+    }
+    else
+    {
+        mSourceCtrl->SetStyleEx(*mDebugStatementFocus, mSourceCtrl->GetDefaultStyleEx());
+        SetStatusText("End of shader");
+    }
+
+    mSourceCtrl->Invalidate();
 }
 
 
