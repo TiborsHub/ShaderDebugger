@@ -147,6 +147,7 @@
     <ClCompile Include="Implementation\ShaderCompilerESSL.cpp" />
     <ClCompile Include="Implementation\ShaderInspectorI.cpp" />
     <ClCompile Include="Implementation\ShaderInspectorWebGL.cpp" />
+    <ClCompile Include="Implementation\ShaderStructureNodes.cpp" />
     <ClCompile Include="Implementation\Texture2D.cpp" />
     <ClCompile Include="Implementation\UtilGLSL.cpp" />
   </ItemGroup>

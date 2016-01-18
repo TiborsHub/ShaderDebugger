@@ -200,5 +200,8 @@
     <ClCompile Include="Implementation\Log.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>
+    <ClCompile Include="Implementation\ShaderStructureNodes.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

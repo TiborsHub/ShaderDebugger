@@ -20,9 +20,16 @@
 #include "ASTNodeLocation.h"
 
 
+// ANGLE headers
+#include <compiler/translator/IntermNode.h>
+
+
 class ShaderStructureNodes
 {
 public:
+
+    const tASTNodeLocation&       GetFunction(const TString& inName);
+
     tASTNodeLocation              mMain;
     std::vector<tASTNodeLocation> mSelections;
     std::vector<tASTNodeLocation> mBranches;
