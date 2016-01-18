@@ -143,6 +143,7 @@ ShaderInspectorWebGL::GetShaderStructure(ShaderStructureState& outShaderStructur
     ShaderStructureNodes structure_nodes;
     if (GetShaderStructureNodes(structure_nodes))
     {
+        outShaderStructure.mMain.clear();
         GetNodeIndexPath(structure_nodes.mMain, outShaderStructure.mMain);
     }
 
@@ -179,6 +180,38 @@ ShaderInspectorWebGL::GetSourceLocation(
 }
 
 
+// Returns true if node is a statement for the debugger to halt on
+bool
+ShaderInspectorWebGL::IsDebugStepStatement(TIntermNode* inNode)
+{
+    switch(GetNodeType(inNode))
+    {
+        case AST_NODE_TYPE_BINARY:
+        {
+            TIntermBinary* bin_node(inNode->getAsBinaryNode());
+            TOperator oper(bin_node->getOp());
+            return IsAssignmentOperator(oper) || oper == EOpFunctionCall;
+        }
+        break;
+
+        case AST_NODE_TYPE_SYMBOL:
+        case AST_NODE_TYPE_RAW:
+        case AST_NODE_TYPE_CONSTANT_UNION:
+        case AST_NODE_TYPE_UNARY:
+        case AST_NODE_TYPE_SELECTION:
+        case AST_NODE_TYPE_SWITCH:
+        case AST_NODE_TYPE_CASE:
+        case AST_NODE_TYPE_AGGREGATE:
+        case AST_NODE_TYPE_LOOP:
+        case AST_NODE_TYPE_BRANCH:
+        default:
+            return false;
+    }
+
+    return false;
+}
+
+
 // Return next statement
 // virtual
 bool
@@ -193,7 +226,7 @@ ShaderInspectorWebGL::GetNextStatement(
     if (ast != nullptr && GetNodePath(ast, inCurrLocation, curr_node_loc))
     {
         tASTNodeLocation next_node_loc;
-        GetNextChildNode(curr_node_loc, next_node_loc);
+        GetNextDebugStepNode(curr_node_loc, next_node_loc);
         if (!next_node_loc.empty())
         {
             GetNodeIndexPath(next_node_loc, outNextLocation);
@@ -203,6 +236,25 @@ ShaderInspectorWebGL::GetNextStatement(
     }
 
     return false;
+}
+
+
+// Get next node from ast which is the next statement
+void
+ShaderInspectorWebGL::GetNextDebugStepNode(const tASTNodeLocation& inNode, tASTNodeLocation& outNextNode)
+{
+    assert(!inNode.empty());
+
+    tASTNodeLocation curr_node_loc(inNode);
+    do
+    {
+        tASTNodeLocation next_node_loc;
+        GetNextChildNode(curr_node_loc, next_node_loc);
+        curr_node_loc = next_node_loc;
+    }
+    while (!curr_node_loc.empty() && !IsDebugStepStatement(curr_node_loc.back()));
+
+    outNextNode = curr_node_loc;
 }
 
 

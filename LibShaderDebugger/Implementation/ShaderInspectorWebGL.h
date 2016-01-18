@@ -85,6 +85,12 @@ private:
                                 // Return the nodes from the ast where the shader execution path can branch
     bool                        GetShaderStructureNodes(ShaderStructureNodes& outShaderStructure);
 
+                                // Returns true if node is a statement for the debugger to halt on
+    bool                        IsDebugStepStatement(TIntermNode* inNode);
+
+                                // Get next node from ast which is the next statement
+    void                        GetNextDebugStepNode(const tASTNodeLocation& inNode, tASTNodeLocation& outNextNode);
+
                                 // Transform AST to return target symbol
     void                        TransformAST(
                                     const tASTNodeLocation& inTargetSymbolPath,
