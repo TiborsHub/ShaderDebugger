@@ -104,6 +104,11 @@ bool
 IsAssignmentOperator(TOperator inOperator);
 
 
+// Returns true if node is function call
+bool
+IsFunctionCall(TIntermNode* inNode);
+
+
 // Return next child node in traverse order
 // Return child of leave node if it exist
 // Otherwise return next child of parent of leave node
