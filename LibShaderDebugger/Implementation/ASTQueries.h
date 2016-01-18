@@ -99,6 +99,11 @@ TIntermNode*
 FindValueExpressionNode(const tASTNodeLocation& inSymbolNodePath);
 
 
+// Returns true if operator is an assignment
+bool
+IsAssignmentOperator(TOperator inOperator);
+
+
 // Return next child node in traverse order
 // Return child of leave node if it exist
 // Otherwise return next child of parent of leave node

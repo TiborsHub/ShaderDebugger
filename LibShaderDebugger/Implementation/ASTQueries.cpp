@@ -425,6 +425,49 @@ FindValueExpressionNode(const tASTNodeLocation& inSymbolNodePath)
 }
 
 
+namespace
+{
+    TOperator sAssignmentOperators[] =
+    {
+        // Assignment
+        EOpAssign,
+        EOpInitialize,
+        EOpAddAssign,
+        EOpSubAssign,
+
+        EOpMulAssign,
+        EOpVectorTimesMatrixAssign,
+        EOpVectorTimesScalarAssign,
+        EOpMatrixTimesScalarAssign,
+        EOpMatrixTimesMatrixAssign,
+
+        EOpDivAssign,
+        EOpIModAssign,
+        EOpBitShiftLeftAssign,
+        EOpBitShiftRightAssign,
+        EOpBitwiseAndAssign,
+        EOpBitwiseXorAssign,
+        EOpBitwiseOrAssign
+    };
+}
+
+
+// Returns true if operator is an assignment
+bool
+IsAssignmentOperator(TOperator inOperator)
+{
+    for (size_t s_ix(0); s_ix < sizeof(sAssignmentOperators) / sizeof(sAssignmentOperators[0]); ++s_ix)
+    {
+        if (inOperator == sAssignmentOperators[s_ix])
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
 // Return next child node in traverse order
 // Return child of leave node if it exist
 // Otherwise return next child of parent of leave node
