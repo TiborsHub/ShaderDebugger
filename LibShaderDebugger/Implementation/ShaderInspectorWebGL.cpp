@@ -254,16 +254,25 @@ ShaderInspectorWebGL::GetNextDebugStepNode(const tASTNodeLocation& inNode, tASTN
 {
     assert(!inNode.empty());
 
-    tASTNodeLocation curr_node_loc(inNode);
-    do
+    if (IsFunctionCall(inNode.back()))
     {
-        tASTNodeLocation next_node_loc;
-        GetNextChildNode(curr_node_loc, next_node_loc);
-        curr_node_loc = next_node_loc;
+        TIntermAggregate* aggregate(inNode.back()->getAsAggregate());
+        const TString& function_name(aggregate->getName());
+        outNextNode = mStructureNodes->GetFunction(function_name);
     }
-    while (!curr_node_loc.empty() && !IsDebugStepStatement(curr_node_loc.back()));
+    else
+    {
+        tASTNodeLocation curr_node_loc(inNode);
+        do
+        {
+            tASTNodeLocation next_node_loc;
+            GetNextChildNode(curr_node_loc, next_node_loc);
+            curr_node_loc = next_node_loc;
+        }
+        while (!curr_node_loc.empty() && !IsDebugStepStatement(curr_node_loc.back()));
 
-    outNextNode = curr_node_loc;
+        outNextNode = curr_node_loc;
+    }
 }
 
 
