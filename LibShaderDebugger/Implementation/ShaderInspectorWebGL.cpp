@@ -194,14 +194,23 @@ ShaderInspectorWebGL::IsDebugStepStatement(TIntermNode* inNode)
         }
         break;
 
+        case AST_NODE_TYPE_SELECTION:
+            return true;
+
+        case AST_NODE_TYPE_AGGREGATE:
+        {
+            TIntermAggregate* agg_node(inNode->getAsAggregate());
+            TOperator oper(agg_node->getOp());
+            return oper == EOpFunctionCall;
+        }
+        break;
+
         case AST_NODE_TYPE_SYMBOL:
         case AST_NODE_TYPE_RAW:
         case AST_NODE_TYPE_CONSTANT_UNION:
         case AST_NODE_TYPE_UNARY:
-        case AST_NODE_TYPE_SELECTION:
         case AST_NODE_TYPE_SWITCH:
         case AST_NODE_TYPE_CASE:
-        case AST_NODE_TYPE_AGGREGATE:
         case AST_NODE_TYPE_LOOP:
         case AST_NODE_TYPE_BRANCH:
         default:
