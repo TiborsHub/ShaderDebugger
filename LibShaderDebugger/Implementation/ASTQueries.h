@@ -116,6 +116,14 @@ void
 GetNextChildNode(const tASTNodeLocation& inCurrNodePath, tASTNodeLocation& outNextNodePath);
 
 
+// Returns index at which two node paths differ
+// if std::numeric_limits<size_t>::max() is returned, all nodes from path 1 are equal to the nodes at the same positions
+// from path2
+// Path 2 can be longer
+size_t
+FindNodePathDifference(const tASTNodeLocation& inNodePath1, const tASTNodeLocation& inNodePath2);
+
+
 // Tests if child node is a direct descendent of the parent
 bool
 IsDirectChildNode(TIntermNode* inParentNode, TIntermNode* inChildNode);

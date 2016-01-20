@@ -17,7 +17,8 @@
 
 
 // Standard headers
-#include <assert.h>
+#include <cassert>
+#include <climits>
 
 
 namespace
@@ -521,6 +522,26 @@ GetNextChildNode(const tASTNodeLocation& inCurrNodePath, tASTNodeLocation& outNe
             AssertNodeLocationDirectParentChild(outNextNodePath);
         }
     }
+}
+
+
+// Returns index at which two node paths differ
+// if std::numeric_limits<size_t>::max() is returned, all nodes from path 1 are equal to the nodes at the same positions
+// from path2
+// Path 2 can be longer
+size_t
+FindNodePathDifference(const tASTNodeLocation& inNodePath1, const tASTNodeLocation& inNodePath2)
+{
+    // Find first node which is different
+    for (size_t n_ix(0); n_ix < inNodePath1.size(); ++n_ix)
+    {
+        if (inNodePath1[n_ix] != inNodePath2[n_ix])
+        {
+            return n_ix;
+        }
+    }
+
+    return std::numeric_limits<size_t>::max();
 }
 
 
