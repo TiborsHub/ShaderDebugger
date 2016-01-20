@@ -533,7 +533,8 @@ size_t
 FindNodePathDifference(const tASTNodeLocation& inNodePath1, const tASTNodeLocation& inNodePath2)
 {
     // Find first node which is different
-    for (size_t n_ix(0); n_ix < inNodePath1.size(); ++n_ix)
+    size_t node_count(std::min(inNodePath1.size(), inNodePath2.size()));
+    for (size_t n_ix(0); n_ix < node_count; ++n_ix)
     {
         if (inNodePath1[n_ix] != inNodePath2[n_ix])
         {
