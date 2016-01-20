@@ -251,15 +251,29 @@ GetNodeIndexPath(
     const tASTNodeLocation& inNodePath,
     tASTLocation&           outNodeIndexPath)
 {
-    assert(outNodeIndexPath.empty());
     assert(inNodePath.size() >= 2);
-
-    for (size_t n_ix(0); n_ix < inNodePath.size() - 1; ++n_ix)
+    size_t child_node_count(inNodePath.size() - 1);
+    outNodeIndexPath.resize(child_node_count);
+    for (size_t n_ix(0); n_ix < child_node_count; ++n_ix)
     {
         int child_node_ix(NodeIndexPathFromNodePath::sGetChildNodeIndex(inNodePath[n_ix], inNodePath[n_ix + 1]));
         assert(child_node_ix != -1);
 
-        outNodeIndexPath.push_back(child_node_ix);
+        outNodeIndexPath[n_ix] = child_node_ix;
+    }
+}
+
+
+// Return path in node tree by depth and index for a list of node paths
+void
+GetNodeIndexPaths(
+    const std::vector<tASTNodeLocation>& inNodePath,
+    std::vector<tASTLocation>&           outNodeIndexPath)
+{
+    outNodeIndexPath.resize(inNodePath.size());
+    for (auto l_it(inNodePath.begin()); l_it != inNodePath.end(); ++l_it)
+    {
+        GetNodeIndexPath(*l_it, outNodeIndexPath[l_it - inNodePath.begin()]);
     }
 }
 
@@ -284,4 +298,23 @@ GetNodePath(
     }
 
     return !outNodePath.empty();
+}
+
+
+// Return path to node as list of direct child nodes for a list of child node index locations
+bool
+GetNodePaths(
+    TIntermNode*                     inAST,
+    const std::vector<tASTLocation>& inNodeIndexPaths,
+    std::vector<tASTNodeLocation>&   outNodePaths)
+{
+    for (auto l_it(inNodeIndexPaths.begin()); l_it != inNodeIndexPaths.end(); ++l_it)
+    {
+        if (!GetNodePath(inAST, *l_it, outNodePaths[l_it - inNodeIndexPaths.begin()]))
+        {
+            return false;
+        }
+    }
+
+    return true;
 }

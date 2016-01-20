@@ -28,12 +28,27 @@ GetNodeIndexPath(
     tASTLocation&           outNodeIndexPath);
 
 
+// Return path in node tree by depth and index for a list of node paths
+void
+GetNodeIndexPaths(
+    const std::vector<tASTNodeLocation>& inNodePath,
+    std::vector<tASTLocation>&           outNodeIndexPath);
+
+
 // Return path to node as list of direct child nodes
 bool
 GetNodePath(
     TIntermNode*        inAST,
     const tASTLocation& inNodeIndexPath,
     tASTNodeLocation&   outNodePath);
+
+
+// Return path to node as list of direct child nodes for a list of child node index locations
+bool
+GetNodePaths(
+    TIntermNode*                     inAST,
+    const std::vector<tASTLocation>& inNodeIndexPaths,
+    std::vector<tASTNodeLocation>&   outNodePaths);
 
 
 #endif // __AST_NODE_LOCATION_CONVERSION_H__
