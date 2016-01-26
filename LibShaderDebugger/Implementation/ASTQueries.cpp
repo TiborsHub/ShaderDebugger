@@ -17,7 +17,6 @@
 
 
 // Standard headers
-#include <cassert>
 #include <climits>
 
 
@@ -551,19 +550,4 @@ bool
 IsDirectChildNode(TIntermNode* inParentNode, TIntermNode* inChildNode)
 {
     return DirectChildTester::sIsDirectChildNode(inParentNode, inChildNode);
-}
-
-
-// Verify that  consecutive nodes have a direct parent - child relation
-void
-AssertNodeLocationDirectParentChild(const tASTNodeLocation& inNodeLocation)
-{
-#if !defined(NDEBUG)
-    size_t node_count(inNodeLocation.size());
-    assert(node_count>= 2);
-    for (size_t n_ix(0); n_ix < node_count - 1; ++n_ix)
-    {
-        assert(IsDirectChildNode(inNodeLocation[n_ix], inNodeLocation[n_ix + 1]));
-    }
-#endif
 }

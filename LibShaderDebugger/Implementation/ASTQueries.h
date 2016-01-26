@@ -28,6 +28,10 @@ class TIntermSymbol;
 #include <compiler/translator/Operator.h>
 
 
+// Standard headers
+#include <cassert>
+
+
 // Node types of ast
 enum ASTNodeType
 {
@@ -129,12 +133,21 @@ bool
 IsDirectChildNode(TIntermNode* inParentNode, TIntermNode* inChildNode);
 
 
-#if !defined(NDEBUG)
 
 // Verify that consecutive nodes have a direct parent - child relation
+inline
 void
-AssertNodeLocationDirectParentChild(const tASTNodeLocation& inNodeLocation);
-
+AssertNodeLocationDirectParentChild(const tASTNodeLocation& inNodeLocation)
+{
+#if !defined(NDEBUG)
+    size_t node_count(inNodeLocation.size());
+    assert(node_count>= 2);
+    for (size_t n_ix(0); n_ix < node_count - 1; ++n_ix)
+    {
+        assert(IsDirectChildNode(inNodeLocation[n_ix], inNodeLocation[n_ix + 1]));
+    }
 #endif
+}
+
 
 #endif // __AST_QUERIES_H__
