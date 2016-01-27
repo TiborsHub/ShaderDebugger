@@ -20,6 +20,10 @@
 #include "InspectContextWebGL1.h"
 
 
+// Standard headers
+#include <vector>
+
+
 class InspectContextWebGL1Basic : public InspectContextWebGL1
 {
 public:

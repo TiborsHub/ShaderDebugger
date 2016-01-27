@@ -1,9 +1,9 @@
 /*******************************************************************************\
 *                                                                               *
-*           Class   : InspectContext    I                                       *
+*           Class   : InspectContextI                                           *
 *           Purpose : Interface to program and all state needed to run          *
 *                     program                                                   *
-*           File    : InspectContext    I.h                                     *
+*           File    : InspectContextI.h                                         *
 *           Author  : Tibor den Ouden                                           *
 *                                                                               *
 \*******************************************************************************/
@@ -23,10 +23,6 @@ class Win32EmbeddedWindow;
 // Standard headers
 #include <string>
 #include <cstdint>
-
-
-// ANGLE headers
-#include "GLSLANG\ShaderLang.h"
 
 
 class InspectContextI
