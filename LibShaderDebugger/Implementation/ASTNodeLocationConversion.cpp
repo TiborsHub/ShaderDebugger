@@ -273,6 +273,7 @@ GetNodeIndexPaths(
     outNodeIndexPath.resize(inNodePath.size());
     for (auto l_it(inNodePath.begin()); l_it != inNodePath.end(); ++l_it)
     {
+        assert(!l_it->empty());
         GetNodeIndexPath(*l_it, outNodeIndexPath[l_it - inNodePath.begin()]);
     }
 }
@@ -310,6 +311,7 @@ GetNodePaths(
 {
     for (auto l_it(inNodeIndexPaths.begin()); l_it != inNodeIndexPaths.end(); ++l_it)
     {
+        assert(!l_it->empty());
         if (!GetNodePath(inAST, *l_it, outNodePaths[l_it - inNodeIndexPaths.begin()]))
         {
             return false;
