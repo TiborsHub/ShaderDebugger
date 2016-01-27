@@ -27,12 +27,16 @@
 class ShaderStructureState
 {
 public:
+                                // Static info
     tASTLocation                mMain;
     std::vector<tASTLocation>   mSelections;
     std::vector<tASTLocation>   mBranches;
     std::vector<tASTLocation>   mLoops;
     std::vector<tASTLocation>   mFunctionDefinitions;
     std::vector<tASTLocation>   mFunctionCalls;
+
+                                // Dynamic info
+    std::vector<tASTLocation>   mCallStack;
 };
 
 
