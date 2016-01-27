@@ -155,4 +155,21 @@ AssertNodeLocationDirectParentChild(const tASTNodeLocation& inNodeLocation)
 }
 
 
+// Verify if list of node locations is callstack
+template <class tInputIterator>
+inline
+void
+AssertIsCallStack(tInputIterator inBegin, tInputIterator inEnd)
+{
+#if !defined(NDEBUG)
+    assert(IsFunctionDefinition(inBegin->at(1)));
+
+    for (auto c_it(inBegin); c_it != inEnd; ++c_it)
+    {
+        assert(IsFunctionCall(c_it->back()));
+    }
+#endif
+}
+
+
 #endif // __AST_QUERIES_H__
