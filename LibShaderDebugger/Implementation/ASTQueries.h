@@ -126,6 +126,22 @@ GetNextChildNode(const tASTNodeLocation& inCurrNodePath, tASTNodeLocation& outNe
 
 
 // Return next child of parent of leave node
+void
+GetNextChildNodeSameDepthOrUp(const tASTNodeLocation& inCurrNodePath, tASTNodeLocation& outNextNodePath);
+
+
+// Return next node from ast traverse order
+// Return empty node location if difference path contains function definition
+void
+GetNextChildNodeEmptyAtFunctionEnd(const tASTNodeLocation& inCurrNodePath, tASTNodeLocation& outNextNodePath);
+
+
+// Return next node after leave node from ast traverse order
+// Return empty node location if difference path contains function definition
+void
+GetNextChildNodeSameDepthOrUpEmptyAtFunctionEnd(const tASTNodeLocation& inCurrNodePath, tASTNodeLocation& outNextNodePath);
+
+
 // Returns first node index at which two node paths differ
 // Returns size of the smallest path if paths are of unequal length
 // and smallest path is equal to first size nodes of other path
@@ -136,7 +152,6 @@ FindNodePathDifference(const tASTNodeLocation& inNodePath1, const tASTNodeLocati
 // Tests if child node is a direct descendent of the parent
 bool
 IsDirectChildNode(TIntermNode* inParentNode, TIntermNode* inChildNode);
-
 
 
 // Verify that consecutive nodes have a direct parent - child relation

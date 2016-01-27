@@ -482,12 +482,54 @@ IsFunctionDefinition(TIntermNode* inNode)
 }
 
 
+namespace
+{
+
+// Utility function to find the next node after the current child node
+// Recurses higher up the tree until node found
+void
+FindNextNode(
+    const tASTNodeLocation&                  inCurrNodePath,
+    tASTNodeLocation::const_reverse_iterator inRevParentIt,
+    tASTNodeLocation&                        outNextNodePath)
+{
+    tASTNodeLocation::const_reverse_iterator rparent_it;
+    TIntermNode* next_node;
+    // Iterate over node path
+    do
+    {
+        TIntermNode* child_node = *inRevParentIt;
+        ++inRevParentIt;
+        next_node = FindNextChildNode::sGetNextChildNode(*inRevParentIt, child_node);
+    }
+    while (next_node == nullptr && inRevParentIt != inCurrNodePath.rend() - 1);
+
+    if (next_node != nullptr)
+    {
+        assert(IsDirectChildNode(*inRevParentIt, next_node));
+
+        // Copy parent node path from root till (including) parent
+        tASTNodeLocation::const_iterator parent_it(inRevParentIt.base() - 1);
+        assert(*inRevParentIt == *parent_it);
+        outNextNodePath.assign(inCurrNodePath.begin(), (parent_it + 1));
+        assert(*inRevParentIt == outNextNodePath.back());
+        assert(IsDirectChildNode(outNextNodePath.back(), next_node));
+        outNextNodePath.push_back(next_node);
+
+        AssertNodeLocationDirectParentChild(outNextNodePath);
+    }
+}
+
+} // namespace
+
+
 // Return next child node in traverse order
 // Return child of leave node if it exist
 // Otherwise return next child of parent of leave node
 void
 GetNextChildNode(const tASTNodeLocation& inCurrNodePath, tASTNodeLocation& outNextNodePath)
 {
+    assert(outNextNodePath.empty());
     AssertNodeLocationDirectParentChild(inCurrNodePath);
 
     tASTNodeLocation::const_reverse_iterator rparent_it(inCurrNodePath.rbegin());
@@ -502,29 +544,66 @@ GetNextChildNode(const tASTNodeLocation& inCurrNodePath, tASTNodeLocation& outNe
     }
     else
     {
-        // Iterate over node path
-        do
-        {
-            child_node = *rparent_it;
-            ++rparent_it;
-            next_node = FindNextChildNode::sGetNextChildNode(*rparent_it, child_node);
-        }
-        while (next_node == nullptr && rparent_it != inCurrNodePath.rend() - 1);
+        FindNextNode(inCurrNodePath, rparent_it, outNextNodePath);
+    }
+}
 
-        if (next_node != nullptr)
-        {
-            assert(IsDirectChildNode(*rparent_it, next_node));
 
-            // Copy parent node path from root till (including) parent
-            tASTNodeLocation::const_iterator parent_it(rparent_it.base() - 1);
-            assert(*rparent_it == *parent_it);
-            outNextNodePath.assign(inCurrNodePath.begin(), (parent_it + 1));
-            assert(*rparent_it == outNextNodePath.back());
-            assert(IsDirectChildNode(outNextNodePath.back(), next_node));
-            outNextNodePath.push_back(next_node);
+// Return next child of parent of leave node
+// Or next child node of parent higher up the tree
+void
+GetNextChildNodeSameDepthOrUp(const tASTNodeLocation& inCurrNodePath, tASTNodeLocation& outNextNodePath)
+{
+    assert(inCurrNodePath.size() >= 2);
+    assert(outNextNodePath.empty());
+    AssertNodeLocationDirectParentChild(inCurrNodePath);
 
-            AssertNodeLocationDirectParentChild(outNextNodePath);
-        }
+    FindNextNode(inCurrNodePath, inCurrNodePath.rbegin(), outNextNodePath);
+}
+
+
+// Return next node from ast traverse order
+// Return empty node location if difference path contains function definition
+void
+GetNextChildNodeEmptyAtFunctionEnd(const tASTNodeLocation& inCurrNodePath, tASTNodeLocation& outNextNodePath)
+{
+    assert(!inCurrNodePath.empty());
+
+    GetNextChildNode(inCurrNodePath, outNextNodePath);
+    size_t diff_ix(FindNodePathDifference(inCurrNodePath, outNextNodePath));
+    bool function_exit(false);
+    for (size_t n_ix(diff_ix); n_ix < inCurrNodePath.size() && !function_exit; ++n_ix)
+    {
+        function_exit = IsFunctionDefinition(inCurrNodePath[n_ix]);
+    }
+
+    if (function_exit)
+    {
+        // Next node in ast traverse order is outside function definition
+        outNextNodePath.clear();
+    }
+}
+
+
+// Return next node after leave node from ast traverse order
+// Return empty node location if difference path contains function definition
+void
+GetNextChildNodeSameDepthOrUpEmptyAtFunctionEnd(const tASTNodeLocation& inCurrNodePath, tASTNodeLocation& outNextNodePath)
+{
+    assert(!inCurrNodePath.empty());
+
+    GetNextChildNodeSameDepthOrUp(inCurrNodePath, outNextNodePath);
+    size_t diff_ix(FindNodePathDifference(inCurrNodePath, outNextNodePath));
+    bool function_exit(false);
+    for (size_t n_ix(diff_ix); n_ix < inCurrNodePath.size() && !function_exit; ++n_ix)
+    {
+        function_exit = IsFunctionDefinition(inCurrNodePath[n_ix]);
+    }
+
+    if (function_exit)
+    {
+        // Next node in ast traverse order is outside function definition
+        outNextNodePath.clear();
     }
 }
 
