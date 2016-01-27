@@ -190,7 +190,7 @@ ShaderInspectorWebGL::IsDebugStepStatement(TIntermNode* inNode)
         {
             TIntermBinary* bin_node(inNode->getAsBinaryNode());
             TOperator oper(bin_node->getOp());
-            return IsAssignmentOperator(oper) || oper == EOpFunctionCall;
+            return IsAssignmentOperator(oper) || (oper == EOpFunctionCall);
         }
         break;
 
@@ -201,7 +201,15 @@ ShaderInspectorWebGL::IsDebugStepStatement(TIntermNode* inNode)
         {
             TIntermAggregate* agg_node(inNode->getAsAggregate());
             TOperator oper(agg_node->getOp());
-            return oper == EOpFunctionCall;
+            return (oper == EOpFunctionCall);
+        }
+        break;
+
+        case AST_NODE_TYPE_BRANCH:
+        {
+            TIntermBranch* branch_node(static_cast<TIntermBranch*>(inNode));
+            TOperator oper(branch_node->getFlowOp());
+            return (oper == EOpReturn);
         }
         break;
 
@@ -212,7 +220,6 @@ ShaderInspectorWebGL::IsDebugStepStatement(TIntermNode* inNode)
         case AST_NODE_TYPE_SWITCH:
         case AST_NODE_TYPE_CASE:
         case AST_NODE_TYPE_LOOP:
-        case AST_NODE_TYPE_BRANCH:
         default:
             return false;
     }
