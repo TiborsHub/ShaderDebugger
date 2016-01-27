@@ -581,6 +581,8 @@ MainFrame::OnStep(wxCommandEvent& event)
 void
 MainFrame::OnReset(wxCommandEvent& event)
 {
+    SetStatusText("");
+
     DebugResetResult reset_result;
     mDebugger->Reset(reset_result);
 
