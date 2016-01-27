@@ -113,6 +113,11 @@ bool
 IsFunctionCall(TIntermNode* inNode);
 
 
+// Returns true if node is function definition
+bool
+IsFunctionDefinition(TIntermNode* inNode);
+
+
 // Return next child node in traverse order
 // Return child of leave node if it exist
 // Otherwise return next child of parent of leave node

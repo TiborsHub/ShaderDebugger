@@ -477,6 +477,15 @@ IsFunctionCall(TIntermNode* inNode)
 }
 
 
+// Returns true if node is function definition
+bool
+IsFunctionDefinition(TIntermNode* inNode)
+{
+    TIntermAggregate* aggregate(inNode->getAsAggregate());
+    return (aggregate != nullptr && aggregate->getOp() == EOpFunction);
+}
+
+
 // Return next child node in traverse order
 // Return child of leave node if it exist
 // Otherwise return next child of parent of leave node
