@@ -125,10 +125,10 @@ void
 GetNextChildNode(const tASTNodeLocation& inCurrNodePath, tASTNodeLocation& outNextNodePath);
 
 
-// Returns index at which two node paths differ
-// if std::numeric_limits<size_t>::max() is returned, all nodes from path 1 are equal to the nodes at the same positions
-// from path2
-// Path 2 can be longer
+// Return next child of parent of leave node
+// Returns first node index at which two node paths differ
+// Returns size of the smallest path if paths are of unequal length
+// and smallest path is equal to first size nodes of other path
 size_t
 FindNodePathDifference(const tASTNodeLocation& inNodePath1, const tASTNodeLocation& inNodePath2);
 

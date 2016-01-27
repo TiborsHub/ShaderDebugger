@@ -16,10 +16,6 @@
 #include <compiler/translator/IntermNode.h>
 
 
-// Standard headers
-#include <climits>
-
-
 namespace
 {
 
@@ -533,10 +529,9 @@ GetNextChildNode(const tASTNodeLocation& inCurrNodePath, tASTNodeLocation& outNe
 }
 
 
-// Returns index at which two node paths differ
-// if std::numeric_limits<size_t>::max() is returned, all nodes from path 1 are equal to the nodes at the same positions
-// from path2
-// Path 2 can be longer
+// Returns first node index at which two node paths differ
+// Returns size of the smallest path if paths are of unequal length
+// and smallest path is equal to first size nodes of other path
 size_t
 FindNodePathDifference(const tASTNodeLocation& inNodePath1, const tASTNodeLocation& inNodePath2)
 {
@@ -550,7 +545,7 @@ FindNodePathDifference(const tASTNodeLocation& inNodePath1, const tASTNodeLocati
         }
     }
 
-    return std::numeric_limits<size_t>::max();
+    return node_count;
 }
 
 
