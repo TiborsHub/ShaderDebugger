@@ -160,7 +160,7 @@ InspectContextWebGL1::UseProgram()
     {
         glUseProgram(mHandleProgram);
 
-        return (glGetError() != GL_NO_ERROR);
+        return (glGetError() == GL_NO_ERROR);
     }
 
     return false;
