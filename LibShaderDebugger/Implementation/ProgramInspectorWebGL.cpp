@@ -49,15 +49,9 @@ ProgramInspectorWebGL::GetShaderStructure(ShaderStructureState& outShaderStructu
 // Return next statement
 // virtual
 bool
-ProgramInspectorWebGL::GetNextStatement(
-    const tASTLocation&         inCurrLocation,
-    const ShaderStructureState& inCurrentState,
-    tASTLocation&               outNextLocation)
+ProgramInspectorWebGL::GetNextStatement(ShaderStructureState& ioCurrentState)
 {
-    return mShaderInspector->GetNextStatement(
-        inCurrLocation,
-        inCurrentState,
-        outNextLocation);
+    return mShaderInspector->GetNextStatement(ioCurrentState);
 }
 
 

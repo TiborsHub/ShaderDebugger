@@ -69,10 +69,7 @@ public:
                                     SourceLocation&     outSourceLocation) override;
 
                                 // Return next statement
-    virtual bool                GetNextStatement(
-                                    const tASTLocation&         inCurrLocation,
-                                    const ShaderStructureState& inCurrentState,
-                                    tASTLocation&               outNextLocation) override;
+    virtual bool                GetNextStatement(ShaderStructureState& ioCurrentState) override;
 
                                 // Inspect a token at the given source position
     virtual void                Inspect(
@@ -88,8 +85,13 @@ private:
                                 // Returns true if node is a statement for the debugger to halt on
     bool                        IsDebugStepStatement(TIntermNode* inNode);
 
-                                // Get next node from ast which is the next statement
-    void                        GetNextDebugStepNode(const tASTNodeLocation& inNode, tASTNodeLocation& outNextNode);
+                                // Get next ast node after return from function call
+                                // Input is callstack pointing to function call which returned
+                                // The node location inside the function is just popped off the stack
+    void                        GetNextNodeAfterFunctionCall(std::vector<tASTNodeLocation>& ioCallStack);
+
+                                // Get next node from ast which is the next statement to execute
+    void                        GetNextDebugStepNode(std::vector<tASTNodeLocation>& ioCallStack);
 
                                 // Transform AST to return target symbol
     void                        TransformAST(

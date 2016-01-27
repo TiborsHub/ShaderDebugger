@@ -145,6 +145,10 @@ ShaderInspectorWebGL::GetShaderStructure(ShaderStructureState& outShaderStructur
     {
         outShaderStructure.mMain.clear();
         GetNodeIndexPath(structure_nodes.mMain, outShaderStructure.mMain);
+        outShaderStructure.mCallStack.clear();
+        outShaderStructure.mCallStack.push_back(outShaderStructure.mMain);
+
+        return true;
     }
 
     return false;
@@ -231,23 +235,27 @@ ShaderInspectorWebGL::IsDebugStepStatement(TIntermNode* inNode)
 // Return next statement
 // virtual
 bool
-ShaderInspectorWebGL::GetNextStatement(
-    const tASTLocation&         inCurrLocation,
-    const ShaderStructureState& inCurrentState,
-     tASTLocation&              outNextLocation)
+ShaderInspectorWebGL::GetNextStatement(ShaderStructureState& ioCurrentState)
 {
     std::string source(GetInspectContext()->GetShaderSource(mShaderIx));
     TIntermNode* ast(mCompiler->CompileToAST(source, mCompileOptions));
+    std::vector<tASTNodeLocation> call_stack(ioCurrentState.mCallStack.size());
+    GetNodePaths(ast, ioCurrentState.mCallStack, call_stack);
+
     tASTNodeLocation curr_node_loc;
-    if (ast != nullptr && GetNodePath(ast, inCurrLocation, curr_node_loc))
+    if (ast != nullptr && !call_stack.empty())
     {
-        tASTNodeLocation next_node_loc;
-        GetNextDebugStepNode(curr_node_loc, next_node_loc);
-        if (!next_node_loc.empty())
+        GetNextDebugStepNode(call_stack);
+        if (!call_stack.empty())
         {
-            GetNodeIndexPath(next_node_loc, outNextLocation);
+            ioCurrentState.mCallStack.resize(call_stack.size());
+            GetNodeIndexPaths(call_stack, ioCurrentState.mCallStack);
 
             return true;
+        }
+        else
+        {
+            ioCurrentState.mCallStack.clear();
         }
     }
 
@@ -255,30 +263,74 @@ ShaderInspectorWebGL::GetNextStatement(
 }
 
 
-// Get next node from ast which is the next statement
+// Get next ast node after return from function call
+// Input is callstack pointing to function call which returned
+// The node location inside the function is just popped off the stack
 void
-ShaderInspectorWebGL::GetNextDebugStepNode(const tASTNodeLocation& inNode, tASTNodeLocation& outNextNode)
+ShaderInspectorWebGL::GetNextNodeAfterFunctionCall(std::vector<tASTNodeLocation>& ioCallStack)
 {
-    assert(!inNode.empty());
+    assert(!ioCallStack.empty());
+    assert(!ioCallStack.back().empty());
+    AssertIsCallStack(ioCallStack.begin(), ioCallStack.end());
 
-    if (IsFunctionCall(inNode.back()))
+    tASTNodeLocation next_node;
+    GetNextChildNodeSameDepthOrUpEmptyAtFunctionEnd(ioCallStack.back(), next_node);
+    while (next_node.empty() && ioCallStack.size() > 1)
     {
-        TIntermAggregate* aggregate(inNode.back()->getAsAggregate());
-        const TString& function_name(aggregate->getName());
-        outNextNode = mStructureNodes->GetFunction(function_name);
+        ioCallStack.pop_back();
+        GetNextChildNodeSameDepthOrUpEmptyAtFunctionEnd(ioCallStack.back(), next_node);
+    }
+
+    if (!next_node.empty())
+    {
+        ioCallStack.back() = next_node;
     }
     else
     {
-        tASTNodeLocation curr_node_loc(inNode);
+        // End of program reached
+        ioCallStack.clear();
+    }
+}
+
+
+// Get next node from ast which is the next statement to execute
+void
+ShaderInspectorWebGL::GetNextDebugStepNode(std::vector<tASTNodeLocation>& ioCallStack)
+{
+    assert(!ioCallStack.empty());
+
+    if (IsFunctionCall(ioCallStack.back().back()))
+    {
+        // Retrieve ast node of function definition
+        TIntermAggregate* aggregate(ioCallStack.back().back()->getAsAggregate());
+        const TString& function_name(aggregate->getName());
+        ioCallStack.push_back(mStructureNodes->GetFunction(function_name));
+    }
+    else
+    {
+        // Advance to next debug node
+        tASTNodeLocation curr_node_loc(ioCallStack.back());
         do
         {
             tASTNodeLocation next_node_loc;
-            GetNextChildNode(curr_node_loc, next_node_loc);
+            GetNextChildNodeEmptyAtFunctionEnd(curr_node_loc, next_node_loc);
             curr_node_loc = next_node_loc;
         }
         while (!curr_node_loc.empty() && !IsDebugStepStatement(curr_node_loc.back()));
 
-        outNextNode = curr_node_loc;
+        if (curr_node_loc.empty())
+        {
+            // End of function reached
+            ioCallStack.pop_back();
+            if (!ioCallStack.empty())
+            {
+                GetNextNodeAfterFunctionCall(ioCallStack);
+            }
+        }
+        else
+        {
+            ioCallStack.back() = curr_node_loc;
+        }
     }
 }
 

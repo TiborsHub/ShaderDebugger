@@ -57,10 +57,7 @@ public:
                                     SourceLocation&     outSourceLocation) = 0;
 
                                 // Return next statement
-    virtual bool                GetNextStatement(
-                                    const tASTLocation&         inCurrLocation,
-                                    const ShaderStructureState& inCurrentState,
-                                    tASTLocation&               outNextLocation) = 0;
+    virtual bool                GetNextStatement(ShaderStructureState& ioCurrentState) = 0;
 
                                 // Inspect a token at the given source position
     virtual void                Inspect(

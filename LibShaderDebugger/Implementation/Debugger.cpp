@@ -31,16 +31,11 @@ Debugger::Debugger(SpProgramInspectorI& inInspector) :
 bool
 Debugger::Step(DebugStepResult& outStepResult)
 {
-    tASTLocation next_statement;
-    mInspector->GetNextStatement(
-        mCurrentStatement,
-        mShaderState,
-        next_statement);
+    mInspector->GetNextStatement(mShaderState);
 
-    if (!next_statement.empty())
+    if (!mShaderState.mCallStack.empty())
     {
-        mCurrentStatement = next_statement;
-        return mInspector->GetSourceLocation(mCurrentStatement, outStepResult.mNextLocation);
+        return mInspector->GetSourceLocation(mShaderState.mCallStack.back(), outStepResult.mNextLocation);
     }
 
     return false;
@@ -52,8 +47,7 @@ void
 Debugger::Reset(DebugResetResult& outResetResult)
 {
     mInspector->GetShaderStructure(mShaderState);
-    mCurrentStatement = mShaderState.mMain;
-    mInspector->GetSourceLocation(mCurrentStatement, outResetResult.mMainLocation);
+    mInspector->GetSourceLocation(mShaderState.mCallStack.back(), outResetResult.mMainLocation);
 }
 
 

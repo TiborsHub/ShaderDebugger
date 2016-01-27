@@ -75,7 +75,6 @@ public:
 
 private:
     SpProgramInspectorI         mInspector;
-    tASTLocation                mCurrentStatement;
     ShaderStructureState        mShaderState;
 };
 
