@@ -505,13 +505,13 @@ MainFrame::OnTestShader(wxCommandEvent& inEvent)
                 inspector);
 
             mDebugger = std::make_unique<Debugger>(inspector);
+
+            wxCommandEvent dummy_event;
+            OnShaderType(dummy_event);
+            OnReset(dummy_event);
+            OnRun(dummy_event);
         }
     }
-
-    wxCommandEvent dummy_event;
-    OnShaderType(dummy_event);
-    OnReset(dummy_event);
-    OnRun(dummy_event);
 }
 
 
