@@ -56,10 +56,10 @@ private:
 
 // Utility function to copy a node vector allocated with the pool allocator to vector allocated with the standard allocator
 void
-AddTVectorNodePath(
-    tASTLocation&          outNodePath,
+GetNodeLocation(
     TVector<TIntermNode*>& inTVectorNodePath,
-    TIntermNode*           inTargetChildNode)
+    TIntermNode*           inTargetChildNode,
+    tASTLocation&          outNodePath)
 {
     tASTNodeLocation node_location;
     node_location.reserve(inTVectorNodePath.size() + 1);
@@ -71,18 +71,13 @@ AddTVectorNodePath(
 
 
 void
-AddTVectorNodePath(
-    std::vector<tASTLocation>& ioNodePaths,
+AddNodeLocation(
     TVector<TIntermNode*>&     inTVectorNodePath,
-    TIntermNode*               inTargetChildNode)
+    TIntermNode*               inTargetChildNode,
+    std::vector<tASTLocation>& ioNodePaths)
 {
-    tASTNodeLocation node_location;
-    node_location.reserve(inTVectorNodePath.size() + 1);
-    node_location.assign(inTVectorNodePath.begin(), inTVectorNodePath.end());
-    node_location.push_back(inTargetChildNode);
-
     ioNodePaths.push_back(tASTLocation());
-    GetNodeIndexPath(node_location, ioNodePaths.back());
+    GetNodeLocation(inTVectorNodePath, inTargetChildNode, ioNodePaths.back());
 }
 
 
@@ -103,7 +98,7 @@ ASTGetShaderStructureNodes::visitSelection(Visit inVisit, TIntermSelection*inSel
 {
     (void)inVisit;
 
-    AddTVectorNodePath(mShaderStructureNodes.mSelections, mPath, inSelectionNode);
+    AddNodeLocation(mPath, inSelectionNode, mShaderStructureNodes.mSelections);
 
     return true;
 }
@@ -115,7 +110,7 @@ ASTGetShaderStructureNodes::visitLoop(Visit inVisit, TIntermLoop* inLoopNode)
 {
     (void)inVisit;
 
-    AddTVectorNodePath(mShaderStructureNodes.mLoops, mPath, inLoopNode);
+    AddNodeLocation(mPath, inLoopNode, mShaderStructureNodes.mLoops);
 
     return true;
 }
@@ -127,7 +122,7 @@ ASTGetShaderStructureNodes::visitBranch (Visit inVisit, TIntermBranch* inBranchN
 {
     (void)inVisit;
 
-    AddTVectorNodePath(mShaderStructureNodes.mBranches, mPath, inBranchNode);
+    AddNodeLocation(mPath, inBranchNode, mShaderStructureNodes.mBranches);
 
     return true;
 }
@@ -150,13 +145,13 @@ ASTGetShaderStructureNodes::visitAggregate(Visit inVisit, TIntermAggregate* inAg
             {
                 assert(mShaderStructureNodes.mMain.empty());
 
-                AddTVectorNodePath(mShaderStructureNodes.mMain, mPath, inAggregateNode);
+                GetNodeLocation(mPath, inAggregateNode, mShaderStructureNodes.mMain);
             }
             else
             {
                 std::string function_name(inAggregateNode->getName().c_str());
                 tASTLocation function_loc;
-                AddTVectorNodePath(function_loc, mPath, inAggregateNode);
+                GetNodeLocation(mPath, inAggregateNode, function_loc);
 
                 auto result(mShaderStructureNodes.mFunctionDefinitions.insert(std::make_pair(function_name, function_loc)));
             }
@@ -164,7 +159,7 @@ ASTGetShaderStructureNodes::visitAggregate(Visit inVisit, TIntermAggregate* inAg
 
         case EOpFunctionCall:
             // Call of function
-            AddTVectorNodePath(mShaderStructureNodes.mFunctionCalls, mPath, inAggregateNode);
+            AddNodeLocation(mPath, inAggregateNode, mShaderStructureNodes.mFunctionCalls);
             break;
     }
 
