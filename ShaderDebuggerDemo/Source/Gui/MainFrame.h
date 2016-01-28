@@ -106,6 +106,8 @@ private:
     wxRichTextCtrl*             mDebugCtrl;
     wxRichTextCtrl*             mInspectCtrl;
     wxStaticText*               mRenderWindowPos;
+    wxButton*                   mDebugReset;
+    wxButton*                   mDebugStep;
     UpWin32EmbeddedWindow       mRenderWindow;
     UpEGLWindow                 mEglWindow;
     UpEglRenderWindow           mEglRenderWindow;

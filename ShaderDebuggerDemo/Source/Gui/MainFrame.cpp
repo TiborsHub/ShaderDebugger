@@ -250,25 +250,25 @@ MainFrame::MainFrame(
         wxSTRETCH_NOT);
 
     // Debugger step
-    wxButton* btn_step = new wxButton(
+    mDebugStep = new wxButton(
         left_panel,
         ID_STEP,
         "Step");
 
     left_sizer->Add(
-        btn_step,
+        mDebugStep,
         wxGBPosition(1, 2),
         wxGBSpan(1, 1),
         wxSTRETCH_NOT | wxLEFT);
 
     // Debugger reset
-    wxButton* btn_reset = new wxButton(
+    mDebugReset = new wxButton(
         left_panel,
         ID_RESET,
         "Reset");
 
     left_sizer->Add(
-        btn_reset,
+        mDebugReset,
         wxGBPosition(2, 2),
         wxGBSpan(1, 1),
         wxSTRETCH_NOT);
