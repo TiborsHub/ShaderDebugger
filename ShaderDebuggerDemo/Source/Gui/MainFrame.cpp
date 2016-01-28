@@ -218,11 +218,11 @@ MainFrame::MainFrame(
         1,
         wxRA_SPECIFY_COLS);
 
-        // Set focus of fragment shader
-        mShaderType->SetSelection(1);
+    // Set focus of fragment shader
+    mShaderType->SetSelection(1);
 
-        // Disable vertex shader for now
-        mShaderType->Enable(0, false);
+    // Disable vertex shader for now
+    mShaderType->Enable(0, false);
 
     left_sizer->Add(
         mShaderType,
@@ -240,8 +240,8 @@ MainFrame::MainFrame(
         1,
         wxRA_SPECIFY_COLS);
 
-        // Disable WebGL 2
-        mWebGlVersion->Enable(1, false);
+    // Disable WebGL 2
+    mWebGlVersion->Enable(1, false);
 
     left_sizer->Add(
         mWebGlVersion,
@@ -254,6 +254,7 @@ MainFrame::MainFrame(
         left_panel,
         ID_STEP,
         "Step");
+    mDebugStep->Enable(false);
 
     left_sizer->Add(
         mDebugStep,
@@ -266,6 +267,7 @@ MainFrame::MainFrame(
         left_panel,
         ID_RESET,
         "Reset");
+    mDebugReset->Enable(false);
 
     left_sizer->Add(
         mDebugReset,
@@ -337,11 +339,9 @@ MainFrame::MainFrame(
     mDebugCtrl->SetFont(debug_font);
     mDebugCtrl->AppendText(L"Debug information, parse tree and modified shader are listed here");
 
-
     // Status bar
     CreateStatusBar();
     SetStatusText("Status text");
-
 
     // GLES Initialization
     mRenderWindow.reset(new Win32EmbeddedWindow(mEglRenderWindow->GetHWND()));
@@ -486,6 +486,8 @@ MainFrame::OnTestShader(wxCommandEvent& inEvent)
     mInspectData.reset();
     mInspectCtrl->Clear();
     mDebugCtrl->Clear();
+    mDebugStep->Enable(false);
+    mDebugReset->Enable(false);
     SpInspectContextI inspect_context(gTestCaseFactorySingleton->CreateTestCase(shader_test_id));
     if (inspect_context.get() != nullptr)
     {
@@ -505,6 +507,9 @@ MainFrame::OnTestShader(wxCommandEvent& inEvent)
                 inspector);
 
             mDebugger = std::make_unique<Debugger>(inspector);
+
+            mDebugStep->Enable(true);
+            mDebugReset->Enable(true);
 
             wxCommandEvent dummy_event;
             OnShaderType(dummy_event);
@@ -572,6 +577,7 @@ MainFrame::OnStep(wxCommandEvent& inEvent)
     else
     {
         mSourceCtrl->SetStyleEx(*mDebugStatementFocus, mSourceCtrl->GetDefaultStyleEx());
+        mDebugStep->Enable(false);
         SetStatusText("End of shader");
     }
 
@@ -585,6 +591,9 @@ MainFrame::OnReset(wxCommandEvent& inEvent)
 {
     (void)inEvent;
 
+    // Erase previous focus
+    mSourceCtrl->SetStyleEx(*mDebugStatementFocus, *mDebugFocusStyle, wxRICHTEXT_SETSTYLE_REMOVE);
+
     SetStatusText("");
 
     DebugResetResult reset_result;
@@ -594,6 +603,7 @@ MainFrame::OnReset(wxCommandEvent& inEvent)
 
     mDebugStatementFocus->SetRange(src_interval.first, src_interval.second);
     mSourceCtrl->SetStyleEx(*mDebugStatementFocus, *mDebugFocusStyle);
+    mDebugStep->Enable(true);
 }
 
 
