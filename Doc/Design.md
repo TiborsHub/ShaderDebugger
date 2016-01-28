@@ -293,7 +293,7 @@ Large sized inspect expressions
 	
 	If the extra introduced branching becomes problematic, another method would be to multiply the different parts
 	of the expression with a weight factor (0 or 1) and sum the result of the multiplications.
-	The weight factors will be input through a uniforms (packing in a float as bit field is possible).
+	The weight factors will be input through uniforms (packing in a float as bit field is possible).
 	
 	
 Debugging functionality
