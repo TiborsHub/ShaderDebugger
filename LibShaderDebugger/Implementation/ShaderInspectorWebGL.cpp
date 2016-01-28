@@ -199,6 +199,7 @@ ShaderInspectorWebGL::IsDebugStepStatement(TIntermNode* inNode)
         break;
 
         case AST_NODE_TYPE_SELECTION:
+        case AST_NODE_TYPE_BRANCH:
             return true;
 
         case AST_NODE_TYPE_AGGREGATE:
@@ -206,14 +207,6 @@ ShaderInspectorWebGL::IsDebugStepStatement(TIntermNode* inNode)
             TIntermAggregate* agg_node(inNode->getAsAggregate());
             TOperator oper(agg_node->getOp());
             return (oper == EOpFunctionCall);
-        }
-        break;
-
-        case AST_NODE_TYPE_BRANCH:
-        {
-            TIntermBranch* branch_node(static_cast<TIntermBranch*>(inNode));
-            TOperator oper(branch_node->getFlowOp());
-            return (oper == EOpReturn);
         }
         break;
 
