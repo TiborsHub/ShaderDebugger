@@ -554,8 +554,10 @@ MainFrame::OnRun(wxCommandEvent& inEvent)
 
 // Execute current statement and advance to next statement
 void
-MainFrame::OnStep(wxCommandEvent& event)
+MainFrame::OnStep(wxCommandEvent& inEvent)
 {
+    (void)inEvent;
+
     // Erase previous focus
     mSourceCtrl->SetStyleEx(*mDebugStatementFocus, *mDebugFocusStyle, wxRICHTEXT_SETSTYLE_REMOVE);
 
@@ -579,8 +581,10 @@ MainFrame::OnStep(wxCommandEvent& event)
 
 // Reset debug state of shader
 void
-MainFrame::OnReset(wxCommandEvent& event)
+MainFrame::OnReset(wxCommandEvent& inEvent)
 {
+    (void)inEvent;
+
     SetStatusText("");
 
     DebugResetResult reset_result;

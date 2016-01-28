@@ -61,9 +61,9 @@ private:
     size_t                      GetSelectedShaderIndex() const;
 
                                 // UI event handlers
-    void                        OnFileOpen(wxCommandEvent& event);
-    void                        OnExit(wxCommandEvent& event);
-    void                        OnAbout(wxCommandEvent& event);
+    void                        OnFileOpen(wxCommandEvent& inEvent);
+    void                        OnExit(wxCommandEvent& inEvent);
+    void                        OnAbout(wxCommandEvent& inEvent);
 
                                 // Change of displayed shader type
     void                        OnShaderType(wxCommandEvent& inEvent);
@@ -72,13 +72,13 @@ private:
     void                        OnTestShader(wxCommandEvent& inEvent);
 
                                 // Run shader
-    void                        OnRun(wxCommandEvent& event);
+    void                        OnRun(wxCommandEvent& inEvent);
 
                                 // Execute current statement and advance to next statement
-    void                        OnStep(wxCommandEvent& event);
+    void                        OnStep(wxCommandEvent& inEvent);
 
                                 // Reset debug state of shader
-    void                        OnReset(wxCommandEvent& event);
+    void                        OnReset(wxCommandEvent& inEvent);
 
                                 // User selected a token in shader source
     void                        OnLeftSourceClick(wxMouseEvent& inEvent);
