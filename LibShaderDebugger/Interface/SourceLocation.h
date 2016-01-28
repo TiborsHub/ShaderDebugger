@@ -1,5 +1,18 @@
+/*******************************************************************************\
+*                                                                               *
+*           Class    : SourceLocation                                           *
+*           Purpose  : Location of character interval in source                 *
+*           File     : SourceLocation.h                                         *
+*           Author   : Tibor den Ouden                                          *
+*                                                                               *
+\*******************************************************************************/
 
 
+#pragma once
+
+
+#ifndef __SOURCE_LOCATION_H__
+#define __SOURCE_LOCATION_H__
 
 
 // Indicates section of source code
@@ -46,3 +59,6 @@ SourceLocation::SourceLocation(
 {
 
 }
+
+
+#endif // __SOURCE_LOCATION_H__
