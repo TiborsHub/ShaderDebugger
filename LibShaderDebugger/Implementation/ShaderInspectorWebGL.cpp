@@ -144,7 +144,7 @@ ShaderInspectorWebGL::GetShaderStructure(ShaderStructureState& outShaderStructur
     if (GetShaderStructureNodes(structure_nodes))
     {
         outShaderStructure.mMain.clear();
-        GetNodeIndexPath(structure_nodes.mMain, outShaderStructure.mMain);
+        outShaderStructure.mMain = structure_nodes.mMain;
         outShaderStructure.mCallStack.clear();
         outShaderStructure.mCallStack.push_back(outShaderStructure.mMain);
 
@@ -297,12 +297,19 @@ ShaderInspectorWebGL::GetNextDebugStepNode(std::vector<tASTNodeLocation>& ioCall
 {
     assert(!ioCallStack.empty());
 
+    std::string source(GetInspectContext()->GetShaderSource(mShaderIx));
+    TIntermNode* ast(mCompiler->CompileToAST(source, mCompileOptions));
+
     if (IsFunctionCall(ioCallStack.back().back()))
     {
         // Retrieve ast node of function definition
         TIntermAggregate* aggregate(ioCallStack.back().back()->getAsAggregate());
         const TString& function_name(aggregate->getName());
-        ioCallStack.push_back(mStructureNodes->GetFunction(function_name));
+        tASTNodeLocation function_location;
+        GetNodePath(ast, mStructureNodes->GetFunction(function_name.c_str()), function_location);
+        assert(!function_location.empty());
+
+        ioCallStack.push_back(function_location);
     }
     else
     {

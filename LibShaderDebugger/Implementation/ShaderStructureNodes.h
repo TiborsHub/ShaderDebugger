@@ -17,25 +17,31 @@
 
 
 // Library headers
-#include "ASTNodeLocation.h"
+#include "ASTLocation.h"
 
 
 // ANGLE headers
 #include <compiler/translator/IntermNode.h>
 
 
+// Standard headers
+#include <map>
+
+
 class ShaderStructureNodes
 {
 public:
+                              // Return function by name
+    const tASTLocation&       GetFunction(const std::string& inName) const;
 
-    const tASTNodeLocation&       GetFunction(const TString& inName);
+    typedef std::map<std::string, tASTLocation> tFunctionDefinitionsMap;
+    tASTLocation              mMain;
+    std::vector<tASTLocation> mSelections;
+    std::vector<tASTLocation> mBranches;
+    std::vector<tASTLocation> mLoops;
+    tFunctionDefinitionsMap   mFunctionDefinitions;
+    std::vector<tASTLocation> mFunctionCalls;
 
-    tASTNodeLocation              mMain;
-    std::vector<tASTNodeLocation> mSelections;
-    std::vector<tASTNodeLocation> mBranches;
-    std::vector<tASTNodeLocation> mLoops;
-    std::vector<tASTNodeLocation> mFunctionDefinitions;
-    std::vector<tASTNodeLocation> mFunctionCalls;
 };
 
 

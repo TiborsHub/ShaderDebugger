@@ -15,6 +15,9 @@
 
 // Library headers
 #include "ShaderStructureNodes.h"
+#include "ASTNodeLocation.h"
+#include "ASTNodeLocationConversion.h"
+
 
 // ANGLE headers
 #include <compiler/translator/IntermNode.h>
@@ -54,28 +57,32 @@ private:
 // Utility function to copy a node vector allocated with the pool allocator to vector allocated with the standard allocator
 void
 AddTVectorNodePath(
-    tASTNodeLocation&      ioNodePath,
+    tASTLocation&          outNodePath,
     TVector<TIntermNode*>& inTVectorNodePath,
     TIntermNode*           inTargetChildNode)
 {
-    ioNodePath.reserve(inTVectorNodePath.size() + 1);
-    ioNodePath.assign(inTVectorNodePath.begin(), inTVectorNodePath.end());
-    assert(ioNodePath.back() != inTargetChildNode);
-    ioNodePath.push_back(inTargetChildNode);
+    tASTNodeLocation node_location;
+    node_location.reserve(inTVectorNodePath.size() + 1);
+    node_location.assign(inTVectorNodePath.begin(), inTVectorNodePath.end());
+    node_location.push_back(inTargetChildNode);
+
+    GetNodeIndexPath(node_location, outNodePath);
 }
 
 
 void
 AddTVectorNodePath(
-    std::vector<tASTNodeLocation>& ioNodePaths,
-    TVector<TIntermNode*>&         inTVectorNodePath,
-    TIntermNode*                   inTargetChildNode)
+    std::vector<tASTLocation>& ioNodePaths,
+    TVector<TIntermNode*>&     inTVectorNodePath,
+    TIntermNode*               inTargetChildNode)
 {
-    ioNodePaths.push_back(tASTNodeLocation());
-    AddTVectorNodePath(
-        ioNodePaths.back(),
-        inTVectorNodePath,
-        inTargetChildNode);
+    tASTNodeLocation node_location;
+    node_location.reserve(inTVectorNodePath.size() + 1);
+    node_location.assign(inTVectorNodePath.begin(), inTVectorNodePath.end());
+    node_location.push_back(inTargetChildNode);
+
+    ioNodePaths.push_back(tASTLocation());
+    GetNodeIndexPath(node_location, ioNodePaths.back());
 }
 
 
@@ -147,7 +154,11 @@ ASTGetShaderStructureNodes::visitAggregate(Visit inVisit, TIntermAggregate* inAg
             }
             else
             {
-                AddTVectorNodePath(mShaderStructureNodes.mFunctionDefinitions, mPath, inAggregateNode);
+                std::string function_name(inAggregateNode->getName().c_str());
+                tASTLocation function_loc;
+                AddTVectorNodePath(function_loc, mPath, inAggregateNode);
+
+                auto result(mShaderStructureNodes.mFunctionDefinitions.insert(std::make_pair(function_name, function_loc)));
             }
             break;
 

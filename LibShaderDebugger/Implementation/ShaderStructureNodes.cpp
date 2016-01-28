@@ -15,26 +15,25 @@
 
 namespace
 {
-    tASTNodeLocation dummy_node_loc;
+    tASTLocation dummy_node_loc;
 };
 
 
-const tASTNodeLocation&
-ShaderStructureNodes::GetFunction(const TString& inName)
+// Return function by name
+const tASTLocation&
+ShaderStructureNodes::GetFunction(const std::string& inName) const
 {
-    for (auto f_it(mFunctionDefinitions.begin()); f_it != mFunctionDefinitions.end(); ++f_it)
+    auto f_it(mFunctionDefinitions.find(inName));
+
+    if (f_it != mFunctionDefinitions.end())
     {
-        TIntermAggregate* aggregate(f_it->back()->getAsAggregate());
-        assert(aggregate != nullptr);
-
-        if (aggregate->getName() == inName)
-        {
-            return *f_it;
-        }
+        return f_it->second;
     }
+    else
+    {
+        // Function should have been in list
+        assert(false);
 
-    // Function should have been in list
-    assert(false);
-
-    return dummy_node_loc;
+        return dummy_node_loc;
+    }
 }
