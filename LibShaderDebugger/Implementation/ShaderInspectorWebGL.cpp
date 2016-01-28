@@ -227,8 +227,6 @@ ShaderInspectorWebGL::IsDebugStepStatement(TIntermNode* inNode)
         default:
             return false;
     }
-
-    return false;
 }
 
 
