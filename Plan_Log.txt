@@ -1,12 +1,13 @@
 Plan
 
-Simple single stepping
-Single step through the source based on the ast.
-No inspection of conditions in selection and loops yet.
+Work on instrumenting branches to follow the dynamic shader state
+Work on instrumenting loop to follow the dynamic shader state
 
 --------------------------------------------------------------------------------
 
 Log
-
+28 Jan 2016 (thu)
+	Single step through the source based on the static ast works.
+	
 13 Jan 2016 (wed)
 	Working towards simple single stepping
