@@ -144,6 +144,7 @@ Fragment shader with loop
 	inspect_loop_count_target is a uniform which is added to the shader and set to the correct value
 	by the debugger.
 	
+	
 Fragment shader with nested function reachable through multiple code paths
 
 	Multiple code paths to reach a target expression result from a branch or loop which 
@@ -218,43 +219,104 @@ Fragment shader with nested function reachable through multiple code paths
 		
 		gl_FragColor = inspect_out
 	}
+
+	
+Fragment shader with multiple invocations of a function
+	
+	Multiple code paths to reach a target expression result from different invocations of a function
+	To identify the correct invocation of a function a global unique invocation id is introduced and set
+	just before the function is called.
+	This invocation id is tested inside the function so the assignment to the inspect output variable is
+	done for the right invocation.
+	
+	foo is inspect expression
+
+	bar()
+	{
+		...
+		foo = ...
+		...
+	}
+	
+	main()
+	{
+		...
+		bar();
+		...
+		bar();
+	}
+	
+	is modified to :
+	
+	inspect_out;
+	uniform inspect_invocation_id;
+	uniform inspect_invocation_id_target;
+	
+	bar()
+	{
+		...
+		foo = ...
+		if (inspect_invocation_id == inspect_invocation_id_target)
+		{
+			inspect_out = foo;
+		}
+		...
+	}
+	
+	main()
+	{
+		...
+		inspect_invocation_id = 1;
+		bar();
+		...
+		inspect_invocation_id = 2;
+		bar();
+		
+		gl_FragColor = inspect_out
+	}
 	
 	
 Generalization 
 	
-	Shader code exists of three different code structures :
+	Shader code exists of four different code structures types :
 		instruction sequence : linear list of instructions
 		loop : repeated sequence based on a loop count
-		branch : selects from different sequences based on a condition
+		function : code section called from different locations
+		conditional branch : a selection between multiple code sections based on a condition
+		These code structures types can recursively contain each other.
 		
+	A way to look at the shader state is this :
+	In a shader with no loops, function calls or branches the execution of the shader visits every node only once.
+	So every state of the shader corresponds to a unique location of a node in the tree.
+	
+	If the tree contains a loop construct, an equivalent single node visiting tree can be constructed by 
+	inserting the loop body multiple times (inlining the loop). In this tree every statement corresponds with a unique 
+	location in the tree.
+	To keep track of the unique state in the original tree the tree location is not enough. It needs to be extended
+	with the loop index for the nodes in the loop body.
+
+	If the tree contains a function and multiple invocations of this function, an equivalent single node visiting tree 
+	can be constructed by inserting the function body at every call site (inlining the function). In this tree every 
+	statement corresponds with a unique location in the tree.
+	To keep track of the unique state in the original tree, the tree location is not enough. It needs to be extended
+	with the invocation id for the nodes in the function body.
+	
 	To keep track of the state of a shader it is sufficient to store the 
 	static instruction index (= line nr if one instruction per line)
-	and the value of every loop index and branch condition.
-
-	Because recursion is not allowed the maximum depth of the call graph 
-	is fixed and can be derived from the static analysis of the ast.
-	And although the same instruction can be reached by different paths
-	(because it is inside a loop or it is inside a function which 
-	has multiple invocation paths). These different paths always have a unique state
-	of the branch conditions and/or loop counters higher up in the call graph.
+	and the value of every loop index and function invocation id for the code sections where these loop indices and / or invocation ids
+	are active.
 	
-	The generalization of the above examples is this:
-	All possible unique paths through the shader code can be enumerated.
-	This can be done by adding a boolean variable for every binary branch 
-	and an execution instance counter for loops. In some cases there is a variable
-	in the original shader which can be used (for instance the loop index variable).
 	These state variables should be at global scope.
 	If this proves to be problematic they could be defined in main() and passed on as extra variables.
 	
-	To retrieve the correct value of the target expression the state of all these variables should be tested
+	To retrieve the correct value of the target expression the state of all the active variables should be tested
 	in the condition before the expression is stored in the output variable.
 	So the pseudo code fragment to store the target expression is like :
 	
-	if (shader-state-set == target-shader-state-set)
+	if (active-shader-state-set == target-shader-state-set)
 	{
 		inspect-output = target-expression;
 	}
-	
 	
 	In the main() function the assignment is to the shader output variable instead of the inspect output
 	variable.
@@ -271,6 +333,85 @@ Generalization
 	Due to that most shaders are relative small and recursion is not allowed, this method to keep track 
 	of the shader state seems possible to implement. The increased branch count can be a problem.
 	
+	
+Determine the next state of a shader from a given shader state  	
+	
+	A stack is needed to keep track of function invocations.
+	
+	For a function invocation the next statement is the first statement in the function body. And the location of the function invocation
+	is put on the stack.
+	For the last statement inside a function : the next statement after the function invocation from the stack is the target. 
+	The stack is popped.
+	For a selection : the value of the condition needs to be inspected to compute which branch is taken.
+	The next statement is the first statement of the selected code section.
+	For a loop : the loop condition needs to be inspected to compute if the loop body is entered or the first statement
+	after the loop body is the next statement.
+	For a sequence the next statement is just the next statement from the ast in 'tree' order.
+	This is typically a dept first traversal.
+	
+
+Generation of inspect shaders for computing state
+
+	Although it is possible to create one shader which can return the value of all state variables (loop indices, function invocation ids, branch conditions),
+	I think it is safer to generate one shader per state variable. I encountered several cases where too complex logical expressions caused a shader
+	to fail compilation. Particular inside a loop if that condition is used as a pre condition for a break statement.
+	
+	So for a shader with 2 loops (A and B) : two shaders are generated : one to retrieve the loop condition of loop A and one to retrieve 
+	the loop condition of loop B.
+	If loop B happens to be inside loop A, the shader for loop B needs the value for loop A as input.
+	
+	Inspect shaders for intermediate expressions selected by the user needs to be generated separately.
+	They need to contain the union of the set of active shader state variables as input.
+	Example : An inspect shader of an expression of a variable inside a function which can be called from two locations :
+	Inside a loop 
+	Inside main
+	
+	If one shader is te be generated, the inspect shader needs the invocation id and the loop index as input.
+	The precondition to store the selected expression in the inspect output variable contains both the target invocation id and the target loop index.
+	For the call site outside the loop the target loop index variable and the loop index inspect variable should be set to a not active value (-1). 
+
+	inspect_out;
+	uniform inspect_invocation_id;
+	uniform inspect_invocation_id_target;
+	uniform inspect_loop_ix;
+	uniform inspect_loop_ix_target;
+	
+	foo()
+	{
+		if (inspect_invocation_id == target_invocation_id && inspect_loop_ix == inspect_loop_ix_target)
+		{
+			inspect_out = ...
+		}
+	}
+	
+	main()
+	{
+		inspect_loop_ix = -1;
+		...
+		inspect_invocation_id = 1;
+		foo()
+		...
+		
+		for (loop_ix = 1; loop_ix < N; ++loop_ix)
+		{
+			++inspect_loop_ix;
+			...
+			inspect_invocation_id = 2;
+			foo()
+			...
+		}
+		inspect_loop_ix = -1;
+		
+		gl_FragColor = inspect_out;
+	}
+	
+	By setting inspect_invocation_id_target to 1 and inspect_loop_ix_target to -1 an intermediate expression from inside the function at the call site
+	outside the loop can be outputted.
+	By setting inspect_invocation_id_target to 2 and inspect_loop_ix_target to n an intermediate expression from inside the function at the call site
+	inside the loop for loop iteration n can be outputted.
+	
+	In potential this can result in a lot of shaders. If the maximum count of shaders in the gl context is reached, shaders can be destroyed
+	and regenerated when needed. This wil result in a delay to regenerate the shader.
 	
 Large sized inspect expressions
 
